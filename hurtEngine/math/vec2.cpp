@@ -1,23 +1,19 @@
 #include "vec2.h"
 
 Vec2 * Vec2::add(Vec2 * vec) {
-	Vec2 * sum = new Vec2(this->x + vec->x, this->y + vec->y);
-	return sum;
+	return new Vec2(this->x + vec->x, this->y + vec->y);
 }
 
 Vec2 * Vec2::sub(Vec2 * vec) {
-	Vec2 * diff = new Vec2(this->x - vec->x, this->y - vec->y);
-	return diff;
+	return new Vec2(this->x - vec->x, this->y - vec->y);
 }
 
 Vec2 * Vec2::mul(float val) {
-	Vec2 * product = new Vec2(this->x * val, this->y * val);
-	return product;
+	return new Vec2(this->x * val, this->y * val);
 }
 
 Vec2 * Vec2::pieceMul(Vec2 * vec) {
-	Vec2 * product = new Vec2(this->x * vec->x, this->y * vec->y);
-	return product;
+	return new Vec2(this->x * vec->x, this->y * vec->y);
 }
 
 float Vec2::dot(Vec2 * vec) {
@@ -26,8 +22,7 @@ float Vec2::dot(Vec2 * vec) {
 
 Vec2 * Vec2::normalized() {
 	float len = this->length();
-	Vec2 * norm = new Vec2(x / len, y / len);
-	return norm;
+	return new Vec2(x / len, y / len);
 }
 
 float Vec2::length() {
