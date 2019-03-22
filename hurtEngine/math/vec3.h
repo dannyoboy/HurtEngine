@@ -1,6 +1,7 @@
 #pragma once
 
-#include "hurtEngine/hurtEngine.h"
+#include <math.h>
+#include "trig.h"
 
 class Vec3 {
 public:

@@ -34,7 +34,7 @@ float Vec3::angleBetween(Vec3 * vec) {
 	float v1Len = this->length();
 	float v2Len = vec->length();
 
-	float thetaRad = acos(dotProduct / (v1Len * v2Len));
+	float thetaRad = (float)acos(dotProduct / (v1Len * v2Len));
 	float thetaDeg = radToDeg(thetaRad);
 
 	return thetaDeg;

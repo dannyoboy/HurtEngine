@@ -1,6 +1,8 @@
 #pragma once
 
-#include "hurtEngine/hurtEngine.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "hurtEngine/math/vec3.h"
 
 class Game {
 public:
