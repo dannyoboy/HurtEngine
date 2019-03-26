@@ -11,6 +11,7 @@ class Game {
 public:
 	static Game * instance();
 	void initGame(int width, int height, char * title, Vec3 * clearColor);
+	// TODO: add method to set clear color (also resize and title?)
 	void close(int status);
 private:
 	bool closed = false;
