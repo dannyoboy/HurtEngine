@@ -29,6 +29,8 @@
 #include "hurtEngine/core/game.h"
 
 // Ecs
+#include "hurtEngine/ecs/entity.h"
+#include "hurtEngine/ecs/scene.h"
 
 // Input
 

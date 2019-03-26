@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "hurtEngine/math/vec3.h"
@@ -10,15 +11,17 @@ using namespace std;
 class Game {
 public:
 	static Game * instance();
-	void initGame(int width, int height, char * title, Vec3 * clearColor);
-	// TODO: add method to set clear color (also resize and title?)
+	void initGame(int width, int height, string * title, Vec3 * clearColor);
+	void resizeWindow(int width, int height);
+	void setClearColor(Vec3 * clearColor);
 	void close(int status);
 private:
+	GLFWwindow * window = nullptr;
 	bool closed = false;
 
 	inline Game() {};
 	void initContext();
-	GLFWwindow * createWindow(int width, int height, char * title);
+	GLFWwindow * createWindow(int width, int height, string * title);
 	void checkGLAD();
 	void initConfig(Vec3 * clearColor);
 	void gameLoop(GLFWwindow * window);

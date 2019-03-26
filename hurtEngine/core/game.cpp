@@ -12,14 +12,22 @@ Game * Game::instance() {
 	return gameInstance;
 }
 
-void Game::initGame(int width, int height, char * title, Vec3 * clearColor) {
+void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
 	initContext();
-	GLFWwindow* window = createWindow(width, height, title);
+	window = createWindow(width, height, title);
 	checkGLAD();
 	initConfig(clearColor);
-
+	
 	gameLoop(window);
 	cleanUp();
+}
+
+void Game::resizeWindow(int width, int height) {
+	glfwSetWindowSize(window, width, height);
+}
+
+void Game::setClearColor(Vec3 * clearColor) {
+	glClearColor(clearColor->x, clearColor->y, clearColor->z, 1.0f);
 }
 
 void Game::close(int status) {
@@ -43,19 +51,20 @@ void Game::initContext() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
-GLFWwindow * Game::createWindow(int width, int height, char * title) {
-	GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
+GLFWwindow * Game::createWindow(int width, int height, string * title) {
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	GLFWwindow* newWindow = glfwCreateWindow(width, height, title->c_str(), NULL, NULL);
 
-	if (window == NULL) {
+	if (newWindow == NULL) {
 		cerr << "Failed to create GLFW window" << endl;
 		glfwTerminate();
 		exit(-1);
 	}
 
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); });
+	glfwMakeContextCurrent(newWindow);
+	glfwSetFramebufferSizeCallback(newWindow, [](GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); });
 
-	return window;
+	return newWindow;
 }
 
 void Game::checkGLAD() {
@@ -66,13 +75,14 @@ void Game::checkGLAD() {
 }
 
 void Game::initConfig(Vec3 * clearColor) {
-	glClearColor(clearColor->x, clearColor->y, clearColor->z, 1.0f);
+	setClearColor(clearColor);
 }
 
 void Game::gameLoop(GLFWwindow * window) {
 	while (!(glfwWindowShouldClose(window) || closed)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		// TODO: update input here
+		// TODO: replace below, update input here
+		glfwPollEvents();
 
 		// TODO: Add additional updating here
 
