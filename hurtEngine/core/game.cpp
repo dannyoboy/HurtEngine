@@ -81,8 +81,7 @@ void Game::initConfig(Vec3 * clearColor) {
 void Game::gameLoop(GLFWwindow * window) {
 	while (!(glfwWindowShouldClose(window) || closed)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		// TODO: replace below, update input here
-		glfwPollEvents();
+		hurt::updateInput(window);
 
 		// TODO: Add additional updating here
 

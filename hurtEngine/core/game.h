@@ -5,6 +5,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "hurtEngine/math/vec3.h"
+#include "hurtEngine/input/inputManager.h"
 
 using namespace std;
 

@@ -28,14 +28,20 @@
 // Core
 #include "hurtEngine/core/game.h"
 
-// Ecs
+// Data
+
+// ECS
 #include "hurtEngine/ecs/entity.h"
 #include "hurtEngine/ecs/scene.h"
 
 // Input
+#include "hurtEngine/input/buttons.h"
+#include "hurtEngine/input/inputManager.h"
+#include "hurtEngine/input/keys.h"
 
 // Math
 #include "hurtEngine/math/mat4.h"
+#include "hurtEngine/math/quaternion.h"
 #include "hurtEngine/math/trig.h"
 #include "hurtEngine/math/vec2.h"
 #include "hurtEngine/math/vec3.h"

@@ -7,7 +7,7 @@ int main() {
 	// TODO: test code below (remove)
 
 	Game * game = Game::instance();
-	game->initGame(1600, 900, &string("Dank memes!"), &Vec3(1, 1, 0));
+	game->initGame(1080, 608, &string("Dank memes!"), &Vec3(1, 1, 0));
 
 	return 0;
 }
