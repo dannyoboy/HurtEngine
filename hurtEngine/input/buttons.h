@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-constexpr int NUM_BUTTONS = 8;
+constexpr int HURT_NUM_BUTTONS = 8;
 
 namespace hurt {
 	void updateButtons(GLFWwindow * window);

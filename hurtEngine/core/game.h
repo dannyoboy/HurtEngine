@@ -27,4 +27,5 @@ private:
 	void initConfig(Vec3 * clearColor);
 	void gameLoop(GLFWwindow * window);
 	void cleanUp();
+	~Game();
 };

@@ -19,7 +19,8 @@ void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
 	initConfig(clearColor);
 	
 	gameLoop(window);
-	cleanUp();
+	//cleanUp();
+	delete this; // TODO: keep like this?
 }
 
 void Game::resizeWindow(int width, int height) {
@@ -90,6 +91,10 @@ void Game::gameLoop(GLFWwindow * window) {
 }
 
 void Game::cleanUp() {
+	delete this; // TODO: keep this like this?
+}
+
+Game::~Game() {
 	// TODO: Add additional resource clean up here
 
 	glfwTerminate();

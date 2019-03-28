@@ -1,5 +1,7 @@
 #include "entity.h"
 
+Entity::Entity(string * tagIn) : tag(tagIn) {};
+
 void Entity::attachAudio(Audio * audio) {
 	// TODO
 }
@@ -37,5 +39,11 @@ void Entity::attachSkybox(Skybox * skybox) {
 }
 
 void Entity::attachTransform(Transform * transform) {
+	// TODO
+}
+
+Entity::~Entity() {
+	delete tag; // TODO: keep?
+
 	// TODO
 }

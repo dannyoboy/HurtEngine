@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-constexpr int NUM_KEYS = 350;
+constexpr int HURT_NUM_KEYS = 350;
 
 namespace hurt {
 	void updateKeys(GLFWwindow * window);

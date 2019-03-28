@@ -1,9 +1,9 @@
 #include "trig.h"
 
-float degToRad(float deg) {
-	return deg * PI / 180;
+float hurtDegToRad(float deg) {
+	return deg * HURT_PI / 180;
 }
 
-float radToDeg(float rad) {
-	return rad * 180 / PI;
+float hurtRadToDeg(float rad) {
+	return rad * 180 / HURT_PI;
 }

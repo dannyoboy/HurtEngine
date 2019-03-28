@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "hurtEngine/components/audio.h"
 #include "hurtEngine/components/collideable.h"
 #include "hurtEngine/components/gui.h"
@@ -11,8 +12,12 @@
 #include "hurtEngine/components/skybox.h"
 #include "hurtEngine/components/transform.h"
 
+using namespace std;
+
 class Entity {
 public:
+	Entity(string * tagIn);
+
 	void attachAudio(Audio * audio);
 	void attachCollideable(Collideable * collideable);
 	void attachGUI(GUI * gui);
@@ -30,7 +35,10 @@ public:
 	void onRemove() {};
 	void onUpdate() {};
 	void onLateUpdate() {};
+
+	~Entity();
 private:
+	string * tag;
 	Audio * audio = nullptr;
 	Collideable * collideable = nullptr;
 	GUI * gui = nullptr;

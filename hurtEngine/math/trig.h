@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr float PI = 3.14159265f;
+constexpr float HURT_PI = 3.14159265f;
 
-float degToRad(float deg);
-float radToDeg(float rad);
+float hurtDegToRad(float deg);
+float hurtRadToDeg(float rad);
