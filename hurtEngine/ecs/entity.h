@@ -17,6 +17,7 @@ using namespace std;
 class Entity {
 public:
 	Entity(string * tagIn);
+	string * getTag();
 
 	void attachAudio(Audio * audio);
 	void attachCollideable(Collideable * collideable);

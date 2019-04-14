@@ -19,8 +19,7 @@ void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
 	initConfig(clearColor);
 	
 	gameLoop(window);
-	//cleanUp();
-	delete this; // TODO: keep like this?
+	delete this;
 }
 
 void Game::resizeWindow(int width, int height) {
@@ -29,6 +28,52 @@ void Game::resizeWindow(int width, int height) {
 
 void Game::setClearColor(Vec3 * clearColor) {
 	glClearColor(clearColor->x, clearColor->y, clearColor->z, 1.0f);
+}
+
+bool Game::addScene(Scene * scene) {
+	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
+		if ((*iter)->getName() == scene->getName()) {
+			return false;
+		}
+	}
+
+	scenes->push_back(scene);
+
+	if (currScene == nullptr) {
+		setCurrentScene(scene->getName());
+	}
+
+	return true;
+}
+
+Scene * Game::getScene(string * name) {
+	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
+		Scene * scene = *iter;
+		
+		if (scene->getName() == name) {
+			return scene;
+		}
+	}
+
+	return nullptr;
+}
+
+bool Game::setCurrentScene(string * name) {
+	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
+		Scene * scene = *iter;
+
+		if (scene->getName() == name) {
+			if (currScene != nullptr) {
+				currScene->entityOnSceneClose();
+			}
+
+			currScene = scene;
+			currScene->entityOnSceneLoad();
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Game::close(int status) {
@@ -83,19 +128,17 @@ void Game::gameLoop(GLFWwindow * window) {
 	while (!(glfwWindowShouldClose(window) || closed)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		hurt::updateInput(window);
-
-		// TODO: Add additional updating here
-
+		updateCurrentScene();
 		glfwSwapBuffers(window);
 	}
 }
 
-void Game::cleanUp() {
-	delete this; // TODO: keep this like this?
+void Game::updateCurrentScene() {
+	currScene->entityOnUpdate();
+	currScene->entityOnLateUpdate();
 }
 
 Game::~Game() {
-	// TODO: Add additional resource clean up here
-
+	delete scenes;
 	glfwTerminate();
 }

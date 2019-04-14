@@ -2,6 +2,10 @@
 
 Entity::Entity(string * tagIn) : tag(tagIn) {};
 
+string * Entity::getTag() {
+	return tag;
+}
+
 void Entity::attachAudio(Audio * audio) {
 	// TODO
 }
@@ -43,7 +47,5 @@ void Entity::attachTransform(Transform * transform) {
 }
 
 Entity::~Entity() {
-	delete tag; // TODO: keep?
-
 	// TODO
 }

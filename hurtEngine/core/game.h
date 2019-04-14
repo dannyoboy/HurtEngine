@@ -6,6 +6,7 @@
 #include "GLFW/glfw3.h"
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/input/inputManager.h"
+#include "hurtEngine/ecs/scene.h"
 
 using namespace std;
 
@@ -15,10 +16,15 @@ public:
 	void initGame(int width, int height, string * title, Vec3 * clearColor);
 	void resizeWindow(int width, int height);
 	void setClearColor(Vec3 * clearColor);
+	bool addScene(Scene * scene);
+	Scene * getScene(string * name);
+	bool setCurrentScene(string * name);
 	void close(int status);
 private:
 	GLFWwindow * window = nullptr;
 	bool closed = false;
+	list<Scene *> * scenes = new list<Scene *>();
+	Scene * currScene = nullptr;
 
 	inline Game() {};
 	void initContext();
@@ -26,6 +32,6 @@ private:
 	void checkGLAD();
 	void initConfig(Vec3 * clearColor);
 	void gameLoop(GLFWwindow * window);
-	void cleanUp();
+	void updateCurrentScene();
 	~Game();
 };
