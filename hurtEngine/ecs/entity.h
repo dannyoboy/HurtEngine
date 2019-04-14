@@ -30,6 +30,8 @@ public:
 	void attachSkybox(Skybox * skybox);
 	void attachTransform(Transform * transform);
 
+	virtual void onGameStart() {};
+	virtual void onGameStop() {};
 	virtual void onSceneLoad() {};
 	virtual void onSceneClose() {};
 	virtual void onAdd() {};

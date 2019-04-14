@@ -8,6 +8,7 @@ public:
 	void onSceneLoad() override;
 	void onUpdate() override;
 	void onAdd() override;
+	void onGameStart() override;
 private:
 	Vec3 * color;
 };

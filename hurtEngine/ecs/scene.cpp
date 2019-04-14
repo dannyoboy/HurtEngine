@@ -13,7 +13,7 @@ list<Entity *> * Scene::getEntities(string * tag) {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Entity * entity = *iter;
 
-		if (entity->getTag() == tag) {
+		if (*entity->getTag() == *tag) {
 			tagged->push_back(entity);
 		}
 	}
@@ -43,7 +43,7 @@ int Scene::removeEntities(string * tag) {
 	int count = 0;
 
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
-		if ((*iter)->getTag() == tag) {
+		if (*(*iter)->getTag() == *tag) {
 			entities->erase(iter);
 			count++;
 		}
@@ -66,26 +66,38 @@ Scene::~Scene() {
 
 // Engine-only methods
 
+void Scene::entityOnGameStart() {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		(*iter)->onGameStart();
+	}
+}
+
+void Scene::entityOnGameStop() {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		(*iter)->onGameStop();
+	}
+}
+
 void Scene::entityOnSceneLoad() {
-	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++entities) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		(*iter)->onSceneLoad();
 	}
 }
 
 void Scene::entityOnSceneClose() {
-	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++entities) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		(*iter)->onSceneClose();
 	}
 }
 
 void Scene::entityOnUpdate() {
-	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++entities) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		(*iter)->onUpdate();
 	}
 }
 
 void Scene::entityOnLateUpdate() {
-	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++entities) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		(*iter)->onLateUpdate();
 	}
 }

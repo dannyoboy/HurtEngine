@@ -10,16 +10,23 @@ int main() {
 
 	// TODO: test code below (remove)
 	
-	Scene * scene1 = new Scene(&string("scene1"));
-	scene1->addEntity(new Object1(&string("obj1"), &Vec3(0, 1, 0)));
+	string name1("scene1");
+	string name2("scene2");
+	Scene * scene1 = new Scene(&name1);
+	Scene * scene2 = new Scene(&name2);
+	
+	string tag1("obj1");
+	Vec3 color1(0, 1, 0);
+	scene1->addEntity(new Object1(&tag1, &color1));
 
-	Scene * scene2 = new Scene(&string("scene2"));
-	scene2->addEntity(new Object2(&string("obj2"), &Vec3(1, 1, 0)));
+	string tag2("obj2");
+	Vec3 color2(1, 1, 0);
+	scene2->addEntity(new Object2(&tag2, &color2));
 
 	Game * game = Game::instance();
 	game->addScene(scene1);
 	game->addScene(scene2);
-	game->initGame(1080, 608, &string("Dank memes!"), &Vec3(1, 1, 1));
+	game->initGame(1080, 608, &string("Dank memes!"), &Vec3(0, 0, 0));
 
 	return 0;
 }

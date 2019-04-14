@@ -19,6 +19,8 @@ public:
 	~Scene();
 
 	// Engine-only methods
+	void entityOnGameStart();
+	void entityOnGameStop();
 	void entityOnSceneLoad();
 	void entityOnSceneClose();
 	void entityOnUpdate();

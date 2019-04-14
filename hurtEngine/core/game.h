@@ -23,7 +23,7 @@ public:
 	void close(int status);
 private:
 	GLFWwindow * window = nullptr;
-	bool initialized = true;
+	bool initialized = false;
 	bool closed = false;
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
@@ -35,5 +35,7 @@ private:
 	void initConfig(Vec3 * clearColor);
 	void gameLoop(GLFWwindow * window);
 	void updateCurrentScene();
+	void runOnGameStart();
+	void runOnGameStop();
 	~Game();
 };

@@ -24,7 +24,9 @@ void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
 	initConfig(clearColor);
 	
 	initialized = true;
+	runOnGameStart();
 	gameLoop(window);
+	runOnGameStop();
 	delete this;
 }
 
@@ -38,7 +40,7 @@ void Game::setClearColor(Vec3 * clearColor) {
 
 bool Game::addScene(Scene * scene) {
 	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
-		if ((*iter)->getName() == scene->getName()) {
+		if (*(*iter)->getName() == *scene->getName()) {
 			return false;
 		}
 	}
@@ -56,7 +58,7 @@ Scene * Game::getScene(string * name) {
 	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
 		Scene * scene = *iter;
 		
-		if (scene->getName() == name) {
+		if (*scene->getName() == *name) {
 			return scene;
 		}
 	}
@@ -68,7 +70,7 @@ bool Game::setCurrentScene(string * name) {
 	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
 		Scene * scene = *iter;
 
-		if (scene->getName() == name) {
+		if (*scene->getName() == *name) {
 			if (currScene != nullptr) {
 				currScene->entityOnSceneClose();
 			}
@@ -146,6 +148,18 @@ void Game::gameLoop(GLFWwindow * window) {
 void Game::updateCurrentScene() {
 	currScene->entityOnUpdate();
 	currScene->entityOnLateUpdate();
+}
+
+void Game::runOnGameStart() {
+	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
+		(*iter)->entityOnGameStart();
+	}
+}
+
+void Game::runOnGameStop() {
+	for (list<Scene *>::iterator iter = scenes->begin(); iter != scenes->end(); ++iter) {
+		(*iter)->entityOnGameStop();
+	}
 }
 
 Game::~Game() {
