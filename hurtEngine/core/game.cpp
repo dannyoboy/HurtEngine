@@ -13,11 +13,17 @@ Game * Game::instance() {
 }
 
 void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
+	if (currScene == nullptr) {
+		cerr << "No current scene set" << endl;
+		exit(-1);
+	}
+
 	initContext();
 	window = createWindow(width, height, title);
 	checkGLAD();
 	initConfig(clearColor);
 	
+	initialized = true;
 	gameLoop(window);
 	delete this;
 }
@@ -74,6 +80,10 @@ bool Game::setCurrentScene(string * name) {
 	}
 
 	return false;
+}
+
+bool Game::isInitialized() {
+	return initialized;
 }
 
 void Game::close(int status) {

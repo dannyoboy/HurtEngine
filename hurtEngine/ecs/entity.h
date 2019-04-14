@@ -30,12 +30,12 @@ public:
 	void attachSkybox(Skybox * skybox);
 	void attachTransform(Transform * transform);
 
-	void onSceneLoad() {};
-	void onSceneClose() {};
-	void onAdd() {};
-	void onRemove() {};
-	void onUpdate() {};
-	void onLateUpdate() {};
+	virtual void onSceneLoad() {};
+	virtual void onSceneClose() {};
+	virtual void onAdd() {};
+	virtual void onRemove() {};
+	virtual void onUpdate() {};
+	virtual void onLateUpdate() {};
 
 	~Entity();
 private:

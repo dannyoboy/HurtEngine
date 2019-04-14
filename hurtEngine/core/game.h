@@ -19,9 +19,11 @@ public:
 	bool addScene(Scene * scene);
 	Scene * getScene(string * name);
 	bool setCurrentScene(string * name);
+	bool isInitialized();
 	void close(int status);
 private:
 	GLFWwindow * window = nullptr;
+	bool initialized = true;
 	bool closed = false;
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
