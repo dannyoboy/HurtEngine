@@ -50,6 +50,7 @@
 // Rendering
 #include "hurtEngine/rendering/camera.h"
 #include "hurtEngine/rendering/shader.h"
+#include "hurtEngine/rendering/texture.h"
 
 // Utils
 #include "hurtEngine/utils/time.h"
