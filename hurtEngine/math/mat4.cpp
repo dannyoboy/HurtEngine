@@ -2,6 +2,10 @@
 
 Mat4::Mat4(float * valsIn) : vals(valsIn) {}
 
+float Mat4::getVal(int row, int col) {
+	return vals[row * 4 + col];
+}
+
 Mat4 * Mat4::add(Mat4 * mat) {
 	float * sum = new float[16];
 	

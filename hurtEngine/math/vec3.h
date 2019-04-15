@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include "trig.h"
+#include "quaternion.h"
 
 class Vec3 {
 public:
@@ -17,5 +18,5 @@ public:
 	float length();
 	float angleBetween(Vec3 * vec);
 	Vec3 * cross(Vec3 * vec);
-	// TODO: quaternion rotation method
+	void rotate(Vec3 * axis, float theta);
 };

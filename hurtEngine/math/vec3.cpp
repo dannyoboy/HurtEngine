@@ -47,3 +47,28 @@ Vec3 * Vec3::cross(Vec3 * vec) {
 
 	return new Vec3(cX, cY, cZ);
 }
+
+void Vec3::rotate(Vec3 * axis, float theta) {
+	float halfThetaRad = hurtDegToRad(theta) / 2;
+	float sinHalfTheta = (float)sin(halfThetaRad);
+	float cosHalfTheta = (float)cos(halfThetaRad);
+
+	float rX = axis->x * sinHalfTheta;
+	float rY = axis->y * sinHalfTheta;
+	float rZ = axis->z * sinHalfTheta;
+	float rW = cosHalfTheta;
+
+	Quaternion * rotation = new Quaternion(rX, rY, rZ, rW);
+	Quaternion * conjugate = rotation->conjugated();
+	Quaternion * temp = rotation->mul(this);
+	Quaternion * result = temp->mul(conjugate);
+
+	x = result->x;
+	y = result->y;
+	z = result->z;
+
+	delete rotation;
+	delete conjugate;
+	delete temp;
+	delete result;
+}

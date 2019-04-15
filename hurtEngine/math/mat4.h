@@ -5,6 +5,7 @@
 class Mat4 {
 public:
 	Mat4(float * valsIn);
+	float getVal(int row, int col);
 	Mat4 * add(Mat4 * mat);
 	Mat4 * sub(Mat4 * mat);
 	Mat4 * mul(Mat4 * mat);
