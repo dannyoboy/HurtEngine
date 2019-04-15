@@ -7,6 +7,7 @@
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/input/inputManager.h"
 #include "hurtEngine/ecs/scene.h"
+#include "hurtEngine/utils/time.h"
 
 using namespace std;
 

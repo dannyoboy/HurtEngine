@@ -139,6 +139,7 @@ void Game::initConfig(Vec3 * clearColor) {
 void Game::gameLoop(GLFWwindow * window) {
 	while (!(glfwWindowShouldClose(window) || closed)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		Time::instance()->markDelta();
 		hurt::updateInput(window);
 		updateCurrentScene();
 		glfwSwapBuffers(window);
@@ -164,5 +165,6 @@ void Game::runOnGameStop() {
 
 Game::~Game() {
 	delete scenes;
+	delete Time::instance();
 	glfwTerminate();
 }
