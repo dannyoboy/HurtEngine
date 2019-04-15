@@ -1,5 +1,6 @@
 #pragma once
 
+#include "hurtEngine/math/vec2.h"
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/math/mat4.h"
 
@@ -9,6 +10,9 @@ public:
 	void moveRight(float delta);
 	void moveUp(float delta);
 	void moveForward(float delta);
+	void moveY(float delta);
+	void moveRightXZ(float delta);
+	void moveForwardXZ(float delta);
 	void turnHorizontal(float delta);
 	void turnVertical(float delta);
 	Vec3 * getPos();
