@@ -46,3 +46,7 @@
 #include "hurtEngine/math/vec2.h"
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/math/vec4.h"
+
+// Rendering
+#include "hurtEngine/rendering/camera.h"
+#include "hurtEngine/rendering/shader.h"

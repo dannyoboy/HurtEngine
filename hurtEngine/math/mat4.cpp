@@ -6,6 +6,10 @@ float Mat4::getVal(int row, int col) {
 	return vals[row * 4 + col];
 }
 
+float * Mat4::getVals() {
+	return vals;
+}
+
 Mat4 * Mat4::add(Mat4 * mat) {
 	float * sum = new float[16];
 	
