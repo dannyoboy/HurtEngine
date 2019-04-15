@@ -6,7 +6,7 @@
 
 class Camera {
 public:
-	Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn);
+	Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn, float fov, int windowWidth, int windowHeight, float zNear, float zFar);
 	void moveRight(float delta);
 	void moveUp(float delta);
 	void moveForward(float delta);
@@ -22,9 +22,11 @@ public:
 	Vec3 * getUp();
 	void setUp(Vec3 * upIn);
 	Mat4 * viewMatrix();
+	Mat4 * projectionMatrix();
 	~Camera();
 private:
 	Vec3 * pos;
 	Vec3 * forward;
 	Vec3 * up;
+	Mat4 * projection;
 };

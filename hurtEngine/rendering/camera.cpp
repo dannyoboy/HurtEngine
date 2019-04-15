@@ -2,12 +2,24 @@
 
 static Vec3 Y_AXIS(0, 1, 0);
 
-Camera::Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn) : pos(posIn) {
+Camera::Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn, float fov, int windowWidth, int windowHeight, float zNear, float zFar) : pos(posIn) {
 	forward = forwardIn->normalized();
 	up = upIn->normalized();
 
 	delete forwardIn;
 	delete upIn;
+
+	float fovRad = hurtDegToRad(fov);
+	float tanHalfFov = (float)tan(fovRad / 2);
+	float zRange = zNear - zFar;
+	float aspectRatio = (float)windowWidth / windowHeight;
+	float * projectionVals = new float[16]{
+		-1 / (tanHalfFov * aspectRatio),	0,				0,							0,
+		0,									1 / tanHalfFov, 0,							0,
+		0,									0,				-(zNear + zFar) / zRange,	2 * zFar * zNear / zRange,
+		0,									0,				1,							0
+	};
+	projection = new Mat4(projectionVals);
 }
 
 void Camera::moveRight(float delta) {
@@ -178,8 +190,13 @@ Mat4 * Camera::viewMatrix() {
 	return viewMatrix;
 }
 
+Mat4 * Camera::projectionMatrix() {
+	return projection;
+}
+
 Camera::~Camera() {
 	delete pos;
 	delete forward;
 	delete up;
+	delete projection;
 }
