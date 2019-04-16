@@ -28,6 +28,7 @@ private:
 	bool closed = false;
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
+	Shader * entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
 
 	inline Game() {};
 	void initContext();
@@ -36,6 +37,7 @@ private:
 	void initConfig(Vec3 * clearColor);
 	void gameLoop(GLFWwindow * window);
 	void updateCurrentScene();
+	void renderCurrentScene();
 	void runOnGameStart();
 	void runOnGameStop();
 	~Game();

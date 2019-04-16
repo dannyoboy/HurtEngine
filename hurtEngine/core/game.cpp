@@ -76,6 +76,7 @@ bool Game::setCurrentScene(string * name) {
 			}
 
 			currScene = scene;
+			currScene->loadProjectionMatrix(entityShader);
 			currScene->entityOnSceneLoad();
 			return true;
 		}
@@ -142,6 +143,7 @@ void Game::gameLoop(GLFWwindow * window) {
 		Time::instance()->markDelta();
 		hurt::updateInput(window);
 		updateCurrentScene();
+		renderCurrentScene();
 		glfwSwapBuffers(window);
 	}
 }
@@ -149,6 +151,12 @@ void Game::gameLoop(GLFWwindow * window) {
 void Game::updateCurrentScene() {
 	currScene->entityOnUpdate();
 	currScene->entityOnLateUpdate();
+}
+
+void Game::renderCurrentScene() {
+	currScene->loadView(entityShader);
+	currScene->loadLights(entityShader);
+	currScene->renderEntities(entityShader);
 }
 
 void Game::runOnGameStart() {
@@ -165,6 +173,7 @@ void Game::runOnGameStop() {
 
 Game::~Game() {
 	delete scenes;
+	delete entityShader;
 	delete Time::instance();
 	glfwTerminate();
 }

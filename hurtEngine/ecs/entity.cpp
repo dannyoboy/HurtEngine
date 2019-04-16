@@ -15,7 +15,7 @@ void Entity::attachCollideable(Collideable * collideable) {
 }
 
 void Entity::attachDirectionalLight(DirectionalLight * directionalLight) {
-	// TODO
+	this->directionalLight = directionalLight;
 }
 
 void Entity::attachGUI(GUI * gui) {
@@ -27,11 +27,11 @@ void Entity::attachKinematics(Kinematics * kinematics) {
 }
 
 void Entity::attachMaterial(Material * material) {
-	// TODO
+	this->material = material;
 }
 
 void Entity::attachMesh(Mesh * mesh) {
-	// TODO
+	this->mesh = mesh;
 }
 
 void Entity::attachMousePicker(MousePicker * mousePicker) {
@@ -39,7 +39,7 @@ void Entity::attachMousePicker(MousePicker * mousePicker) {
 }
 
 void Entity::attachPointLight(PointLight * pointLight) {
-	// TODO
+	this->pointLight = pointLight;
 }
 
 void Entity::attachSkybox(Skybox * skybox) {
@@ -47,10 +47,53 @@ void Entity::attachSkybox(Skybox * skybox) {
 }
 
 void Entity::attachTransform(Transform * transform) {
-	// TODO
+	this->transform = transform;
+}
+
+Audio * Entity::getAudio() {
+	return audio;
+}
+
+Collideable * Entity::getCollideable() {
+	return collideable;
+}
+
+DirectionalLight * Entity::getDirectionalLight() {
+	return directionalLight;
+}
+
+GUI * Entity::getGUI() {
+	return gui;
+}
+
+Kinematics * Entity::getKinematics() {
+	return kinematics;
+}
+
+Material * Entity::getMaterial() {
+	return material;
+}
+
+Mesh * Entity::getMesh() {
+	return mesh;
+}
+
+MousePicker * Entity::getMousePicker() {
+	return mousePicker;
+}
+
+PointLight * Entity::getPointLight() {
+	return pointLight;
+}
+
+Skybox * Entity::getSkybox() {
+	return skybox;
+}
+
+Transform * Entity::getTransform() {
+	return transform;
 }
 
 Entity::~Entity() {
-	// TODO
 	delete tag;
 }

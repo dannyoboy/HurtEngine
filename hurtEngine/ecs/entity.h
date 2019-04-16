@@ -32,6 +32,18 @@ public:
 	void attachSkybox(Skybox * skybox);
 	void attachTransform(Transform * transform);
 
+	Audio * getAudio();
+	Collideable * getCollideable();
+	DirectionalLight * getDirectionalLight();
+	GUI * getGUI();
+	Kinematics * getKinematics();
+	Material * getMaterial();
+	Mesh * getMesh();
+	MousePicker * getMousePicker();
+	PointLight * getPointLight();
+	Skybox * getSkybox();
+	Transform * getTransform();
+
 	virtual void onGameStart() {};
 	virtual void onGameStop() {};
 	virtual void onSceneLoad() {};

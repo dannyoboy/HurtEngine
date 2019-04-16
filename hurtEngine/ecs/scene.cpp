@@ -56,8 +56,66 @@ void Scene::clear() {
 	entities->clear();
 }
 
+void Scene::loadLights(Shader * entityShader) {
+	int directionalLightIndex = 0;
+	int pointLightIndex = 0;
+
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Entity * entity = *iter;
+		DirectionalLight * directionalLight = entity->getDirectionalLight();
+		PointLight * pointLight = entity->getPointLight();
+
+		if (directionalLight != nullptr) {
+			directionalLight->load(entityShader, directionalLightIndex);
+			directionalLightIndex++;
+		}
+
+		if (pointLight != nullptr) {
+			pointLight->load(entityShader, pointLightIndex);
+			pointLightIndex++;
+		}
+	}
+
+	entityShader->loadInt(&string("numDirectionalLights"), directionalLightIndex);
+	entityShader->loadInt(&string("numPointLights"), pointLightIndex);
+}
+
+void Scene::renderEntities(Shader * entityShader) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Entity * entity = *iter;
+		Transform * transform = entity->getTransform();
+		Mesh * mesh = entity->getMesh();
+		Material * material = entity->getMaterial();
+
+		if (transform != nullptr && mesh != nullptr && material != nullptr) {
+			Mat4 * transformationMatrix = transform->transformationMatrix();
+			entityShader->loadMat4(&string("transform"), transformationMatrix);
+			delete transformationMatrix;
+
+			mesh->bind();
+			material->loadAndBind(entityShader);
+
+			glDrawElements(GL_TRIANGLES, mesh->getNumIndices(), GL_UNSIGNED_INT, 0);
+		}
+	}
+}
+
+void Scene::loadProjectionMatrix(Shader * entityShader) {
+	entityShader->loadMat4(&string("projection"), camera->projectionMatrix());
+}
+
+void Scene::loadView(Shader * entityShader) {
+	Mat4 * view = camera->viewMatrix();
+	entityShader->loadMat4(&string("view"), view);
+	entityShader->loadVec3(&string("camLoc"), camera->getPos());
+}
+
 string * Scene::getName() {
 	return name;
+}
+
+Camera * Scene::getCamera() {
+	return camera;
 }
 
 Scene::~Scene() {
