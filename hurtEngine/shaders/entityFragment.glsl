@@ -32,9 +32,9 @@ struct DirectionalLight {
 };
 
 struct Attenuation {
-	float constant;
-	float linear;
 	float exponent;
+	float linear;
+	float constant;
 };
 
 struct PointLight {

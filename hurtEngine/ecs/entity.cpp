@@ -14,15 +14,15 @@ void Entity::attachCollideable(Collideable * collideable) {
 	// TODO
 }
 
+void Entity::attachDirectionalLight(DirectionalLight * directionalLight) {
+	// TODO
+}
+
 void Entity::attachGUI(GUI * gui) {
 	// TODO
 }
 
 void Entity::attachKinematics(Kinematics * kinematics) {
-	// TODO
-}
-
-void Entity::attachLight(Light * light) {
 	// TODO
 }
 
@@ -38,6 +38,10 @@ void Entity::attachMousePicker(MousePicker * mousePicker) {
 	// TODO
 }
 
+void Entity::attachPointLight(PointLight * pointLight) {
+	// TODO
+}
+
 void Entity::attachSkybox(Skybox * skybox) {
 	// TODO
 }
@@ -48,4 +52,5 @@ void Entity::attachTransform(Transform * transform) {
 
 Entity::~Entity() {
 	// TODO
+	delete tag;
 }

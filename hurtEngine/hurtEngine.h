@@ -16,12 +16,13 @@
 // Components
 #include "hurtEngine/components/audio.h"
 #include "hurtEngine/components/collideable.h"
+#include "hurtEngine/components/directionalLight.h"
 #include "hurtEngine/components/gui.h"
 #include "hurtEngine/components/kinematics.h"
-#include "hurtEngine/components/light.h"
 #include "hurtEngine/components/material.h"
 #include "hurtEngine/components/mesh.h"
 #include "hurtEngine/components/mousePicker.h"
+#include "hurtEngine/components/pointLight.h"
 #include "hurtEngine/components/skybox.h"
 #include "hurtEngine/components/transform.h"
 
