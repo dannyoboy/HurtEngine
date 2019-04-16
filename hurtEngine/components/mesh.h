@@ -2,7 +2,12 @@
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include <iostream>
 #include <string>
+#include <fstream>
+#include <list>
+#include "hurtEngine/math/vec2.h"
+#include "hurtEngine/math/vec3.h"
 
 using namespace std;
 
