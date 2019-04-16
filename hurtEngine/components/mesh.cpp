@@ -1,19 +1,23 @@
 #include "mesh.h"
 
 Mesh::Mesh(string * objFile) {
-	list<Vec3> positionsList;
-	list<Vec2> texCoordsList;
-	list<Vec3> normalsList;
-	list<unsigned int> indicesList;
+	vector<Vec3> positionsList;
+	vector<Vec2> texCoordsList;
+	vector<Vec3> normalsList;
+	vector<unsigned int> indicesList;
+	vector<unsigned int> texCoordsIndices;
+	vector<unsigned int> normalsIndices;
 	
 	ifstream file(*objFile);
 	string line;
+	bool texCoordsFound = false;
 	while (getline(file, line)) {
 		if (line.find("vt") == 0) {
 			strtok(const_cast<char *>(line.c_str()), " ");
 			float texCoordU = (float)atof(strtok(NULL, " "));
 			float texCoordV = (float)atof(strtok(NULL, " "));
 			texCoordsList.push_back(Vec2(texCoordU, texCoordV));
+			texCoordsFound = true;
 		}
 		else if (line.find("vn") == 0) {
 			strtok(const_cast<char *>(line.c_str()), " ");
@@ -31,10 +35,16 @@ Mesh::Mesh(string * objFile) {
 		}
 		else if (line.find("f") == 0) {
 			strtok(const_cast<char *>(line.c_str()), " ");
-			char * value = strtok(NULL, " /");
-			while (value) {
-				indicesList.push_back((unsigned int)atof(value) - 1);
-				value = strtok(NULL, " /");
+			for (int i = 0; i < 3; i++) {
+				indicesList.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+
+				if (texCoordsFound) {
+					texCoordsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+					normalsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+				}
+				else {
+					normalsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+				}
 			}
 		}
 	}
@@ -58,34 +68,27 @@ Mesh::Mesh(string * objFile) {
 	float * normals = new float[numNormals];
 	unsigned int * indices = new unsigned int[numIndices];
 
-	int i = 0;
-	for (list<Vec3>::iterator iter = positionsList.begin(); iter != positionsList.end(); ++iter) {
-		Vec3 pos = *iter;
-		positions[i * 3] = pos.x;
-		positions[i * 3 + 1] = pos.y;
-		positions[i * 3 + 2] = pos.z;
-		i++;
-	}
-	i = 0;
-	for (list<Vec2>::iterator iter = texCoordsList.begin(); iter != texCoordsList.end(); ++iter) {
-		Vec2 texCoord = *iter;
-		texCoords[i * 2] = texCoord.x;
-		texCoords[i * 2 + 1] = texCoord.y;
-		i++;
-	}
-	i = 0;
-	for (list<Vec3>::iterator iter = normalsList.begin(); iter != normalsList.end(); ++iter) {
-		Vec3 normal = *iter;
-		normals[i * 3] = normal.x;
-		normals[i * 3 + 1] = normal.y;
-		normals[i * 3 + 2] = normal.z;
-		i++;
-	}
-	i = 0;
-	for (list<unsigned int>::iterator iter = indicesList.begin(); iter != indicesList.end(); ++iter) {
-		unsigned int index = *iter;
+	for (int i = 0; i < indicesList.size(); i++) {
+		unsigned int index = indicesList[i];
+		Vec3 pos = positionsList[index];
+		positions[index * 3] = pos.x;
+		positions[index * 3 + 1] = pos.y;
+		positions[index * 3 + 2] = pos.z;
+
+		if (texCoordsFound) {
+			unsigned int texCoordsIndex = texCoordsIndices[i];
+			Vec2 texCoord = texCoordsList[texCoordsIndex];
+			texCoords[index * 2] = texCoord.x;
+			texCoords[index * 2 + 1] = texCoord.y;
+		}
+
+		unsigned int normalsIndex = normalsIndices[i];
+		Vec3 normal = normalsList[normalsIndex];
+		normals[index * 3] = normal.x;
+		normals[index * 3 + 1] = normal.y;
+		normals[index * 3 + 2] = normal.z;
+
 		indices[i] = index;
-		i++;
 	}
 
 	glGenVertexArrays(1, &vao);
