@@ -53,7 +53,7 @@ uniform int numPointLights;
 
 void main() {
 	vec3 baseColor;
-	if(material.useDiffuseMap) {
+	if(material.useDiffuseMap != 0) {
 		vec4 texColor = texture(material.diffuseMap, texCoords);
 		if(texColor.a == 0.0) {
 			discard;
@@ -67,7 +67,7 @@ void main() {
 	float ambientFactor;
 	float diffuseFactor;
 	float specularFactor;
-	if(material.useLightMap) {
+	if(material.useLightMap != 0) {
 		vec4 lightValues = texture(material.lightMap, texCoords);
 		ambientFactor = lightValues.r;
 		diffuseFactor = lightValues.g;
@@ -109,7 +109,7 @@ void main() {
 			float diffuseDot = max(dot(normal, -directionNorm), 0.0);
 			vec3 diffuseAmt = diffuseFactor * diffuseDot * lightShade;
 
-			vec3 reflection = reflection(directionNorm, normal);
+			vec3 reflection = reflect(directionNorm, normal);
 			float specularEffect = pow(max(dot(normalize(toCam), reflection), 0.0), shininessFactor);
 			vec3 specularAmt = specularFactor * specularEffect * lightShade;
 

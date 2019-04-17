@@ -60,7 +60,7 @@ void Vec3::rotate(Vec3 * axis, float theta) {
 
 	Quaternion * rotation = new Quaternion(rX, rY, rZ, rW);
 	Quaternion * conjugate = rotation->conjugated();
-	Quaternion * temp = rotation->mul(this);
+	Quaternion * temp = rotation->mul(x, y, z);
 	Quaternion * result = temp->mul(conjugate);
 
 	x = result->x;

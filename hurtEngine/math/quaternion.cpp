@@ -6,11 +6,11 @@ Quaternion * Quaternion::conjugated() {
 	return new Quaternion(-x, -y, -z, w);
 }
 
-Quaternion * Quaternion::mul(Vec3 * vec) {
-	float pX = w * vec->x + y * vec->z - z * vec->y;
-	float pY = w * vec->y + z * vec->x - x * vec->z;
-	float pZ = w * vec->z + x * vec->y - y * vec->x;
-	float pW = -x * vec->x - y * vec->y - z * vec->z;
+Quaternion * Quaternion::mul(float vecX, float vecY, float vecZ) {
+	float pX = w * vecX + y * vecZ - z * vecY;
+	float pY = w * vecY + z * vecX - x * vecZ;
+	float pZ = w * vecZ + x * vecY - y * vecX;
+	float pW = -x * vecX - y * vecY - z * vecZ;
 
 	return new Quaternion(pX, pY, pZ, pW);
 }

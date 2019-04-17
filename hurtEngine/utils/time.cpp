@@ -16,7 +16,7 @@ void Time::markDelta() {
 	lastTime = thisTime;
 
 	milliseconds currTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-	thisTime = currTime.count / 1000.0f;
+	thisTime = currTime.count() / 1000.0f;
 }
 
 float Time::getDelta() {
@@ -27,7 +27,7 @@ float Time::getDelta() {
 
 Time::Time() {
 	milliseconds currTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-	thisTime = currTime.count / 1000.0f;
+	thisTime = currTime.count() / 1000.0f;
 
 	lastTime = thisTime;
 }

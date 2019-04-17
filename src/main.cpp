@@ -11,10 +11,13 @@ constexpr int HEIGHT = 608;
 int main() {
 	// Start coding here
 
+	Game * game = Game::instance();
+	game->init(WIDTH, HEIGHT, &string("Dank memes!"), &Vec3(0, 0, 0));
+
 	// TODO: test code below (remove)
 	
-	Camera * scene1Cam = new Camera(new Vec3(0, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 1, 0), 60, WIDTH, HEIGHT, 0.001, 1000);
-	Camera * scene2Cam = new Camera(new Vec3(0, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 1, 0), 60, WIDTH, HEIGHT, 0.001, 1000;
+	Camera * scene1Cam = new Camera(new Vec3(0, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 1, 0), 60, WIDTH, HEIGHT, 0.001f, 1000);
+	Camera * scene2Cam = new Camera(new Vec3(0, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 1, 0), 60, WIDTH, HEIGHT, 0.001f, 1000);
 
 	string name1("scene1");
 	string name2("scene2");
@@ -29,10 +32,30 @@ int main() {
 	Vec3 color2(1, 1, 0);
 	scene2->addEntity(new Object2(&tag2, &color2));
 
-	Game * game = Game::instance();
+	string tag3("directionalLight");
+	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 1, new Vec3(-1, -1, -1));
+	Entity * light = new Entity(&tag3);
+	light->attachDirectionalLight(directionalLight);
+	scene1->addEntity(light);
+
+	string tag4("guy");
+	Material * guyMaterial = new Material(new Vec3(1, 0, 0), 0.2f, 0.4f, 0.25f, 16);
+	Mesh * guyMesh = new Mesh(&string("res/guy.obj"));
+	Transform * guyTransform = new Transform(new Vec3(0, 0, 3), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
+	Entity * guy = new Entity(&tag4);
+	guy->attachMaterial(guyMaterial);
+	guy->attachMesh(guyMesh);
+	guy->attachTransform(guyTransform);
+	scene1->addEntity(guy);
+
 	game->addScene(scene1);
 	game->addScene(scene2);
-	game->initGame(WIDTH, HEIGHT, &string("Dank memes!"), &Vec3(0, 0, 0));
+	game->start();
+
+	delete directionalLight;
+	delete guyMaterial;
+	delete guyMesh;
+	delete guyTransform;
 
 	return 0;
 }

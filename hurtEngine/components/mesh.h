@@ -15,7 +15,7 @@ class Mesh {
 public:
 	Mesh(string * objFile);
 	void bind();
-	unsigned int getNumIndices();
+	unsigned int getIndexCount();
 	~Mesh();
 private:
 	unsigned int vao;
@@ -23,5 +23,5 @@ private:
 	unsigned int texVbo;
 	unsigned int normVbo;
 	unsigned int indexEbo;
-	unsigned int numIndices;
+	unsigned int indexCount;
 };

@@ -95,7 +95,7 @@ void Scene::renderEntities(Shader * entityShader) {
 			mesh->bind();
 			material->loadAndBind(entityShader);
 
-			glDrawElements(GL_TRIANGLES, mesh->getNumIndices(), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 		}
 	}
 }

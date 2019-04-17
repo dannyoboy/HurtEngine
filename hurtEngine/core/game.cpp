@@ -12,18 +12,21 @@ Game * Game::instance() {
 	return gameInstance;
 }
 
-void Game::initGame(int width, int height, string * title, Vec3 * clearColor) {
+void Game::init(int width, int height, string * title, Vec3 * clearColor) {
+	initContext();
+	window = createWindow(width, height, title);
+	checkGLAD();
+	initConfig(clearColor);
+	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
+	initialized = true;
+}
+
+void Game::start() {
 	if (currScene == nullptr) {
 		cerr << "No current scene set" << endl;
 		exit(-1);
 	}
 
-	initContext();
-	window = createWindow(width, height, title);
-	checkGLAD();
-	initConfig(clearColor);
-	
-	initialized = true;
 	runOnGameStart();
 	gameLoop(window);
 	runOnGameStop();

@@ -12,56 +12,58 @@ Mesh::Mesh(string * objFile) {
 	string line;
 	bool texCoordsFound = false;
 	while (getline(file, line)) {
+		char * temp; // TODO
 		if (line.find("vt") == 0) {
-			strtok(const_cast<char *>(line.c_str()), " ");
-			float texCoordU = (float)atof(strtok(NULL, " "));
-			float texCoordV = (float)atof(strtok(NULL, " "));
+			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
+			float texCoordU = (float)atof(strtok_s(NULL, " ", &temp));
+			float texCoordV = (float)atof(strtok_s(NULL, " ", &temp));
 			texCoordsList.push_back(Vec2(texCoordU, texCoordV));
 			texCoordsFound = true;
 		}
 		else if (line.find("vn") == 0) {
-			strtok(const_cast<char *>(line.c_str()), " ");
-			float normalX = (float)atof(strtok(NULL, " "));
-			float normalY = (float)atof(strtok(NULL, " "));
-			float normalZ = (float)atof(strtok(NULL, " "));
+			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
+			float normalX = (float)atof(strtok_s(NULL, " ", &temp));
+			float normalY = (float)atof(strtok_s(NULL, " ", &temp));
+			float normalZ = (float)atof(strtok_s(NULL, " ", &temp));
 			normalsList.push_back(Vec3(normalX, normalY, normalZ));
 		}
 		else if (line.find("v") == 0) {
-			strtok(const_cast<char *>(line.c_str()), " ");
-			float posX = (float)atof(strtok(NULL, " "));
-			float posY = (float)atof(strtok(NULL, " "));
-			float posZ = (float)atof(strtok(NULL, " "));
+			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
+			float posX = (float)atof(strtok_s(NULL, " ", &temp));
+			float posY = (float)atof(strtok_s(NULL, " ", &temp));
+			float posZ = (float)atof(strtok_s(NULL, " ", &temp));
 			positionsList.push_back(Vec3(posX, posY, posZ));
 		}
 		else if (line.find("f") == 0) {
-			strtok(const_cast<char *>(line.c_str()), " ");
+			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
 			for (int i = 0; i < 3; i++) {
-				indicesList.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+				indicesList.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
 
 				if (texCoordsFound) {
-					texCoordsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
-					normalsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+					texCoordsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
+					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
 				}
 				else {
-					normalsIndices.push_back((unsigned int)atof(strtok(NULL, " /")) - 1);
+					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
 				}
 			}
 		}
 	}
 
-	if (texCoordsList.size() != 0 && texCoordsList.size() != positionsList.size()) {
-		cerr << "Invalid number of texture coordinates in " << *objFile << endl;
-		exit(-1);
-	}
-	if (normalsList.size() != positionsList.size()) {
-		cerr << "Invalid number of normal vectors in " << *objFile << endl;
-		exit(-1);
-	}
+	// TODO
+	//if (texCoordsList.size() != 0 && texCoordsList.size() != positionsList.size()) {
+	//	cerr << "Invalid number of texture coordinates in " << *objFile << endl;
+	//	exit(-1);
+	//}
+	//if (normalsList.size() != positionsList.size()) {
+	//	cerr << "Invalid number of normal vectors in " << *objFile << endl;
+	//	exit(-1);
+	//}
 
-	unsigned int numPositions = positionsList.size() * 3;
-	unsigned int numTexCoords = texCoordsList.size() * 2;
-	unsigned int numNormals = normalsList.size() * 3;
-	unsigned int numIndices = indicesList.size();
+	unsigned int numPositions = (unsigned int)positionsList.size() * 3;
+	unsigned int numTexCoords = (unsigned int)positionsList.size() * 2;
+	unsigned int numNormals = (unsigned int)positionsList.size() * 3;
+	unsigned int numIndices = (unsigned int)positionsList.size();
 
 	float * positions = new float[numPositions];
 	float * texCoords = new float[numTexCoords];
@@ -125,7 +127,7 @@ Mesh::Mesh(string * objFile) {
 	delete[] normals;
 	delete[] indices;
 
-	this->numIndices = numIndices;
+	indexCount = numIndices;
 }
 
 void Mesh::bind() {
@@ -133,8 +135,8 @@ void Mesh::bind() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexEbo);
 }
 
-unsigned int Mesh::getNumIndices() {
-	return numIndices;
+unsigned int Mesh::getIndexCount() {
+	return indexCount;
 }
 
 Mesh::~Mesh() {

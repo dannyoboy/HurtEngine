@@ -14,7 +14,8 @@ using namespace std;
 class Game {
 public:
 	static Game * instance();
-	void initGame(int width, int height, string * title, Vec3 * clearColor);
+	void init(int width, int height, string * title, Vec3 * clearColor);
+	void start();
 	void resizeWindow(int width, int height);
 	void setClearColor(Vec3 * clearColor);
 	bool addScene(Scene * scene);
@@ -28,7 +29,7 @@ private:
 	bool closed = false;
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
-	Shader * entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
+	Shader * entityShader = nullptr;
 
 	inline Game() {};
 	void initContext();
