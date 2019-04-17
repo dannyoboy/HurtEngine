@@ -6,6 +6,7 @@ const int MAX_POINT_LIGHTS = 16;
 in vec2 texCoords;
 in vec3 normal;
 in vec3 toCam;
+in vec3 worldPos;
 
 out vec4 outColor;
 
@@ -95,7 +96,30 @@ void main() {
 		specularColor += specularFactor * specularEffect * lightShade;
 	}
 	for(int i = 0; i < numPointLights; i++) {
-		// TODO: point light calculations
+		PointLight light = pointLights[i];
+		vec3 lightShade = light.basic.color * light.basic.intensity;
+
+		vec3 direction = worldPos - light.position;
+		float distance = length(direction);
+		if(distance <= light.range) {
+			vec3 directionNorm = normalize(direction);
+			
+			vec3 ambientAmt = ambientFactor * lightShade;
+			
+			float diffuseDot = max(dot(normal, -directionNorm), 0.0);
+			vec3 diffuseAmt = diffuseFactor * diffuseDot * lightShade;
+
+			vec3 reflection = reflection(directionNorm, normal);
+			float specularEffect = pow(max(dot(normalize(toCam), reflection), 0.0), shininessFactor);
+			vec3 specularAmt = specularFactor * specularEffect * lightShade;
+
+			Attenuation attenuation = light.attenuation;
+			float attenuationFactor = attenuation.exponent * distance * distance + attenuation.linear * distance + attenuation.constant + 0.001;
+
+			ambientColor += ambientAmt / attenuationFactor;
+			diffuseColor += diffuseAmt / attenuationFactor;
+			specularColor += specularAmt / attenuationFactor;
+		}
 	}
 
 	vec3 finalColor = baseColor * (ambientColor + diffuseColor) + specularColor;
