@@ -17,6 +17,7 @@ Mesh::Mesh(string * objFile) {
 			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
 			float texCoordU = (float)atof(strtok_s(NULL, " ", &temp));
 			float texCoordV = (float)atof(strtok_s(NULL, " ", &temp));
+			cout << "Adding tex coord (" << texCoordU << "," << texCoordV << ")" << endl; // TODO
 			texCoordsList.push_back(Vec2(texCoordU, texCoordV));
 			texCoordsFound = true;
 		}
@@ -25,6 +26,7 @@ Mesh::Mesh(string * objFile) {
 			float normalX = (float)atof(strtok_s(NULL, " ", &temp));
 			float normalY = (float)atof(strtok_s(NULL, " ", &temp));
 			float normalZ = (float)atof(strtok_s(NULL, " ", &temp));
+			cout << "Adding normal (" << normalX << "," << normalY << "," << normalZ << ")" << endl; // TODO
 			normalsList.push_back(Vec3(normalX, normalY, normalZ));
 		}
 		else if (line.find("v") == 0) {
@@ -32,6 +34,7 @@ Mesh::Mesh(string * objFile) {
 			float posX = (float)atof(strtok_s(NULL, " ", &temp));
 			float posY = (float)atof(strtok_s(NULL, " ", &temp));
 			float posZ = (float)atof(strtok_s(NULL, " ", &temp));
+			cout << "Adding position (" << posX << "," << posY << "," << posZ << ")" << endl; // TODO
 			positionsList.push_back(Vec3(posX, posY, posZ));
 		}
 		else if (line.find("f") == 0) {
@@ -49,6 +52,11 @@ Mesh::Mesh(string * objFile) {
 			}
 		}
 	}
+
+	cout << "Number of positions: " << positionsList.size() << endl;
+	cout << "Number of tex coords: " << texCoordsList.size() << endl;
+	cout << "Number of normals: " << normalsList.size() << endl;
+	cout << "Number of indices: " << indicesList.size() << endl;
 
 	// TODO
 	//if (texCoordsList.size() != 0 && texCoordsList.size() != positionsList.size()) {
