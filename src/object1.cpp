@@ -69,6 +69,15 @@ void Object1::onUpdate() {
 		sideMove -= moveSpeed;
 	}
 	cam->moveRight(sideMove * Time::instance()->getDelta() * multiplier);
+
+	float vertMove = 0;
+	if (hurtKeyDown(HURT_KEY_Q)) {
+		vertMove += moveSpeed;
+	}
+	if (hurtKeyDown(HURT_KEY_E)) {
+		vertMove -= moveSpeed;
+	}
+	cam->moveUp(vertMove * Time::instance()->getDelta() * multiplier);
 }
 
 void Object1::onLateUpdate() {

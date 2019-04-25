@@ -32,16 +32,19 @@ int main() {
 	Vec3 color2(1, 1, 0);
 	scene2->addEntity(new Object2(&tag2, &color2));
 
-	string tag3("directionalLight");
+	string tag3("light");
 	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 1, new Vec3(-1, -1, 1));
 	Entity * light = new Entity(&tag3);
-	light->attachDirectionalLight(directionalLight);
+	//light->attachDirectionalLight(directionalLight);
+	
+	PointLight * pointLight = new PointLight(new Vec3(1, 1, 1), 1, new Vec3(0.05f, 0.05f, 0.05f), new Vec3(-3, 0, 5), 100);
+	light->attachPointLight(pointLight);
 	scene1->addEntity(light);
 
 	string tag4("guy");
 	Material * guyMaterial = new Material(&string("res/guy.png"), 0.2f, 0.4f, 0.07f, 4);
 	Mesh * guyMesh = new Mesh(&string("res/guy.obj"));
-	Transform * guyTransform = new Transform(new Vec3(0, 0, 3), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
+	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 90, 0), new Vec3(1, 1, 1));
 	Entity * guy = new Entity(&tag4);
 	guy->attachMaterial(guyMaterial);
 	guy->attachMesh(guyMesh);
