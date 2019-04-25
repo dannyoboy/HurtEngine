@@ -28,6 +28,7 @@ void Game::start() {
 	}
 
 	runOnGameStart();
+	Time::instance()->markDelta();
 	gameLoop(window);
 	runOnGameStop();
 	delete this;
@@ -155,6 +156,7 @@ void Game::gameLoop(GLFWwindow * window) {
 }
 
 void Game::updateCurrentScene() {
+	currScene->updatePhysics();
 	currScene->entityOnUpdate();
 	currScene->entityOnLateUpdate();
 }

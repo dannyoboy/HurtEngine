@@ -26,6 +26,7 @@ public:
 	~Scene();
 
 	// Engine-only methods
+	void updatePhysics();
 	void entityOnGameStart();
 	void entityOnGameStop();
 	void entityOnSceneLoad();

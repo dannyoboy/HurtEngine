@@ -23,7 +23,12 @@ void Entity::attachGUI(GUI * gui) {
 }
 
 void Entity::attachKinematics(Kinematics * kinematics) {
-	// TODO
+	if (transform == nullptr) {
+		cerr << "Cannot attach a Kinematics component without a Transform component" << endl;
+		exit(-1);
+	}
+
+	this->kinematics = kinematics;
 }
 
 void Entity::attachMaterial(Material * material) {

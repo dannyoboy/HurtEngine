@@ -28,6 +28,26 @@ void Object1::onUpdate() {
 		cout << "Removed all testers!" << endl;
 	}
 
+	// Guy controls
+	list<Entity *> * guys = Game::instance()->getScene(&string("scene1"))->getEntities(&string("guy"));
+	Entity * guy = guys->front();
+	const float acc = 0.5f;
+	if (hurtKeyPressed(HURT_KEY_KP_6)) {
+		guy->getKinematics()->setAcc(new Vec3(acc, 0, 0));
+	}
+	if (hurtKeyReleased(HURT_KEY_KP_6)) {
+		guy->getKinematics()->setAcc(new Vec3(0, 0, 0));
+	}
+
+	const float angAcc = 5;
+	if (hurtKeyPressed(HURT_KEY_KP_8)) {
+		guy->getKinematics()->setAngAcc(new Vec3(angAcc, 0, 0));
+	}
+	if (hurtKeyReleased(HURT_KEY_KP_8)) {
+		guy->getKinematics()->setAngAcc(new Vec3(0, 0, 0));
+	}
+	delete guys;
+
 	// Camera controls
 	Camera * cam = Game::instance()->getScene(&string("scene1"))->getCamera();
 	float multiplier = hurtKeyDown(HURT_KEY_LEFT_SHIFT) ? 3.0f : 1.0f;

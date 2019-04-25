@@ -124,6 +124,17 @@ Scene::~Scene() {
 
 // Engine-only methods
 
+void Scene::updatePhysics() {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Entity * entity = *iter;
+		Kinematics * kinematics = entity->getKinematics();
+
+		if (kinematics != nullptr) {
+			kinematics->update(entity->getTransform());
+		}
+	}
+}
+
 void Scene::entityOnGameStart() {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		(*iter)->onGameStart();

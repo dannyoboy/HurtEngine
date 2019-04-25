@@ -44,21 +44,27 @@ int main() {
 	string tag4("guy");
 	Material * guyMaterial = new Material(&string("res/guy.png"), &string("res/guyLight.png"), 4);
 	Mesh * guyMesh = new Mesh(&string("res/guy.obj"));
-	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 90, 0), new Vec3(1, 1, 1));
+	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
+	Kinematics * guyKinematics = new Kinematics(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Entity * guy = new Entity(&tag4);
 	guy->attachMaterial(guyMaterial);
 	guy->attachMesh(guyMesh);
 	guy->attachTransform(guyTransform);
+	guy->attachKinematics(guyKinematics);
 	scene1->addEntity(guy);
 
 	game->addScene(scene1);
 	game->addScene(scene2);
 	game->start();
 
+	// Delete entity components here
+
 	delete directionalLight;
+	delete pointLight;
 	delete guyMaterial;
 	delete guyMesh;
 	delete guyTransform;
+	delete guyKinematics;
 
 	return 0;
 }

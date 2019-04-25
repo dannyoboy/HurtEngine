@@ -74,12 +74,27 @@ Vec3 * Transform::getPos() {
 	return pos;
 }
 
+void Transform::setPos(Vec3 * posIn) {
+	delete pos;
+	pos = posIn;
+}
+
 Vec3 * Transform::getRot() {
 	return rot;
 }
 
+void Transform::setRot(Vec3 * rotIn) {
+	delete rot;
+	rot = rotIn;
+}
+
 Vec3 * Transform::getScale() {
 	return scale;
+}
+
+void Transform::setScale(Vec3 * scaleIn) {
+	delete scale;
+	scale = scaleIn;
 }
 
 Transform::~Transform() {
