@@ -4,6 +4,7 @@
 #include <string>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "stb_image.h"
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/input/inputManager.h"
 #include "hurtEngine/ecs/scene.h"

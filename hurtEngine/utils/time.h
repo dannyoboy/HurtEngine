@@ -11,6 +11,6 @@ public:
 	float getDelta();
 private:
 	Time();
-	float lastTime;
-	float thisTime;
+	double lastTime;
+	double thisTime;
 };

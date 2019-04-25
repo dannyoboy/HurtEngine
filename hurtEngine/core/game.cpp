@@ -79,6 +79,7 @@ bool Game::setCurrentScene(string * name) {
 			}
 
 			currScene = scene;
+			entityShader->use();
 			currScene->loadProjectionMatrix(entityShader);
 			currScene->entityOnSceneLoad();
 			return true;
@@ -138,6 +139,8 @@ void Game::checkGLAD() {
 
 void Game::initConfig(Vec3 * clearColor) {
 	setClearColor(clearColor);
+	glEnable(GL_DEPTH_TEST);
+	stbi_set_flip_vertically_on_load(true);
 }
 
 void Game::gameLoop(GLFWwindow * window) {
@@ -157,6 +160,7 @@ void Game::updateCurrentScene() {
 }
 
 void Game::renderCurrentScene() {
+	entityShader->use();
 	currScene->loadView(entityShader);
 	currScene->loadLights(entityShader);
 	currScene->renderEntities(entityShader);

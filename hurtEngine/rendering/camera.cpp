@@ -25,7 +25,7 @@ Camera::Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn, float fov, int windo
 void Camera::moveRight(float delta) {
 	Vec3 * right = forward->cross(up);
 	Vec3 * rightNorm = right->normalized();
-	Vec3 * rightScaled = rightNorm->mul(delta);
+	Vec3 * rightScaled = rightNorm->mul(-delta);
 	Vec3 * newPos = pos->add(rightScaled);
 
 	delete right;
@@ -71,7 +71,7 @@ void Camera::moveRightXZ(float delta) {
 	Vec3 * forwardXZNorm = forwardXZ.normalized();
 	Vec3 * rightXZ = forwardXZNorm->cross(&Y_AXIS);
 	Vec3 * rightXZNorm = rightXZ->normalized();
-	Vec3 * rightXZScaled = rightXZNorm->mul(delta);
+	Vec3 * rightXZScaled = rightXZNorm->mul(-delta);
 	Vec3 * newPos = pos->add(rightXZScaled);
 
 	delete forwardXZNorm;
@@ -120,7 +120,7 @@ void Camera::turnVertical(float delta) {
 	Vec3 * horizontal = Y_AXIS.cross(forward);
 	Vec3 * horizontalNorm = horizontal->normalized();
 
-	forward->rotate(horizontalNorm, delta);
+	forward->rotate(horizontalNorm, -delta);
 	Vec3 * forwardNorm = forward->normalized();
 
 	Vec3 * newUp = forwardNorm->cross(horizontalNorm);

@@ -27,6 +27,48 @@ void Object1::onUpdate() {
 		Game::instance()->getScene(&string("scene1"))->removeEntities(&string("tester"));
 		cout << "Removed all testers!" << endl;
 	}
+
+	// Camera controls
+	Camera * cam = Game::instance()->getScene(&string("scene1"))->getCamera();
+	float multiplier = hurtKeyDown(HURT_KEY_LEFT_SHIFT) ? 3.0f : 1.0f;
+
+	const float turnSpeed = 70;
+	float verticalTurnAmt = 0;
+	if (hurtKeyDown(HURT_KEY_UP)) {
+		verticalTurnAmt += turnSpeed;
+	}
+	if (hurtKeyDown(HURT_KEY_DOWN)) {
+		verticalTurnAmt -= turnSpeed;
+	}
+	cam->turnVertical(verticalTurnAmt * Time::instance()->getDelta() * multiplier);
+
+	float horizTurnAmt = 0;
+	if (hurtKeyDown(HURT_KEY_LEFT)) {
+		horizTurnAmt += turnSpeed;
+	}
+	if (hurtKeyDown(HURT_KEY_RIGHT)) {
+		horizTurnAmt -= turnSpeed;
+	}
+	cam->turnHorizontal(horizTurnAmt * Time::instance()->getDelta() * multiplier);
+
+	const float moveSpeed = 3;
+	float forwardMove = 0;
+	if (hurtKeyDown(HURT_KEY_W)) {
+		forwardMove += moveSpeed;
+	}
+	if (hurtKeyDown(HURT_KEY_S)) {
+		forwardMove -= moveSpeed;
+	}
+	cam->moveForward(forwardMove * Time::instance()->getDelta() * multiplier);
+
+	float sideMove = 0;
+	if (hurtKeyDown(HURT_KEY_D)) {
+		sideMove += moveSpeed;
+	}
+	if (hurtKeyDown(HURT_KEY_A)) {
+		sideMove -= moveSpeed;
+	}
+	cam->moveRight(sideMove * Time::instance()->getDelta() * multiplier);
 }
 
 void Object1::onLateUpdate() {

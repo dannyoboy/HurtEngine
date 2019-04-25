@@ -16,11 +16,11 @@ void Time::markDelta() {
 	lastTime = thisTime;
 
 	milliseconds currTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-	thisTime = currTime.count() / 1000.0f;
+	thisTime = currTime.count() / 1000.0;
 }
 
 float Time::getDelta() {
-	return thisTime - lastTime;
+	return (float)(thisTime - lastTime);
 }
 
 // Private

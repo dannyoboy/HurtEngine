@@ -11,67 +11,49 @@ Mesh::Mesh(string * objFile) {
 	ifstream file(*objFile);
 	string line;
 	bool texCoordsFound = false;
+	char * str;
 	while (getline(file, line)) {
-		char * temp; // TODO
 		if (line.find("vt") == 0) {
-			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
-			float texCoordU = (float)atof(strtok_s(NULL, " ", &temp));
-			float texCoordV = (float)atof(strtok_s(NULL, " ", &temp));
-			cout << "Adding tex coord (" << texCoordU << "," << texCoordV << ")" << endl; // TODO
+			strtok_s(const_cast<char *>(line.c_str()), " ", &str);
+			float texCoordU = (float)atof(strtok_s(NULL, " ", &str));
+			float texCoordV = (float)atof(strtok_s(NULL, " ", &str));
 			texCoordsList.push_back(Vec2(texCoordU, texCoordV));
 			texCoordsFound = true;
 		}
 		else if (line.find("vn") == 0) {
-			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
-			float normalX = (float)atof(strtok_s(NULL, " ", &temp));
-			float normalY = (float)atof(strtok_s(NULL, " ", &temp));
-			float normalZ = (float)atof(strtok_s(NULL, " ", &temp));
-			cout << "Adding normal (" << normalX << "," << normalY << "," << normalZ << ")" << endl; // TODO
+			strtok_s(const_cast<char *>(line.c_str()), " ", &str);
+			float normalX = (float)atof(strtok_s(NULL, " ", &str));
+			float normalY = (float)atof(strtok_s(NULL, " ", &str));
+			float normalZ = (float)atof(strtok_s(NULL, " ", &str));
 			normalsList.push_back(Vec3(normalX, normalY, normalZ));
 		}
 		else if (line.find("v") == 0) {
-			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
-			float posX = (float)atof(strtok_s(NULL, " ", &temp));
-			float posY = (float)atof(strtok_s(NULL, " ", &temp));
-			float posZ = (float)atof(strtok_s(NULL, " ", &temp));
-			cout << "Adding position (" << posX << "," << posY << "," << posZ << ")" << endl; // TODO
+			strtok_s(const_cast<char *>(line.c_str()), " ", &str);
+			float posX = (float)atof(strtok_s(NULL, " ", &str));
+			float posY = (float)atof(strtok_s(NULL, " ", &str));
+			float posZ = (float)atof(strtok_s(NULL, " ", &str));
 			positionsList.push_back(Vec3(posX, posY, posZ));
 		}
 		else if (line.find("f") == 0) {
-			strtok_s(const_cast<char *>(line.c_str()), " ", &temp);
+			strtok_s(const_cast<char *>(line.c_str()), " ", &str);
 			for (int i = 0; i < 3; i++) {
-				indicesList.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
+				indicesList.push_back((unsigned int)atof(strtok_s(NULL, " /", &str)) - 1);
 
 				if (texCoordsFound) {
-					texCoordsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
-					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
+					texCoordsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &str)) - 1);
+					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &str)) - 1);
 				}
 				else {
-					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &temp)) - 1);
+					normalsIndices.push_back((unsigned int)atof(strtok_s(NULL, " /", &str)) - 1);
 				}
 			}
 		}
 	}
 
-	cout << "Number of positions: " << positionsList.size() << endl;
-	cout << "Number of tex coords: " << texCoordsList.size() << endl;
-	cout << "Number of normals: " << normalsList.size() << endl;
-	cout << "Number of indices: " << indicesList.size() << endl;
-
-	// TODO
-	//if (texCoordsList.size() != 0 && texCoordsList.size() != positionsList.size()) {
-	//	cerr << "Invalid number of texture coordinates in " << *objFile << endl;
-	//	exit(-1);
-	//}
-	//if (normalsList.size() != positionsList.size()) {
-	//	cerr << "Invalid number of normal vectors in " << *objFile << endl;
-	//	exit(-1);
-	//}
-
 	unsigned int numPositions = (unsigned int)positionsList.size() * 3;
 	unsigned int numTexCoords = (unsigned int)positionsList.size() * 2;
 	unsigned int numNormals = (unsigned int)positionsList.size() * 3;
-	unsigned int numIndices = (unsigned int)positionsList.size();
+	unsigned int numIndices = (unsigned int)indicesList.size();
 
 	float * positions = new float[numPositions];
 	float * texCoords = new float[numTexCoords];
@@ -80,6 +62,7 @@ Mesh::Mesh(string * objFile) {
 
 	for (int i = 0; i < indicesList.size(); i++) {
 		unsigned int index = indicesList[i];
+
 		Vec3 pos = positionsList[index];
 		positions[index * 3] = pos.x;
 		positions[index * 3 + 1] = pos.y;
@@ -97,7 +80,7 @@ Mesh::Mesh(string * objFile) {
 		normals[index * 3] = normal.x;
 		normals[index * 3 + 1] = normal.y;
 		normals[index * 3 + 2] = normal.z;
-
+		
 		indices[i] = index;
 	}
 
