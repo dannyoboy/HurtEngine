@@ -42,7 +42,7 @@ int main() {
 	scene1->addEntity(light);
 
 	string tag4("guy");
-	Material * guyMaterial = new Material(&string("res/guy.png"), 0.2f, 0.4f, 0.07f, 4);
+	Material * guyMaterial = new Material(&string("res/guy.png"), &string("res/guyLight.png"), 4);
 	Mesh * guyMesh = new Mesh(&string("res/guy.obj"));
 	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 90, 0), new Vec3(1, 1, 1));
 	Entity * guy = new Entity(&tag4);
