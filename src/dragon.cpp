@@ -13,4 +13,8 @@ void Dragon::onUpdate() {
 	}
 
 	delete guys;
+
+	if (hurtKeyDown(HURT_KEY_EQUAL)) {
+		getSkybox()->setRotation(getSkybox()->getRotation()->add(&Vec3(0, 50 * Time::instance()->getDelta(), 0)));
+	}
 }

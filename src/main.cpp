@@ -64,11 +64,16 @@ int main() {
 	Mesh * dragonMesh = new Mesh(&string("res/dragon.obj"));
 	Transform * dragonTransform = new Transform(new Vec3(5, 0, 5), new Vec3(0, 0, 0), new Vec3(0.1f, 0.1f, 0.1f));
 	Collideable * dragonCollideable = new Collideable(dragonTransform, new Vec3(0, 0.8f, 0), 1);
+	string textures[] = {
+		string("res/skyboxTex/R.png"), string("res/skyboxTex/L.png"), string("res/skyboxTex/U.png"), string("res/skyboxTex/D.png"), string("res/skyboxTex/F.png"), string("res/skyboxTex/B.png")
+	};
+	Skybox * dragonSkybox = new Skybox(textures, new Vec3(0, 0, 0));
 	Dragon * dragon = new Dragon(&tag5);
 	dragon->attachMaterial(dragonMaterial);
 	dragon->attachMesh(dragonMesh);
 	dragon->attachTransform(dragonTransform);
 	dragon->attachCollideable(dragonCollideable);
+	dragon->attachSkybox(dragonSkybox);
 	scene1->addEntity(dragon);
 
 	game->addScene(scene1);
@@ -84,6 +89,11 @@ int main() {
 	delete guyTransform;
 	delete guyKinematics;
 	delete guyCollideable;
+	delete dragonMaterial;
+	delete dragonMesh;
+	delete dragonTransform;
+	delete dragonCollideable;
+	delete dragonSkybox;
 
 	return 0;
 }

@@ -126,6 +126,16 @@ void Scene::renderBspheres(Shader * bsphereShader, hurt::Debug * debug) {
 	}
 }
 
+void Scene::renderSkyboxes(Shader * skyboxShader) {
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Skybox * skybox = (*iter)->getSkybox();
+
+		if (skybox != nullptr) {
+			skybox->loadAndRender(skyboxShader);
+		}
+	}
+}
+
 void Scene::loadProjectionMatrix(Shader * entityShader) {
 	entityShader->loadMat4(&string("projection"), camera->projectionMatrix());
 }

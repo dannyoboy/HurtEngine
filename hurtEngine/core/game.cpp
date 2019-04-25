@@ -20,6 +20,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	hurt::hurtMeshesInit();
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
 	bsphereShader = new Shader(&string("hurtEngine/shaders/bsphereVertex.glsl"), &string("hurtEngine/shaders/bsphereFragment.glsl"));
+	skyboxShader = new Shader(&string("hurtEngine/shaders/skyboxVertex.glsl"), &string("hurtEngine/shaders/skyboxFragment.glsl"));
 	debug = new hurt::Debug();
 	initialized = true;
 }
@@ -83,10 +84,14 @@ bool Game::setCurrentScene(string * name) {
 			}
 
 			currScene = scene;
+			
 			entityShader->use();
 			currScene->loadProjectionMatrix(entityShader);
 			bsphereShader->use();
 			currScene->loadProjectionMatrix(bsphereShader);
+			skyboxShader->use();
+			currScene->loadProjectionMatrix(skyboxShader);
+
 			currScene->entityOnSceneLoad();
 			return true;
 		}
@@ -176,15 +181,20 @@ void Game::renderCurrentScene() {
 	currScene->loadView(entityShader);
 	currScene->loadLights(entityShader);
 	currScene->renderEntities(entityShader);
+
+	Mat4 * view = currScene->getCamera()->viewMatrix();
+
 	if (debug->getShowBspheres()) {
 		bsphereShader->use();
-
-		Mat4 * view = currScene->getCamera()->viewMatrix();
 		bsphereShader->loadMat4(&string("view"), view);
-		delete view;
-
 		currScene->renderBspheres(bsphereShader, debug);
 	}
+
+	skyboxShader->use();
+	skyboxShader->loadMat4(&string("view"), view);
+	currScene->renderSkyboxes(skyboxShader);
+
+	delete view;
 }
 
 void Game::runOnGameStart() {
@@ -204,6 +214,7 @@ Game::~Game() {
 	hurt::hurtMeshesDestroy();
 	delete entityShader;
 	delete bsphereShader;
+	delete skyboxShader;
 	delete Time::instance();
 	delete debug;
 	glfwTerminate();

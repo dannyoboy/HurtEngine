@@ -35,6 +35,7 @@ private:
 	Scene * currScene = nullptr;
 	Shader * entityShader = nullptr;
 	Shader * bsphereShader = nullptr;
+	Shader * skyboxShader = nullptr;
 	hurt::Debug * debug = nullptr;
 
 	inline Game() {};

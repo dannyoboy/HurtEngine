@@ -43,7 +43,7 @@ void Entity::attachPointLight(PointLight * pointLight) {
 }
 
 void Entity::attachSkybox(Skybox * skybox) {
-	// TODO
+	this->skybox = skybox;
 }
 
 void Entity::attachTransform(Transform * transform) {

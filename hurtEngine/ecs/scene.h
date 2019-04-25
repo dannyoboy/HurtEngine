@@ -22,6 +22,7 @@ public:
 	void loadLights(Shader * entityShader);
 	void renderEntities(Shader * entityShader);
 	void renderBspheres(Shader * bsphereShader, hurt::Debug * debug);
+	void renderSkyboxes(Shader * skyboxShader);
 	void loadProjectionMatrix(Shader * entityShader);
 	void loadView(Shader * entityShader);
 	string * getName();
