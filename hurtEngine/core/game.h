@@ -33,6 +33,7 @@ private:
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
 	Shader * entityShader = nullptr;
+	Shader * bsphereShader = nullptr;
 	hurt::Debug * debug = nullptr;
 
 	inline Game() {};

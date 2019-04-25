@@ -5,6 +5,7 @@
 #include "hurtEngine/ecs/entity.h"
 #include "hurtEngine/rendering/camera.h"
 #include "hurtEngine/rendering/shader.h"
+#include "hurtEngine/utils/debug.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	void clear();
 	void loadLights(Shader * entityShader);
 	void renderEntities(Shader * entityShader);
+	void renderBspheres(Shader * bsphereShader, hurt::Debug * debug);
 	void loadProjectionMatrix(Shader * entityShader);
 	void loadView(Shader * entityShader);
 	string * getName();

@@ -100,6 +100,26 @@ void Scene::renderEntities(Shader * entityShader) {
 	}
 }
 
+void Scene::renderBspheres(Shader * bsphereShader, hurt::Debug * debug) {
+	if (!debug->getWireframeMode()) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Collideable * collideable = (*iter)->getCollideable();
+
+		if (collideable != nullptr) {
+			// TODO: bind custom sphere mesh
+			collideable->load(bsphereShader);
+			// TODO: render sphere
+		}
+	}
+
+	if (!debug->getWireframeMode()) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+}
+
 void Scene::loadProjectionMatrix(Shader * entityShader) {
 	entityShader->loadMat4(&string("projection"), camera->projectionMatrix());
 }
@@ -108,6 +128,7 @@ void Scene::loadView(Shader * entityShader) {
 	Mat4 * view = camera->viewMatrix();
 	entityShader->loadMat4(&string("view"), view);
 	entityShader->loadVec3(&string("camLoc"), camera->getPos());
+	delete view;
 }
 
 string * Scene::getName() {
@@ -128,9 +149,14 @@ void Scene::updatePhysics() {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Entity * entity = *iter;
 		Kinematics * kinematics = entity->getKinematics();
+		Collideable * collideable = entity->getCollideable();
 
 		if (kinematics != nullptr) {
-			kinematics->update(entity->getTransform());
+			kinematics->update();
+		}
+
+		if (collideable != nullptr) {
+			collideable->setColor(HURT_BSPHERE_DEFAULT);
 		}
 	}
 }

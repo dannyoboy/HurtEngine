@@ -29,8 +29,6 @@
 // Core
 #include "hurtEngine/core/game.h"
 
-// Data
-
 // ECS
 #include "hurtEngine/ecs/entity.h"
 #include "hurtEngine/ecs/scene.h"
@@ -55,4 +53,5 @@
 
 // Utils
 #include "hurtEngine/utils/debug.h"
+#include "hurtEngine/utils/meshes.h"
 #include "hurtEngine/utils/time.h"

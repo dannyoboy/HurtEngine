@@ -18,6 +18,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	checkGLAD();
 	initConfig(clearColor);
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
+	bsphereShader = new Shader(&string("hurtEngine/shaders/bsphereVertex.glsl"), &string("hurtEngine/shaders/bsphereFragment.glsl"));
 	debug = new hurt::Debug();
 	initialized = true;
 }
@@ -83,6 +84,8 @@ bool Game::setCurrentScene(string * name) {
 			currScene = scene;
 			entityShader->use();
 			currScene->loadProjectionMatrix(entityShader);
+			bsphereShader->use();
+			currScene->loadProjectionMatrix(bsphereShader);
 			currScene->entityOnSceneLoad();
 			return true;
 		}
@@ -172,6 +175,15 @@ void Game::renderCurrentScene() {
 	currScene->loadView(entityShader);
 	currScene->loadLights(entityShader);
 	currScene->renderEntities(entityShader);
+	if (debug->getShowBspheres()) {
+		bsphereShader->use();
+
+		Mat4 * view = currScene->getCamera()->viewMatrix();
+		bsphereShader->loadMat4(&string("view"), view);
+		delete view;
+
+		currScene->renderBspheres(bsphereShader, debug);
+	}
 }
 
 void Game::runOnGameStart() {
@@ -189,6 +201,7 @@ void Game::runOnGameStop() {
 Game::~Game() {
 	delete scenes;
 	delete entityShader;
+	delete bsphereShader;
 	delete Time::instance();
 	delete debug;
 	glfwTerminate();

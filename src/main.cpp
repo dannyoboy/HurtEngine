@@ -5,8 +5,8 @@
 #include "object1.h"
 #include "object2.h"
 
-constexpr int WIDTH = 1080;
-constexpr int HEIGHT = 608;
+constexpr int WIDTH = 1080 * 2;
+constexpr int HEIGHT = 608 * 2;
 
 int main() {
 	// Start coding here
@@ -43,13 +43,15 @@ int main() {
 	scene1->addEntity(light);
 
 	string tag4("guy");
-	Material * guyMaterial = new Material(&string("res/guy.png"), &string("res/guyLight.png"), 4);
-	Mesh * guyMesh = new Mesh(&string("res/guy.obj"));
+	//Material * guyMaterial = new Material(&string("res/guy.png"), &string("res/guyLight.png"), 4);
+	Material * guyMaterial = new Material(new Vec3(1, 0, 0), 0.2f, 0.3f, 0.2f, 16);
+	Mesh * guyMesh = new Mesh(&string("hurtEngine/assets/sphere.obj"));
 	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
-	Kinematics * guyKinematics = new Kinematics(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
+	Kinematics * guyKinematics = new Kinematics(guyTransform, new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Entity * guy = new Entity(&tag4);
 	guy->attachMaterial(guyMaterial);
-	guy->attachMesh(guyMesh);
+	//guy->attachMesh(guyMesh);
+	guy->attachMesh(HURT_CUBE);
 	guy->attachTransform(guyTransform);
 	guy->attachKinematics(guyKinematics);
 	scene1->addEntity(guy);

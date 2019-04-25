@@ -11,7 +11,7 @@ void Entity::attachAudio(Audio * audio) {
 }
 
 void Entity::attachCollideable(Collideable * collideable) {
-	// TODO
+	this->collideable = collideable;
 }
 
 void Entity::attachDirectionalLight(DirectionalLight * directionalLight) {
@@ -23,11 +23,6 @@ void Entity::attachGUI(GUI * gui) {
 }
 
 void Entity::attachKinematics(Kinematics * kinematics) {
-	if (transform == nullptr) {
-		cerr << "Cannot attach a Kinematics component without a Transform component" << endl;
-		exit(-1);
-	}
-
 	this->kinematics = kinematics;
 }
 

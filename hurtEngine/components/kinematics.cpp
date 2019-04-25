@@ -1,8 +1,8 @@
 #include "kinematics.h"
 
-Kinematics::Kinematics(Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn) : vel(velIn), angVel(angVelIn), acc(accIn), angAcc(angAccIn) {}
+Kinematics::Kinematics(Transform * transformIn, Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn) : transform(transformIn), vel(velIn), angVel(angVelIn), acc(accIn), angAcc(angAccIn) {}
 
-void Kinematics::update(Transform * transform) {
+void Kinematics::update() {
 	float deltaTime = Time::instance()->getDelta();
 	
 	Vec3 * deltaVel = acc->mul(deltaTime);

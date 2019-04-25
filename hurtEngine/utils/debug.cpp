@@ -15,5 +15,17 @@ void hurt::Debug::update() {
 			}
 			wireframeMode = !wireframeMode;
 		}
+
+		if (hurtKeyPressed(HURT_KEY_F11)) {
+			showBspheres = !showBspheres;
+		}
 	}
+}
+
+bool hurt::Debug::getWireframeMode() {
+	return wireframeMode;
+}
+
+bool hurt::Debug::getShowBspheres() {
+	return showBspheres;
 }

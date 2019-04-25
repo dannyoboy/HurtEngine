@@ -9,8 +9,11 @@ namespace hurt {
 	public:
 		void enabled(bool enableIn);
 		void update();
+		bool getWireframeMode();
+		bool getShowBspheres();
 	private:
 		bool enable = false;
 		bool wireframeMode = false;
+		bool showBspheres = false;
 	};
 }

@@ -6,8 +6,8 @@
 
 class Kinematics {
 public:
-	Kinematics(Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn);
-	void update(Transform * transform);
+	Kinematics(Transform * transformIn, Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn);
+	void update();
 	Vec3 * getVel();
 	void setVel(Vec3 * velIn);
 	Vec3 * getAngVel();
@@ -18,6 +18,7 @@ public:
 	void setAngAcc(Vec3 * angAccIn);
 	~Kinematics();
 private:
+	Transform * transform;
 	Vec3 * vel;
 	Vec3 * angVel;
 	Vec3 * acc;
