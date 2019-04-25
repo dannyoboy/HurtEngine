@@ -54,4 +54,5 @@
 #include "hurtEngine/rendering/texture.h"
 
 // Utils
+#include "hurtEngine/utils/debug.h"
 #include "hurtEngine/utils/time.h"

@@ -9,6 +9,7 @@
 #include "hurtEngine/input/inputManager.h"
 #include "hurtEngine/ecs/scene.h"
 #include "hurtEngine/utils/time.h"
+#include "hurtEngine/utils/debug.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
 	bool addScene(Scene * scene);
 	Scene * getScene(string * name);
 	bool setCurrentScene(string * name);
+	void setDebugToolsEnabled(bool enabled);
 	bool isInitialized();
 	void close(int status);
 private:
@@ -31,6 +33,7 @@ private:
 	list<Scene *> * scenes = new list<Scene *>();
 	Scene * currScene = nullptr;
 	Shader * entityShader = nullptr;
+	hurt::Debug * debug = nullptr;
 
 	inline Game() {};
 	void initContext();

@@ -13,6 +13,7 @@ int main() {
 
 	Game * game = Game::instance();
 	game->init(WIDTH, HEIGHT, &string("Dank memes!"), &Vec3(0, 0, 0));
+	game->setDebugToolsEnabled(true);
 
 	// TODO: test code below (remove)
 	

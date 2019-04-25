@@ -18,6 +18,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	checkGLAD();
 	initConfig(clearColor);
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
+	debug = new hurt::Debug();
 	initialized = true;
 }
 
@@ -90,6 +91,10 @@ bool Game::setCurrentScene(string * name) {
 	return false;
 }
 
+void Game::setDebugToolsEnabled(bool enabled) {
+	debug->enabled(enabled);
+}
+
 bool Game::isInitialized() {
 	return initialized;
 }
@@ -149,6 +154,7 @@ void Game::gameLoop(GLFWwindow * window) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		Time::instance()->markDelta();
 		hurt::updateInput(window);
+		debug->update();
 		updateCurrentScene();
 		renderCurrentScene();
 		glfwSwapBuffers(window);
@@ -184,5 +190,6 @@ Game::~Game() {
 	delete scenes;
 	delete entityShader;
 	delete Time::instance();
+	delete debug;
 	glfwTerminate();
 }
