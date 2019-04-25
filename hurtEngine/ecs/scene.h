@@ -6,6 +6,7 @@
 #include "hurtEngine/rendering/camera.h"
 #include "hurtEngine/rendering/shader.h"
 #include "hurtEngine/utils/debug.h"
+#include "hurtEngine/utils/meshes.h"
 
 using namespace std;
 

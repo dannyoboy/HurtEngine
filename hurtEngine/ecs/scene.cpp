@@ -104,16 +104,22 @@ void Scene::renderBspheres(Shader * bsphereShader, hurt::Debug * debug) {
 	if (!debug->getWireframeMode()) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
+
+	HURT_SPHERE->bind();
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 	
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Collideable * collideable = (*iter)->getCollideable();
 
 		if (collideable != nullptr) {
-			// TODO: bind custom sphere mesh
 			collideable->load(bsphereShader);
-			// TODO: render sphere
+			glDrawElements(GL_TRIANGLES, HURT_SPHERE->getIndexCount(), GL_UNSIGNED_INT, 0);
 		}
 	}
+
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	if (!debug->getWireframeMode()) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

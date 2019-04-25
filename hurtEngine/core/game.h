@@ -10,6 +10,7 @@
 #include "hurtEngine/ecs/scene.h"
 #include "hurtEngine/utils/time.h"
 #include "hurtEngine/utils/debug.h"
+#include "hurtEngine/utils/meshes.h"
 
 using namespace std;
 

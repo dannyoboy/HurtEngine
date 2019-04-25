@@ -17,6 +17,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	window = createWindow(width, height, title);
 	checkGLAD();
 	initConfig(clearColor);
+	hurt::hurtMeshesInit();
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
 	bsphereShader = new Shader(&string("hurtEngine/shaders/bsphereVertex.glsl"), &string("hurtEngine/shaders/bsphereFragment.glsl"));
 	debug = new hurt::Debug();
@@ -200,6 +201,7 @@ void Game::runOnGameStop() {
 
 Game::~Game() {
 	delete scenes;
+	hurt::hurtMeshesDestroy();
 	delete entityShader;
 	delete bsphereShader;
 	delete Time::instance();
