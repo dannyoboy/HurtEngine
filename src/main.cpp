@@ -4,6 +4,7 @@
 // TODO: for test code (remove)
 #include "object1.h"
 #include "object2.h"
+#include "dragon.h"
 
 constexpr int WIDTH = 1080;
 constexpr int HEIGHT = 608;
@@ -38,7 +39,7 @@ int main() {
 	Entity * light = new Entity(&tag3);
 	//light->attachDirectionalLight(directionalLight);
 	
-	PointLight * pointLight = new PointLight(new Vec3(1, 1, 1), 1, new Vec3(0.05f, 0.05f, 0.05f), new Vec3(-3, 0, 5), 100);
+	PointLight * pointLight = new PointLight(new Vec3(1, 1, 1), 1, new Vec3(0.01f, 0.01f, 0.01f), new Vec3(-3, 0, 5), 100);
 	light->attachPointLight(pointLight);
 	scene1->addEntity(light);
 
@@ -46,9 +47,9 @@ int main() {
 	//Material * guyMaterial = new Material(&string("res/guy.png"), &string("res/guyLight.png"), 4);
 	Material * guyMaterial = new Material(new Vec3(1, 0, 0), 0.3f, 0.3f, 0.3f, 64);
 	Mesh * guyMesh = new Mesh(&string("hurtEngine/assets/sphere.obj"));
-	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 0, 0), new Vec3(1, 1, 1));
+	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 0, 0), new Vec3(2, 2, 2));
 	Kinematics * guyKinematics = new Kinematics(guyTransform, new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
-	Collideable * guyCollideable = new Collideable(guyTransform, new Vec3(0, 0, 0), 0.5f);
+	Collideable * guyCollideable = new Collideable(guyTransform, new Vec3(-2, 2, 0), 2);
 	Entity * guy = new Entity(&tag4);
 	guy->attachMaterial(guyMaterial);
 	//guy->attachMesh(guyMesh);
@@ -57,6 +58,18 @@ int main() {
 	guy->attachKinematics(guyKinematics);
 	guy->attachCollideable(guyCollideable);
 	scene1->addEntity(guy);
+
+	string tag5("dragon");
+	Material * dragonMaterial = new Material(new Vec3(0, 0, 1), 0.4f, 0.3f, 0.3f, 64);
+	Mesh * dragonMesh = new Mesh(&string("res/dragon.obj"));
+	Transform * dragonTransform = new Transform(new Vec3(5, 0, 5), new Vec3(0, 0, 0), new Vec3(0.1f, 0.1f, 0.1f));
+	Collideable * dragonCollideable = new Collideable(dragonTransform, new Vec3(0, 0.8f, 0), 1);
+	Dragon * dragon = new Dragon(&tag5);
+	dragon->attachMaterial(dragonMaterial);
+	dragon->attachMesh(dragonMesh);
+	dragon->attachTransform(dragonTransform);
+	dragon->attachCollideable(dragonCollideable);
+	scene1->addEntity(dragon);
 
 	game->addScene(scene1);
 	game->addScene(scene2);

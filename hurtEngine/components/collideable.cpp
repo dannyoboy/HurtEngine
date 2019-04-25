@@ -5,10 +5,12 @@ Collideable::Collideable(Transform * transformIn, Vec3 * offsetIn, float radiusI
 }
 
 Vec3 * Collideable::collisionWith(Collideable * collideable) {
-	Vec3 * sphere1Center = transform->getPos()->add(offset);
+	Vec3 * rotatedOffset1 = transform->applyRotationTo(offset);
+	Vec3 * sphere1Center = transform->getPos()->add(rotatedOffset1);
 	float sphere1Rad = radius;
 
-	Vec3 * sphere2Center = collideable->transform->getPos()->add(collideable->offset);
+	Vec3 * rotatedOffset2 = collideable->transform->applyRotationTo(collideable->offset);
+	Vec3 * sphere2Center = collideable->transform->getPos()->add(rotatedOffset2);
 	float sphere2Rad = collideable->radius;
 
 	Vec3 * centerDelta = sphere1Center->sub(sphere2Center);
@@ -22,9 +24,12 @@ Vec3 * Collideable::collisionWith(Collideable * collideable) {
 		intersection = collideDir->mul(collideAmount);
 		delete collideDir;
 		setColor(HURT_BSPHERE_COLLIDE);
+		collideable->setColor(HURT_BSPHERE_COLLIDE);
 	}
 
+	delete rotatedOffset1;
 	delete sphere1Center;
+	delete rotatedOffset2;
 	delete sphere2Center;
 	delete centerDelta;
 
@@ -32,10 +37,13 @@ Vec3 * Collideable::collisionWith(Collideable * collideable) {
 }
 
 void Collideable::load(Shader * bsphereShader) {
-	Vec3 * spherePos = transform->getPos()->add(offset);
+	Vec3 * pos = transform->getPos();
+	Vec3 * spherePos = new Vec3(pos->x, pos->y, pos->z);
+	Vec3 * rot = transform->getRot();
+	Vec3 * sphereRot = new Vec3(rot->x, rot->y, rot->z);
 	float sphereScale = 2 * radius;
-	Transform * sphereTransform = new Transform(spherePos, new Vec3(0, 0, 0), new Vec3(sphereScale, sphereScale, sphereScale));
-	Mat4 * sphereTransformationMatrix = sphereTransform->transformationMatrix();
+	Transform * sphereTransform = new Transform(spherePos, sphereRot, new Vec3(sphereScale, sphereScale, sphereScale));
+	Mat4 * sphereTransformationMatrix = sphereTransform->transformationMatrixWithOffset(offset);
 	
 	bsphereShader->loadMat4(&string("transform"), sphereTransformationMatrix);
 	

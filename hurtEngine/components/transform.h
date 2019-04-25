@@ -8,6 +8,8 @@ class Transform {
 public:
 	Transform(Vec3 * posIn, Vec3 * rotIn, Vec3 * scaleIn);
 	Mat4 * transformationMatrix();
+	Mat4 * transformationMatrixWithOffset(Vec3 * offset);
+	Vec3 * applyRotationTo(Vec3 * offset);
 	Vec3 * getPos();
 	void setPos(Vec3 * posIn);
 	Vec3 * getRot();

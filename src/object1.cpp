@@ -29,29 +29,29 @@ void Object1::onUpdate() {
 	}
 
 	// Guy controls
+	float multiplier = hurtKeyDown(HURT_KEY_LEFT_SHIFT) ? 3.0f : 1.0f;
 	list<Entity *> * guys = Game::instance()->getScene(&string("scene1"))->getEntities(&string("guy"));
 	Entity * guy = guys->front();
-	const float acc = 0.5f;
+	const float acc = 1;
 	if (hurtKeyPressed(HURT_KEY_KP_6)) {
-		guy->getKinematics()->setAcc(new Vec3(acc, 0, 0));
+		guy->getKinematics()->setVel(new Vec3(acc * multiplier, 0, 0));
 	}
 	if (hurtKeyReleased(HURT_KEY_KP_6)) {
-		guy->getKinematics()->setAcc(new Vec3(0, 0, 0));
+		guy->getKinematics()->setVel(new Vec3(0, 0, 0));
 	}
 
-	const float angAcc = 5;
+	const float angAcc = 20;
 	if (hurtKeyPressed(HURT_KEY_KP_8)) {
-		guy->getKinematics()->setAngAcc(new Vec3(angAcc, 0, 0));
+		guy->getKinematics()->setAngVel(new Vec3(angAcc * multiplier, 0, 0));
 	}
 	if (hurtKeyReleased(HURT_KEY_KP_8)) {
-		guy->getKinematics()->setAngAcc(new Vec3(0, 0, 0));
+		guy->getKinematics()->setAngVel(new Vec3(0, 0, 0));
 	}
 	delete guys;
 
 	// Camera controls
 	Camera * cam = Game::instance()->getScene(&string("scene1"))->getCamera();
-	float multiplier = hurtKeyDown(HURT_KEY_LEFT_SHIFT) ? 3.0f : 1.0f;
-
+	
 	const float turnSpeed = 70;
 	float verticalTurnAmt = 0;
 	if (hurtKeyDown(HURT_KEY_UP)) {
