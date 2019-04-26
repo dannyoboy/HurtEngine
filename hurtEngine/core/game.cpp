@@ -18,10 +18,12 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	checkGLAD();
 	initConfig(clearColor);
 	hurt::hurtMeshesInit();
+	hurt::initInput(window);
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
 	bsphereShader = new Shader(&string("hurtEngine/shaders/bsphereVertex.glsl"), &string("hurtEngine/shaders/bsphereFragment.glsl"));
 	skyboxShader = new Shader(&string("hurtEngine/shaders/skyboxVertex.glsl"), &string("hurtEngine/shaders/skyboxFragment.glsl"));
 	debug = new hurt::Debug();
+	windowSize = new Vec2((float)width, (float)height);
 	initialized = true;
 }
 
@@ -104,6 +106,10 @@ void Game::setDebugToolsEnabled(bool enabled) {
 	debug->enabled(enabled);
 }
 
+Vec2 * Game::getWindowSize() {
+	return windowSize;
+}
+
 bool Game::isInitialized() {
 	return initialized;
 }
@@ -171,6 +177,7 @@ void Game::gameLoop(GLFWwindow * window) {
 }
 
 void Game::updateCurrentScene() {
+	currScene->getCamera()->updateLocked();
 	currScene->updatePhysics();
 	currScene->entityOnUpdate();
 	currScene->entityOnLateUpdate();
@@ -217,5 +224,6 @@ Game::~Game() {
 	delete skyboxShader;
 	delete Time::instance();
 	delete debug;
+	delete windowSize;
 	glfwTerminate();
 }

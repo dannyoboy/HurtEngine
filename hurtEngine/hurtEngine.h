@@ -35,6 +35,7 @@
 
 // Input
 #include "hurtEngine/input/buttons.h"
+#include "hurtEngine/input/cursor.h"
 #include "hurtEngine/input/inputManager.h"
 #include "hurtEngine/input/keys.h"
 

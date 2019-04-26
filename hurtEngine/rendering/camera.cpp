@@ -136,6 +136,36 @@ void Camera::turnVertical(float delta) {
 	up = newUpNorm;
 }
 
+void Camera::updateLocked() {
+	if (locked) {
+		Vec2 * turnDelta = hurtGetCursorPos();
+		float timeDelta = Time::instance()->getDelta();
+		turnHorizontal(turnDelta->x * turnSpeed * timeDelta); // TODO: adjust speed for aspect ratio?
+		turnVertical(turnDelta->y * turnSpeed * timeDelta);
+		hurtSetCursorPos(&Vec2(0, 0));
+	}
+}
+
+void Camera::setLocked(bool locked) {
+	if (locked) {
+		hurtSetCursorVisible(false);
+		hurtSetCursorPos(&Vec2(0, 0));
+	}
+	else {
+		hurtSetCursorVisible(true);
+	}
+
+	this->locked = locked;
+}
+
+float Camera::getTurnSpeed() {
+	return turnSpeed;
+}
+
+void Camera::setTurnSpeed(float speed) {
+	turnSpeed = speed;
+}
+
 Vec3 * Camera::getPos() {
 	return pos;
 }

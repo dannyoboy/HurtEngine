@@ -1,5 +1,7 @@
 #include "object1.h"
 
+static bool mouseVisible = true;
+
 Object1::Object1(string * tag, Vec3 * colorIn) : Entity(tag), color(colorIn) {}
 
 void Object1::onSceneLoad() {
@@ -98,6 +100,14 @@ void Object1::onUpdate() {
 		vertMove -= moveSpeed;
 	}
 	cam->moveUp(vertMove * Time::instance()->getDelta() * multiplier);
+
+	// Mouse
+	if (hurtButtonPressed(HURT_BUTTON_LEFT)) {
+		Game::instance()->getScene(&string("scene1"))->getCamera()->setLocked(true);
+	}
+	if (hurtKeyPressed(HURT_KEY_ESCAPE)) {
+		Game::instance()->getScene(&string("scene1"))->getCamera()->setLocked(false);
+	}
 }
 
 void Object1::onLateUpdate() {

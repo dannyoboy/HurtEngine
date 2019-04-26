@@ -25,6 +25,7 @@ public:
 	Scene * getScene(string * name);
 	bool setCurrentScene(string * name);
 	void setDebugToolsEnabled(bool enabled);
+	Vec2 * getWindowSize();
 	bool isInitialized();
 	void close(int status);
 private:
@@ -37,6 +38,7 @@ private:
 	Shader * bsphereShader = nullptr;
 	Shader * skyboxShader = nullptr;
 	hurt::Debug * debug = nullptr;
+	Vec2 * windowSize = nullptr;
 
 	inline Game() {};
 	void initContext();

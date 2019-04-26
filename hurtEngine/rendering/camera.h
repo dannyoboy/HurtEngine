@@ -3,6 +3,9 @@
 #include "hurtEngine/math/vec2.h"
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/math/mat4.h"
+#include "hurtEngine/input/cursor.h"
+
+constexpr float DEFAULT_TURN_SPEED = 10;
 
 class Camera {
 public:
@@ -15,6 +18,10 @@ public:
 	void moveForwardXZ(float delta);
 	void turnHorizontal(float delta);
 	void turnVertical(float delta);
+	void updateLocked();
+	void setLocked(bool locked);
+	float getTurnSpeed();
+	void setTurnSpeed(float speed);
 	Vec3 * getPos();
 	void setPos(Vec3 * posIn);
 	Vec3 * getForward();
@@ -29,4 +36,6 @@ private:
 	Vec3 * forward;
 	Vec3 * up;
 	Mat4 * projection;
+	bool locked = false;
+	bool turnSpeed = DEFAULT_TURN_SPEED;
 };
