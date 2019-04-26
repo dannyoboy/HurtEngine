@@ -76,6 +76,136 @@ Mat4 * Mat4::transpose() {
 	return new Mat4(trans);
 }
 
+// Source: https://stackoverflow.com/questions/1148309/inverting-a-4x4-matrix
+
+Mat4 * Mat4::inverse() {
+	float * iVals = new float[16];
+
+	iVals[0] =	vals[5] * vals[10] * vals[15] -
+				vals[5] * vals[11] * vals[14] -
+				vals[9] * vals[6] * vals[15] +
+				vals[9] * vals[7] * vals[14] +
+				vals[13] * vals[6] * vals[11] -
+				vals[13] * vals[7] * vals[10];
+
+	iVals[4] =	-vals[4] * vals[10] * vals[15] +
+				vals[4] * vals[11] * vals[14] +
+				vals[8] * vals[6] * vals[15] -
+				vals[8] * vals[7] * vals[14] -
+				vals[12] * vals[6] * vals[11] +
+				vals[12] * vals[7] * vals[10];
+
+	iVals[8] =	vals[4] * vals[9] * vals[15] -
+				vals[4] * vals[11] * vals[13] -
+				vals[8] * vals[5] * vals[15] +
+				vals[8] * vals[7] * vals[13] +
+				vals[12] * vals[5] * vals[11] -
+				vals[12] * vals[7] * vals[9];
+
+	iVals[12] = -vals[4] * vals[9] * vals[14] +
+				vals[4] * vals[10] * vals[13] +
+				vals[8] * vals[5] * vals[14] -
+				vals[8] * vals[6] * vals[13] -
+				vals[12] * vals[5] * vals[10] +
+				vals[12] * vals[6] * vals[9];
+
+	iVals[1] =	-vals[1] * vals[10] * vals[15] +
+				vals[1] * vals[11] * vals[14] +
+				vals[9] * vals[2] * vals[15] -
+				vals[9] * vals[3] * vals[14] -
+				vals[13] * vals[2] * vals[11] +
+				vals[13] * vals[3] * vals[10];
+
+	iVals[5] =	vals[0] * vals[10] * vals[15] -
+				vals[0] * vals[11] * vals[14] -
+				vals[8] * vals[2] * vals[15] +
+				vals[8] * vals[3] * vals[14] +
+				vals[12] * vals[2] * vals[11] -
+				vals[12] * vals[3] * vals[10];
+
+	iVals[9] =	-vals[0] * vals[9] * vals[15] +
+				vals[0] * vals[11] * vals[13] +
+				vals[8] * vals[1] * vals[15] -
+				vals[8] * vals[3] * vals[13] -
+				vals[12] * vals[1] * vals[11] +
+				vals[12] * vals[3] * vals[9];
+
+	iVals[13] = vals[0] * vals[9] * vals[14] -
+				vals[0] * vals[10] * vals[13] -
+				vals[8] * vals[1] * vals[14] +
+				vals[8] * vals[2] * vals[13] +
+				vals[12] * vals[1] * vals[10] -
+				vals[12] * vals[2] * vals[9];
+
+	iVals[2] =	vals[1] * vals[6] * vals[15] -
+				vals[1] * vals[7] * vals[14] -
+				vals[5] * vals[2] * vals[15] +
+				vals[5] * vals[3] * vals[14] +
+				vals[13] * vals[2] * vals[7] -
+				vals[13] * vals[3] * vals[6];
+
+	iVals[6] =	-vals[0] * vals[6] * vals[15] +
+				vals[0] * vals[7] * vals[14] +
+				vals[4] * vals[2] * vals[15] -
+				vals[4] * vals[3] * vals[14] -
+				vals[12] * vals[2] * vals[7] +
+				vals[12] * vals[3] * vals[6];
+
+	iVals[10] = vals[0] * vals[5] * vals[15] -
+				vals[0] * vals[7] * vals[13] -
+				vals[4] * vals[1] * vals[15] +
+				vals[4] * vals[3] * vals[13] +
+				vals[12] * vals[1] * vals[7] -
+				vals[12] * vals[3] * vals[5];
+
+	iVals[14] = -vals[0] * vals[5] * vals[14] +
+				vals[0] * vals[6] * vals[13] +
+				vals[4] * vals[1] * vals[14] -
+				vals[4] * vals[2] * vals[13] -
+				vals[12] * vals[1] * vals[6] +
+				vals[12] * vals[2] * vals[5];
+
+	iVals[3] =	-vals[1] * vals[6] * vals[11] +
+				vals[1] * vals[7] * vals[10] +
+				vals[5] * vals[2] * vals[11] -
+				vals[5] * vals[3] * vals[10] -
+				vals[9] * vals[2] * vals[7] +
+				vals[9] * vals[3] * vals[6];
+
+	iVals[7] =	vals[0] * vals[6] * vals[11] -
+				vals[0] * vals[7] * vals[10] -
+				vals[4] * vals[2] * vals[11] +
+				vals[4] * vals[3] * vals[10] +
+				vals[8] * vals[2] * vals[7] -
+				vals[8] * vals[3] * vals[6];
+
+	iVals[11] = -vals[0] * vals[5] * vals[11] +
+				vals[0] * vals[7] * vals[9] +
+				vals[4] * vals[1] * vals[11] -
+				vals[4] * vals[3] * vals[9] -
+				vals[8] * vals[1] * vals[7] +
+				vals[8] * vals[3] * vals[5];
+
+	iVals[15] = vals[0] * vals[5] * vals[10] -
+				vals[0] * vals[6] * vals[9] -
+				vals[4] * vals[1] * vals[10] +
+				vals[4] * vals[2] * vals[9] +
+				vals[8] * vals[1] * vals[6] -
+				vals[8] * vals[2] * vals[5];
+
+	float determinant = vals[0] * iVals[0] + vals[1] * iVals[4] + vals[2] * iVals[8] + vals[3] * iVals[12];
+
+	if (determinant == 0) {
+		return nullptr;
+	}
+
+	for (int i = 0; i < 16; i++) {
+		iVals[i] = iVals[i] / determinant;
+	}
+
+	return new Mat4(iVals);
+}
+
 Mat4::~Mat4() {
 	delete[] vals;
 }

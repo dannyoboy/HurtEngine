@@ -35,7 +35,7 @@ void Entity::attachMesh(Mesh * mesh) {
 }
 
 void Entity::attachMousePicker(MousePicker * mousePicker) {
-	// TODO
+	this->mousePicker = mousePicker;
 }
 
 void Entity::attachPointLight(PointLight * pointLight) {

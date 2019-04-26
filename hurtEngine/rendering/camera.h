@@ -20,6 +20,7 @@ public:
 	void turnHorizontal(float delta);
 	void turnVertical(float delta);
 	void updateLocked(Vec2 * windowSize);
+	bool isLocked();
 	void setLocked(bool locked);
 	float getTurnSpeed();
 	void setTurnSpeed(float speed);

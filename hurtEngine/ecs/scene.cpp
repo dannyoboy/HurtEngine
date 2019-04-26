@@ -175,6 +175,44 @@ void Scene::updatePhysics() {
 			collideable->setColor(HURT_BSPHERE_DEFAULT);
 		}
 	}
+
+	// Source: http://antongerdelan.net/opengl/raycasting.html
+
+	Vec2 * cursorPos = &Vec2(0, 0);
+	if (!camera->isLocked()) {
+		cursorPos = hurtGetCursorPos();
+	}
+	Vec4 * clipRay = new Vec4(cursorPos->x, cursorPos->y, 1, 1);
+
+	Mat4 * projection = camera->projectionMatrix();
+	Mat4 * projectionInverse = projection->inverse();
+	Vec4 * viewRay = projectionInverse->mul(clipRay);
+	viewRay->z = 1;
+	viewRay->w = 0;
+
+	Mat4 * view = camera->viewMatrix();
+	Mat4 * viewInverse = view->inverse();
+	Vec4 * worldRay = viewInverse->mul(viewRay);
+
+	Vec3 * worldRaySwizz = new Vec3(worldRay->x, worldRay->y, worldRay->z);
+	Vec3 * ray = worldRaySwizz->normalized();
+
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		MousePicker * mousePicker = (*iter)->getMousePicker();
+
+		if (mousePicker != nullptr) {
+			mousePicker->updateSelected(camera, ray);
+		}
+	}
+
+	delete clipRay;
+	delete projectionInverse;
+	delete viewRay;
+	delete view;
+	delete viewInverse;
+	delete worldRay;
+	delete worldRaySwizz;
+	delete ray;
 }
 
 void Scene::entityOnGameStart() {

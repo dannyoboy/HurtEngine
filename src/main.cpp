@@ -50,6 +50,7 @@ int main() {
 	Transform * guyTransform = new Transform(new Vec3(0, 0, 5), new Vec3(0, 0, 0), new Vec3(2, 2, 2));
 	Kinematics * guyKinematics = new Kinematics(guyTransform, new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Collideable * guyCollideable = new Collideable(guyTransform, new Vec3(-2, 2, 0), 2);
+	MousePicker * guyMousePicker = new MousePicker(guyCollideable, true);
 	Entity * guy = new Entity(&tag4);
 	guy->attachMaterial(guyMaterial);
 	//guy->attachMesh(guyMesh);
@@ -57,6 +58,7 @@ int main() {
 	guy->attachTransform(guyTransform);
 	guy->attachKinematics(guyKinematics);
 	guy->attachCollideable(guyCollideable);
+	guy->attachMousePicker(guyMousePicker);
 	scene1->addEntity(guy);
 
 	string tag5("dragon");
@@ -68,12 +70,14 @@ int main() {
 		string("res/skyboxTex/R.png"), string("res/skyboxTex/L.png"), string("res/skyboxTex/U.png"), string("res/skyboxTex/D.png"), string("res/skyboxTex/F.png"), string("res/skyboxTex/B.png")
 	};
 	Skybox * dragonSkybox = new Skybox(textures, new Vec3(0, 0, 0));
+	MousePicker * dragonMousePicker = new MousePicker(dragonCollideable, true);
 	Dragon * dragon = new Dragon(&tag5);
 	dragon->attachMaterial(dragonMaterial);
 	dragon->attachMesh(dragonMesh);
 	dragon->attachTransform(dragonTransform);
 	dragon->attachCollideable(dragonCollideable);
 	dragon->attachSkybox(dragonSkybox);
+	dragon->attachMousePicker(dragonMousePicker);
 	scene1->addEntity(dragon);
 
 	game->addScene(scene1);
@@ -89,11 +93,13 @@ int main() {
 	delete guyTransform;
 	delete guyKinematics;
 	delete guyCollideable;
+	delete guyMousePicker;
 	delete dragonMaterial;
 	delete dragonMesh;
 	delete dragonTransform;
 	delete dragonCollideable;
 	delete dragonSkybox;
+	delete dragonMousePicker;
 
 	return 0;
 }

@@ -147,6 +147,10 @@ void Camera::updateLocked(Vec2 * windowSize) {
 	}
 }
 
+bool Camera::isLocked() {
+	return locked;
+}
+
 void Camera::setLocked(bool locked) {
 	if (locked) {
 		hurtSetCursorVisible(false);

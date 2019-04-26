@@ -13,6 +13,7 @@ public:
 	Mat4 * mul(float val);
 	Vec4 * mul(Vec4 * vec);
 	Mat4 * transpose();
+	Mat4 * inverse();
 	~Mat4();
 private:
 	float * vals;
