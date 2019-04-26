@@ -7,7 +7,7 @@ string * Entity::getTag() {
 }
 
 void Entity::attachAudio(Audio * audio) {
-	// TODO
+	this->audio = audio;
 }
 
 void Entity::attachCollideable(Collideable * collideable) {
