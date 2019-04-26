@@ -40,5 +40,5 @@ public:
 private:
 	string * name;
 	Camera * camera;
-	list<Entity *> * entities = new list<Entity *>;
+	list<Entity *> * entities = new list<Entity *>();
 };

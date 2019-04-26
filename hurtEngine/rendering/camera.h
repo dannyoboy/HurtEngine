@@ -37,5 +37,5 @@ private:
 	Vec3 * up;
 	Mat4 * projection;
 	bool locked = false;
-	bool turnSpeed = DEFAULT_TURN_SPEED;
+	float turnSpeed = DEFAULT_TURN_SPEED;
 };
