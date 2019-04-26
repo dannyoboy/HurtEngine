@@ -18,6 +18,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	checkGLAD();
 	initConfig(clearColor);
 	windowSize = new Vec2((float)width, (float)height);
+	aspectRatio = (float)width / height;
 	hurt::hurtMeshesInit();
 	hurt::initInput(window, windowSize);
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
@@ -108,6 +109,10 @@ void Game::setDebugToolsEnabled(bool enabled) {
 
 Vec2 * Game::getWindowSize() {
 	return windowSize;
+}
+
+float Game::getAspectRatio() {
+	return aspectRatio;
 }
 
 bool Game::isInitialized() {

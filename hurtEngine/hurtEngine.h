@@ -33,6 +33,10 @@
 #include "hurtEngine/ecs/entity.h"
 #include "hurtEngine/ecs/scene.h"
 
+// GUI
+#include "hurtEngine/gui/guiButton.h"
+#include "hurtEngine/gui/guiImage.h"
+
 // Input
 #include "hurtEngine/input/buttons.h"
 #include "hurtEngine/input/cursor.h"

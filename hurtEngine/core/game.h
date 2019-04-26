@@ -26,6 +26,7 @@ public:
 	bool setCurrentScene(string * name);
 	void setDebugToolsEnabled(bool enabled);
 	Vec2 * getWindowSize();
+	float getAspectRatio();
 	bool isInitialized();
 	void close(int status);
 private:
@@ -39,6 +40,7 @@ private:
 	Shader * skyboxShader = nullptr;
 	hurt::Debug * debug = nullptr;
 	Vec2 * windowSize = nullptr;
+	float aspectRatio = 0;
 
 	inline Game() {};
 	void initContext();
