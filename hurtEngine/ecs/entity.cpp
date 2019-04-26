@@ -19,7 +19,7 @@ void Entity::attachDirectionalLight(DirectionalLight * directionalLight) {
 }
 
 void Entity::attachGUI(GUI * gui) {
-	// TODO
+	this->gui = gui;
 }
 
 void Entity::attachKinematics(Kinematics * kinematics) {
