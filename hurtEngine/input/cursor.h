@@ -3,10 +3,9 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "hurtEngine/math/vec2.h"
-#include "hurtEngine/core/game.h"
 
 namespace hurt {
-	void setCursorWindow(GLFWwindow * window);
+	void setCursorWindow(GLFWwindow * window, Vec2 * windowSize);
 	void updateCursor();
 }
 

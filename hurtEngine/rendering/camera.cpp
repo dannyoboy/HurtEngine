@@ -100,7 +100,7 @@ void Camera::turnHorizontal(float delta) {
 	Vec3 * horizontal = Y_AXIS.cross(forward);
 	Vec3 * horizontalNorm = horizontal->normalized();
 
-	forward->rotate(&Y_AXIS, -delta);
+	forward->rotate(&Y_AXIS, delta);
 	Vec3 * forwardNorm = forward->normalized();
 
 	Vec3 * newUp = forwardNorm->cross(horizontalNorm);
@@ -136,11 +136,12 @@ void Camera::turnVertical(float delta) {
 	up = newUpNorm;
 }
 
-void Camera::updateLocked() {
+void Camera::updateLocked(Vec2 * windowSize) {
 	if (locked) {
 		Vec2 * turnDelta = hurtGetCursorPos();
 		float timeDelta = Time::instance()->getDelta();
-		turnHorizontal(turnDelta->x * turnSpeed * timeDelta); // TODO: adjust speed for aspect ratio?
+		float aspectRatio = windowSize->x / windowSize->y;
+		turnHorizontal(turnDelta->x * turnSpeed * timeDelta * aspectRatio);
 		turnVertical(turnDelta->y * turnSpeed * timeDelta);
 		hurtSetCursorPos(&Vec2(0, 0));
 	}

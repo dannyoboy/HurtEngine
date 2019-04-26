@@ -1,7 +1,7 @@
 #include "inputManager.h"
 
-void hurt::initInput(GLFWwindow * window) {
-	hurt::setCursorWindow(window);
+void hurt::initInput(GLFWwindow * window, Vec2 * windowSize) {
+	hurt::setCursorWindow(window, windowSize);
 }
 
 void hurt::updateInput(GLFWwindow * window) {

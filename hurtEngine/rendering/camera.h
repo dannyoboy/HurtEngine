@@ -4,8 +4,9 @@
 #include "hurtEngine/math/vec3.h"
 #include "hurtEngine/math/mat4.h"
 #include "hurtEngine/input/cursor.h"
+#include "hurtEngine/utils/time.h"
 
-constexpr float DEFAULT_TURN_SPEED = 10;
+constexpr float DEFAULT_TURN_SPEED = 360;
 
 class Camera {
 public:
@@ -18,7 +19,7 @@ public:
 	void moveForwardXZ(float delta);
 	void turnHorizontal(float delta);
 	void turnVertical(float delta);
-	void updateLocked();
+	void updateLocked(Vec2 * windowSize);
 	void setLocked(bool locked);
 	float getTurnSpeed();
 	void setTurnSpeed(float speed);

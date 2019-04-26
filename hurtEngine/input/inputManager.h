@@ -7,6 +7,6 @@
 #include "cursor.h"
 
 namespace hurt {
-	void initInput(GLFWwindow * window);
+	void initInput(GLFWwindow * window, Vec2 * windowSize);
 	void updateInput(GLFWwindow * window);
 };

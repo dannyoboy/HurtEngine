@@ -65,10 +65,10 @@ void Object1::onUpdate() {
 	cam->turnVertical(verticalTurnAmt * Time::instance()->getDelta() * multiplier);
 
 	float horizTurnAmt = 0;
-	if (hurtKeyDown(HURT_KEY_LEFT)) {
+	if (hurtKeyDown(HURT_KEY_RIGHT)) {
 		horizTurnAmt += turnSpeed;
 	}
-	if (hurtKeyDown(HURT_KEY_RIGHT)) {
+	if (hurtKeyDown(HURT_KEY_LEFT)) {
 		horizTurnAmt -= turnSpeed;
 	}
 	cam->turnHorizontal(horizTurnAmt * Time::instance()->getDelta() * multiplier);
