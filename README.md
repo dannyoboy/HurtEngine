@@ -85,3 +85,18 @@ Vec3 * getColor();
 	void setRot(Vec3 * rotIn);  
 	Vec3 * getScale();  
 	void setScale(Vec3 * scaleIn);
+
+### Core
+#### Game
+static Game * instance();  
+	void init(int width, int height, string * title, Vec3 * clearColor);  
+	void start();  
+	void setClearColor(Vec3 * clearColor);  
+	bool addScene(Scene * scene);  
+	Scene * getScene(string * name);  
+	bool setCurrentScene(string * name);  
+	void setDebugToolsEnabled(bool enabled);  
+	Vec2 * getWindowSize();  
+	float getAspectRatio();  
+	bool isInitialized();  
+	void close(int status);
