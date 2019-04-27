@@ -100,3 +100,46 @@ static Game * instance();
 	float getAspectRatio();  
 	bool isInitialized();  
 	void close(int status);
+
+### ECS
+#### Entity
+Entity(string * tagIn);  
+	string * getTag();  
+	void attachCollideable(Collideable * collideable);  
+	void attachDirectionalLight(DirectionalLight * directionalLight);  
+	void attachKinematics(Kinematics * kinematics);  
+	void attachMaterial(Material * material);  
+	void attachMesh(Mesh * mesh);  
+	void attachMousePicker(MousePicker * mousePicker);  
+	void attachPointLight(PointLight * pointLight);  
+	void attachSkybox(Skybox * skybox);  
+	void attachTransform(Transform * transform);  
+	Collideable * getCollideable();  
+	DirectionalLight * getDirectionalLight();  
+	Kinematics * getKinematics();  
+	Material * getMaterial();  
+	Mesh * getMesh();  
+	MousePicker * getMousePicker();  
+	PointLight * getPointLight();  
+	Skybox * getSkybox();  
+	Transform * getTransform();  
+	bool isActive();  
+	void setActive(bool activeIn);  
+	virtual void onGameStart() {};  
+	virtual void onGameStop() {};  
+	virtual void onSceneLoad() {};  
+	virtual void onSceneClose() {};  
+	virtual void onAdd() {};  
+	virtual void onRemove() {};  
+	virtual void onUpdate() {};  
+	virtual void onLateUpdate() {};
+#### Scene
+inline Scene(string * nameIn, Camera * cameraIn);  
+	void addEntity(Entity * entity);  
+	list<Entity *> * getEntities(string * tag);  
+	list<Entity *> * getEntities();  
+	bool removeEntity(Entity * entity);  
+	int removeEntities(string * tag);  
+	void clear();  
+	string * getName();  
+	Camera * getCamera();
