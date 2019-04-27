@@ -1,6 +1,7 @@
 // Include this file wherever the engine is used
 #include "hurtEngine/hurtEngine.h"
 #include "levelConstruct.h"
+#include "enemy.h"
 
 constexpr int WIDTH = 1400;
 constexpr int HEIGHT = WIDTH;
@@ -22,11 +23,15 @@ int main() {
 	constructLevel(scene, CAM_DISTANCE, FOV);
 	game->addScene(scene);
 
+//	Enemy * test = new Enemy(scene);
+
 	// Start game here
 	game->start();
+	
 
 	// Delete components here
 	freeLevelComponents();
+	//test->death();
 
 	return 0;
 }
