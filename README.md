@@ -215,3 +215,23 @@ float x, y, z, w;
 	Vec4 * normalized();  
 	float length();  
 	float angleBetween(Vec4 * vec);
+
+### Rendering
+#### Camera
+Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn, float fov, int windowWidth, int windowHeight, float zNear, float zFar);  
+	void moveRight(float delta);  
+	void moveUp(float delta);  
+	void moveForward(float delta);  
+	void moveY(float delta);  
+	void moveRightXZ(float delta);  
+	void moveForwardXZ(float delta);  
+	void turnHorizontal(float delta);  
+	void turnVertical(float delta);  
+	bool isLocked();  
+	void setLocked(bool locked);  
+	float getTurnSpeed();  
+	void setTurnSpeed(float speed);  
+	Vec3 * getPos();  
+	void setPos(Vec3 * posIn);  
+	Vec3 * getForward();  
+	Vec3 * getUp();
