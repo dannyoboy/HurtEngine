@@ -25,9 +25,9 @@ TODO
 
 ### Components
 #### Collideable
-Collideable(Transform * transformIn, Vec3 * offsetIn, float radiusIn);
-Vec3 * collisionWith(Collideable * collideable);
-Vec3 * worldCenter();
-void setColor(Vec3 * colorIn);
-void setPicked(float pickedIn);
+Collideable(Transform * transformIn, Vec3 * offsetIn, float radiusIn);  
+Vec3 * collisionWith(Collideable * collideable);  
+Vec3 * worldCenter();  
+void setColor(Vec3 * colorIn);  
+void setPicked(float pickedIn);  
 float getRadius();
