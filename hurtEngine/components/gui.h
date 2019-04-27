@@ -4,6 +4,8 @@
 #include "hurtEngine/gui/guiImage.h"
 #include "hurtEngine/gui/guiButton.h"
 
+// TODO: fix/finish this component
+
 // TODO: add GUIText components
 
 class GUI {

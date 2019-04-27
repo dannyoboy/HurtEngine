@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// TODO: finish this component
+
 class Audio {
 public:
 	Audio(string * file);
