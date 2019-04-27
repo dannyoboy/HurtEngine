@@ -24,7 +24,7 @@ void GUIButton::update() {
 	}
 
 	released = wasPressed && hurtButtonReleased(HURT_BUTTON_LEFT);
-	if (isReleased) {
+	if (released) {
 		wasPressed = false;
 	}
 

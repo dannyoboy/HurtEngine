@@ -6,8 +6,8 @@
 #include "object2.h"
 #include "dragon.h"
 
-constexpr int WIDTH = 1080;
-constexpr int HEIGHT = 608;
+constexpr int WIDTH = 1080 * 2;
+constexpr int HEIGHT = 608 * 2;
 
 int main() {
 	// Start coding here
