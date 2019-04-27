@@ -2,7 +2,6 @@
 
 constexpr int ENEMY_SIZE = 3;
 
-
 Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos) : Entity(&string("Enemy")) { //ADD PARAMETER FOR STARTING POS BASED ON LVL
 	 //half the height/width of window
 	Mesh * mesh = HURT_SPHERE;					//change below

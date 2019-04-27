@@ -1,8 +1,11 @@
 #include "levelConstruct.h"
 #include "Enemy.h"
+#include "PathNode.h"
 
 Entity * background;
 Enemy * test;
+PathNode * pn;
+
 
 void constructLevel(Scene * scene, int cam_distance, int fov_angle) {
 	// creates the background
@@ -21,8 +24,11 @@ void constructLevel(Scene * scene, int cam_distance, int fov_angle) {
 
 	//create for particular level
 	Vec3 * enemyStartPos = new Vec3(-(wh / 2) + 1, 5, (wh / 2)- 9);
-
 	test = new Enemy(scene, enemyStartPos);
+	Vec3 * testPathPos = new Vec3(-(wh / 2) + 30, 5, (wh / 2) - 9);
+	pn = new PathNode(scene, testPathPos, new Vec3(0, 0, 0));
+	
+
 
 	//string testtag("test");
 	//test = new Entity(&testtag);
@@ -46,4 +52,5 @@ void freeLevelComponents() {
 	delete test->getMaterial();
 	delete test->getDirectionalLight();*/
 	test->death();
+	pn->death();
 }
