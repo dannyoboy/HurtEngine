@@ -31,3 +31,57 @@ Vec3 * worldCenter();
 void setColor(Vec3 * colorIn);  
 void setPicked(float pickedIn);  
 float getRadius();
+#### DirectionalLight
+DirectionalLight(Vec3 * colorIn, float intensityIn, Vec3 * directionIn);  
+Vec3 * getColor();  
+	void setColor(Vec3 * colorIn);  
+	float getIntensity();  
+	void setIntensity(float intensityIn);  
+	Vec3 * getDirection();  
+	void setDirection(Vec3 * directionIn);
+ #### Kinematics
+ Kinematics(Transform * transformIn, Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn);  
+ Vec3 * getVel();  
+	void setVel(Vec3 * velIn);  
+	Vec3 * getAngVel();  
+	void setAngVel(Vec3 * angVelIn);  
+	Vec3 * getAcc();  
+	void setAcc(Vec3 * accIn);  
+	Vec3 * getAngAcc();  
+	void setAngAcc(Vec3 * angAccIn);
+ #### Material
+ Material(Vec3 * colorIn, float ambientIn, float diffuseIn, float specularIn, int shininessIn);  
+	Material(string * diffuseMapFile, float ambientIn, float diffuseIn, float specularIn, int shininessIn);  
+	Material(string * diffuseMapFile, string * lightMapFile, int shininessIn);
+ #### Mesh
+ Mesh(string * objFile);
+ #### MousePicker
+ MousePicker(Collideable * collideableIn, bool enabledIn);  
+ bool isSelected();  
+	bool isEnabled();  
+	void setEnabled(bool enabledIn);
+ #### PointLight
+ PointLight(Vec3 * colorIn, float intensityIn, Vec3 * attenuationIn, Vec3 * positionIn, float rangeIn);  
+ Vec3 * getColor();  
+	void setColor(Vec3 * colorIn);  
+	float getIntensity();  
+	void setIntensity(float intensityIn);  
+	Vec3 * getAttenuation();  
+	void setAttenuation(Vec3 * attenuationIn);  
+	Vec3 * getPosition();  
+	void setPosition(Vec3 * positionIn);  
+	float getRange();  
+	void setRange(float rangeIn);
+ #### Skybox
+ Skybox(string textures[], Vec3 * rotIn); // Texture order: R, L, U, D, F, B  
+ Vec3 * getRotation();  
+	void setRotation(Vec3 * rotIn);
+ #### Transform
+ Transform(Vec3 * posIn, Vec3 * rotIn, Vec3 * scaleIn);  
+ Vec3 * applyRotationTo(Vec3 * offset);  
+	Vec3 * getPos();  
+	void setPos(Vec3 * posIn);  
+	Vec3 * getRot();  
+	void setRot(Vec3 * rotIn);  
+	Vec3 * getScale();  
+	void setScale(Vec3 * scaleIn);
