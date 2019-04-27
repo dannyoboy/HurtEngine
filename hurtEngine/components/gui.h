@@ -17,6 +17,7 @@ public:
 	GUIButton * getButton(string * id);
 	~GUI();
 private:
+	inline GUI() {} // TODO: change to public
 	list<GUIImage *> * images = new list<GUIImage *>();
 	list<GUIButton *> * buttons = new list<GUIButton *>();
 };

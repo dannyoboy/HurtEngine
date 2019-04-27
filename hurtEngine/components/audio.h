@@ -8,9 +8,8 @@ using namespace std;
 
 class Audio {
 public:
-	Audio(string * file);
 	void play();
 	~Audio();
 private:
-
+	Audio(string * file); // TODO: change to public
 };
