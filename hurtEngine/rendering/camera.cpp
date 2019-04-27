@@ -97,6 +97,10 @@ void Camera::moveForwardXZ(float delta) {
 }
 
 void Camera::turnHorizontal(float delta) {
+	if (delta == 0) {
+		return;
+	}
+
 	Vec3 * horizontal = Y_AXIS.cross(forward);
 	Vec3 * horizontalNorm = horizontal->normalized();
 
@@ -117,6 +121,10 @@ void Camera::turnHorizontal(float delta) {
 }
 
 void Camera::turnVertical(float delta) {
+	if (delta == 0) {
+		return;
+	}
+
 	Vec3 * horizontal = Y_AXIS.cross(forward);
 	Vec3 * horizontalNorm = horizontal->normalized();
 
