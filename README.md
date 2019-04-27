@@ -235,3 +235,13 @@ Camera(Vec3 * posIn, Vec3 * forwardIn, Vec3 * upIn, float fov, int windowWidth, 
 	void setPos(Vec3 * posIn);  
 	Vec3 * getForward();  
 	Vec3 * getUp();
+
+### Utils
+#### Meshes
+extern Mesh * HURT_CUBE;  
+extern Mesh * HURT_PLANE;  
+extern Mesh * HURT_SPHERE;  
+extern Mesh * HURT_QUAD;
+#### Time
+static Time * instance();  
+	float getDelta();
