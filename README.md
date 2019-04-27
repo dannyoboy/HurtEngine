@@ -4,7 +4,7 @@ A hobby project of Chris Hurt. This 3D C++ engine features a basic render engine
 ## Blender Export Instructions
 * Select File->Export->Wavefront (.obj)
 * Set "Forward" to "Z Forward"
-* Make sure the following are selected:
+* Make sure only the following are selected:
   * Apply Modifiers *(optional)*
   * Write Normals
   * Include UVs *(optional)*
