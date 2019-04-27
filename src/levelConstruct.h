@@ -2,4 +2,5 @@
 
 #include "hurtEngine/hurtEngine.h"
 
-void constructLevel(Scene * scene);
+void constructLevel(Scene * scene, int cam_distance, int fov_angle);
+void freeLevelComponents();
