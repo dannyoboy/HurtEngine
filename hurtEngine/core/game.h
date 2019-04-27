@@ -38,6 +38,7 @@ private:
 	Shader * entityShader = nullptr;
 	Shader * bsphereShader = nullptr;
 	Shader * skyboxShader = nullptr;
+	Shader * guiImageShader = nullptr;
 	hurt::Debug * debug = nullptr;
 	Vec2 * windowSize = nullptr;
 	float aspectRatio = 0;
