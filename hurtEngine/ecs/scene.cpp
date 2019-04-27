@@ -151,8 +151,6 @@ void Scene::renderSkyboxes(Shader * skyboxShader) {
 }
 
 void Scene::renderGUIs(Shader * guiImageShader) {
-	HURT_QUAD->bind();
-
 	glDisable(GL_DEPTH_TEST);
 	glDisableVertexAttribArray(2);
 

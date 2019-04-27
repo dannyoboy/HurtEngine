@@ -10,10 +10,11 @@
 #include "hurtEngine/rendering/texture.h"
 #include "hurtEngine/components/transform.h"
 #include "hurtEngine/utils/meshes.h"
+#include "hurtEngine/gui/guiQuad.h"
 
 class GUIButton {
 public:
-	GUIButton(string * idIn, string * defaultFile, string * hoveredFile, string * heldFile, Vec2 * positionIn, Vec2 * dimensionsIn);
+	GUIButton(string * idIn, string * defaultFile, string * hoveredFile, string * heldFile, Vec2 * texCoordsLow, Vec2 * texCoordsHigh, Vec2 * positionIn, Vec2 * dimensionsIn);
 	void update();
 	void loadAndRender(Shader * guiImageShader);
 	bool isClicked();
@@ -27,6 +28,7 @@ public:
 	void setDimensions(Vec2 * dimensionsIn);
 	~GUIButton();
 private:
+	GUIQuad * mesh;
 	Texture * defaultTex;
 	Texture * hoveredTex;
 	Texture * heldTex;

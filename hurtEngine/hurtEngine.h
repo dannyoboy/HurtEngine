@@ -36,6 +36,7 @@
 // GUI
 #include "hurtEngine/gui/guiButton.h"
 #include "hurtEngine/gui/guiImage.h"
+#include "hurtEngine/gui/guiQuad.h"
 
 // Input
 #include "hurtEngine/input/buttons.h"

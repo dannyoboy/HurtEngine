@@ -1,6 +1,7 @@
 #include "guiButton.h"
 
-GUIButton::GUIButton(string * idIn, string * defaultFile, string * hoveredFile, string * heldFile, Vec2 * positionIn, Vec2 * dimensionsIn) : id(idIn), position(positionIn), dimensions(dimensionsIn) {
+GUIButton::GUIButton(string * idIn, string * defaultFile, string * hoveredFile, string * heldFile, Vec2 * texCoordsLow, Vec2 * texCoordsHigh, Vec2 * positionIn, Vec2 * dimensionsIn) : id(idIn), position(positionIn), dimensions(dimensionsIn) {
+	mesh = new GUIQuad(texCoordsLow, texCoordsHigh);
 	defaultTex = new Texture(defaultFile);
 	hoveredTex = new Texture(hoveredFile);
 	heldTex = new Texture(heldFile);
@@ -36,6 +37,7 @@ void GUIButton::loadAndRender(Shader * guiImageShader) {
 	Mat4 * transformationMatrix = transform->transformationMatrix();
 	guiImageShader->loadMat4(&string("transform"), transformationMatrix);
 
+	mesh->bind();
 	if (held) {
 		heldTex->bindToUnit(0);
 	}
@@ -46,7 +48,7 @@ void GUIButton::loadAndRender(Shader * guiImageShader) {
 		defaultTex->bindToUnit(0);
 	}
 
-	glDrawElements(GL_TRIANGLES, HURT_QUAD->getIndexCount(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 
 	delete transformationMatrix;
 	delete transform;
@@ -90,6 +92,7 @@ void GUIButton::setDimensions(Vec2 * dimensionsIn) {
 }
 
 GUIButton::~GUIButton() {
+	delete mesh;
 	delete defaultTex;
 	delete hoveredTex;
 	delete heldTex;
