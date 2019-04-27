@@ -1,12 +1,14 @@
 #include "enemy.h"
 
-constexpr int ENEMY_SIZE = 4;
+constexpr int ENEMY_SIZE = 3;
 
-Enemy::Enemy(Scene * scene) : Entity(&string("Enemy")) {
-	Mesh * mesh = HURT_PLANE;
-	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(ENEMY_SIZE, 0, ENEMY_SIZE)); //change to depend on FOV 
-	Material * material = new Material(new Vec3(0.192f, 0.192f, 0.192f), 0.01f, 0.4f, 0.7f, 8);
-	Kinematics * kinematics = new Kinematics(transform, new Vec3(1, 0, 0), new Vec3(30, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
+
+Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos) : Entity(&string("Enemy")) { //ADD PARAMETER FOR STARTING POS BASED ON LVL
+	 //half the height/width of window
+	Mesh * mesh = HURT_SPHERE;					//change below
+	Transform * transform = new Transform(enemyStartPos, new Vec3(0, 0, 0), new Vec3(ENEMY_SIZE, ENEMY_SIZE, ENEMY_SIZE)); //change to depend on FOV 
+	Material * material = new Material(new Vec3(0.753f, 0.753f, 0.753f), 0.01f, 0.4f, 0, 8);
+	Kinematics * kinematics = new Kinematics(transform, new Vec3(3, 0, 0), new Vec3(30, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	this->attachTransform(transform);
 	this->attachMesh(mesh);
 	this->attachMaterial(material);
@@ -17,4 +19,5 @@ Enemy::Enemy(Scene * scene) : Entity(&string("Enemy")) {
 void Enemy::death() {
 	delete this->getTransform();
 	delete this->getMaterial();
+	delete this->getKinematics();
 }

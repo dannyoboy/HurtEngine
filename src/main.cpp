@@ -23,7 +23,7 @@ int main() {
 	constructLevel(scene, CAM_DISTANCE, FOV);
 	game->addScene(scene);
 
-//	Enemy * test = new Enemy(scene);
+	
 
 	// Start game here
 	game->start();
@@ -31,7 +31,6 @@ int main() {
 
 	// Delete components here
 	freeLevelComponents();
-	//test->death();
 
 	return 0;
 }

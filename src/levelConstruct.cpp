@@ -1,22 +1,28 @@
 #include "levelConstruct.h"
+#include "Enemy.h"
 
 Entity * background;
-//Entity * test;
+Enemy * test;
 
 void constructLevel(Scene * scene, int cam_distance, int fov_angle) {
 	// creates the background
 	string tag("background");
 	background = new Entity(&tag);
 	Mesh * mesh = HURT_PLANE;
-	int wh = 2 * cam_distance * tan(hurtDegToRad(fov_angle / 2)) + 1;
-	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(wh, 0, wh)); //change to depend on FOV 
-	Material * material = new Material(new Vec3(0.86f, 0.125f, 0.7f), 0.01f, 0.4f, 0.7f, 8);
-	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 0.1f, new Vec3(0, -1, 0));
+	int wh = 2 * cam_distance * tan(hurtDegToRad(fov_angle / 2)) + 1; //height/width given FOV
+	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(wh, 1, wh)); //change to depend on FOV 
+	Material * material = new Material(new Vec3(0.337f, 0.49f, 0.275f), 0.5f, 0.4f, 0, 32);
+	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 1, new Vec3(0, -1, 0));
 	background->attachTransform(transform);
 	background->attachMesh(mesh);
 	background->attachMaterial(material);
 	background->attachDirectionalLight(directionalLight);
 	scene->addEntity(background);
+
+	//create for particular level
+	Vec3 * enemyStartPos = new Vec3(-(wh / 2) + 1, 5, (wh / 2)- 9);
+
+	test = new Enemy(scene, enemyStartPos);
 
 	//string testtag("test");
 	//test = new Entity(&testtag);
@@ -39,4 +45,5 @@ void freeLevelComponents() {
 	/*delete test->getTransform();
 	delete test->getMaterial();
 	delete test->getDirectionalLight();*/
+	test->death();
 }

@@ -4,7 +4,7 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(Scene * scene);
+	Enemy(Scene * scene, Vec3 * enemyStartPos);
 	void death();
 };
 
