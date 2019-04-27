@@ -1,7 +1,7 @@
 #include "guiImage.h"
 
 GUIImage::GUIImage(string * file, Vec2 * positionIn, Vec2 * dimensionsIn) : position(positionIn), dimensions(dimensionsIn) {
-	// TODO
+	tex = new Texture(file);
 }
 
 Vec2 * GUIImage::getPosition() {
@@ -23,12 +23,19 @@ void GUIImage::setDimensions(Vec2 * dimensionsIn) {
 }
 
 void GUIImage::loadAndRender(Shader * guiImageShader) {
-	// TODO
+	Transform * transform = new Transform(new Vec3(position->x, position->y, 0), new Vec3(0, 0, 0), new Vec3(dimensions->x, dimensions->y, 0));
+	Mat4 * transformationMatrix = transform->transformationMatrix();
+
+	guiImageShader->loadMat4(&string("transform"), transformationMatrix);
+	tex->bindToUnit(0);
+	glDrawElements(GL_TRIANGLES, HURT_QUAD->getIndexCount(), GL_UNSIGNED_INT, 0);
+
+	delete transformationMatrix;
+	delete transform;
 }
 
 GUIImage::~GUIImage() {
-	// TODO: delete tex
-	
+	delete tex;
 	delete position;
 	delete dimensions;
 }

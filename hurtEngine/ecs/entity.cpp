@@ -94,6 +94,14 @@ Transform * Entity::getTransform() {
 	return transform;
 }
 
+bool Entity::isActive() {
+	return active;
+}
+
+void Entity::setActive(bool activeIn) {
+	active = activeIn;
+}
+
 Entity::~Entity() {
 	delete tag;
 }

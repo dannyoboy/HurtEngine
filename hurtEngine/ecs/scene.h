@@ -23,6 +23,7 @@ public:
 	void renderEntities(Shader * entityShader);
 	void renderBspheres(Shader * bsphereShader, hurt::Debug * debug);
 	void renderSkyboxes(Shader * skyboxShader);
+	void renderGUIs(Shader * guiImageShader);
 	void loadProjectionMatrix(Shader * entityShader);
 	void loadView(Shader * entityShader);
 	string * getName();
@@ -30,7 +31,7 @@ public:
 	~Scene();
 
 	// Engine-only methods
-	void updatePhysics();
+	void updateComponents();
 	void entityOnGameStart();
 	void entityOnGameStop();
 	void entityOnSceneLoad();

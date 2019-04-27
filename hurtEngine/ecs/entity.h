@@ -44,6 +44,9 @@ public:
 	Skybox * getSkybox();
 	Transform * getTransform();
 
+	bool isActive();
+	void setActive(bool activeIn);
+
 	virtual void onGameStart() {};
 	virtual void onGameStop() {};
 	virtual void onSceneLoad() {};
@@ -56,6 +59,7 @@ public:
 	~Entity();
 private:
 	string * tag;
+	bool active = true;
 	Audio * audio = nullptr;
 	Collideable * collideable = nullptr;
 	DirectionalLight * directionalLight = nullptr;

@@ -5,6 +5,9 @@
 #include "GLFW/glfw3.h"
 #include "hurtEngine/math/vec2.h"
 #include "hurtEngine/rendering/shader.h"
+#include "hurtEngine/rendering/texture.h"
+#include "hurtEngine/utils/meshes.h"
+#include "hurtEngine/components/transform.h"
 
 class GUIImage {
 public:
@@ -16,7 +19,7 @@ public:
 	void loadAndRender(Shader * guiImageShader);
 	~GUIImage();
 private:
-	// TODO: tex id
+	Texture * tex;
 	Vec2 * position;
 	Vec2 * dimensions;
 };

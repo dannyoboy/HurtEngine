@@ -24,6 +24,7 @@ void Game::init(int width, int height, string * title, Vec3 * clearColor) {
 	entityShader = new Shader(&string("hurtEngine/shaders/entityVertex.glsl"), &string("hurtEngine/shaders/entityFragment.glsl"));
 	bsphereShader = new Shader(&string("hurtEngine/shaders/bsphereVertex.glsl"), &string("hurtEngine/shaders/bsphereFragment.glsl"));
 	skyboxShader = new Shader(&string("hurtEngine/shaders/skyboxVertex.glsl"), &string("hurtEngine/shaders/skyboxFragment.glsl"));
+	guiImageShader = new Shader(&string("hurtEngine/shaders/guiImageVertex.glsl"), &string("hurtEngine/shaders/guiImageFragment.glsl"));
 	debug = new hurt::Debug();
 	initialized = true;
 }
@@ -183,7 +184,7 @@ void Game::gameLoop(GLFWwindow * window) {
 
 void Game::updateCurrentScene() {
 	currScene->getCamera()->updateLocked(windowSize);
-	currScene->updatePhysics();
+	currScene->updateComponents();
 	currScene->entityOnUpdate();
 	currScene->entityOnLateUpdate();
 }
@@ -206,6 +207,9 @@ void Game::renderCurrentScene() {
 	skyboxShader->loadMat4(&string("view"), view);
 	currScene->renderSkyboxes(skyboxShader);
 
+	guiImageShader->use();
+	currScene->renderGUIs(guiImageShader);
+
 	delete view;
 }
 
@@ -227,6 +231,7 @@ Game::~Game() {
 	delete entityShader;
 	delete bsphereShader;
 	delete skyboxShader;
+	delete guiImageShader;
 	delete Time::instance();
 	delete debug;
 	delete windowSize;

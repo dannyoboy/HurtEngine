@@ -62,17 +62,20 @@ void Scene::loadLights(Shader * entityShader) {
 
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Entity * entity = *iter;
-		DirectionalLight * directionalLight = entity->getDirectionalLight();
-		PointLight * pointLight = entity->getPointLight();
 
-		if (directionalLight != nullptr) {
-			directionalLight->load(entityShader, directionalLightIndex);
-			directionalLightIndex++;
-		}
+		if (entity->isActive()) {
+			DirectionalLight * directionalLight = entity->getDirectionalLight();
+			PointLight * pointLight = entity->getPointLight();
 
-		if (pointLight != nullptr) {
-			pointLight->load(entityShader, pointLightIndex);
-			pointLightIndex++;
+			if (directionalLight != nullptr) {
+				directionalLight->load(entityShader, directionalLightIndex);
+				directionalLightIndex++;
+			}
+
+			if (pointLight != nullptr) {
+				pointLight->load(entityShader, pointLightIndex);
+				pointLightIndex++;
+			}
 		}
 	}
 
@@ -83,19 +86,22 @@ void Scene::loadLights(Shader * entityShader) {
 void Scene::renderEntities(Shader * entityShader) {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Entity * entity = *iter;
-		Transform * transform = entity->getTransform();
-		Mesh * mesh = entity->getMesh();
-		Material * material = entity->getMaterial();
 
-		if (transform != nullptr && mesh != nullptr && material != nullptr) {
-			Mat4 * transformationMatrix = transform->transformationMatrix();
-			entityShader->loadMat4(&string("transform"), transformationMatrix);
-			delete transformationMatrix;
+		if (entity->isActive()) {
+			Transform * transform = entity->getTransform();
+			Mesh * mesh = entity->getMesh();
+			Material * material = entity->getMaterial();
 
-			mesh->bind();
-			material->loadAndBind(entityShader);
+			if (transform != nullptr && mesh != nullptr && material != nullptr) {
+				Mat4 * transformationMatrix = transform->transformationMatrix();
+				entityShader->loadMat4(&string("transform"), transformationMatrix);
+				delete transformationMatrix;
 
-			glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
+				mesh->bind();
+				material->loadAndBind(entityShader);
+
+				glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
+			}
 		}
 	}
 }
@@ -110,11 +116,15 @@ void Scene::renderBspheres(Shader * bsphereShader, hurt::Debug * debug) {
 	glDisableVertexAttribArray(2);
 	
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
-		Collideable * collideable = (*iter)->getCollideable();
+		Entity * entity = *iter;
 
-		if (collideable != nullptr) {
-			collideable->load(bsphereShader);
-			glDrawElements(GL_TRIANGLES, HURT_SPHERE->getIndexCount(), GL_UNSIGNED_INT, 0);
+		if (entity->isActive()) {
+			Collideable * collideable = entity->getCollideable();
+
+			if (collideable != nullptr) {
+				collideable->load(bsphereShader);
+				glDrawElements(GL_TRIANGLES, HURT_SPHERE->getIndexCount(), GL_UNSIGNED_INT, 0);
+			}
 		}
 	}
 
@@ -128,12 +138,38 @@ void Scene::renderBspheres(Shader * bsphereShader, hurt::Debug * debug) {
 
 void Scene::renderSkyboxes(Shader * skyboxShader) {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
-		Skybox * skybox = (*iter)->getSkybox();
+		Entity * entity = *iter;
 
-		if (skybox != nullptr) {
-			skybox->loadAndRender(skyboxShader);
+		if (entity->isActive()) {
+			Skybox * skybox = entity->getSkybox();
+
+			if (skybox != nullptr) {
+				skybox->loadAndRender(skyboxShader);
+			}
 		}
 	}
+}
+
+void Scene::renderGUIs(Shader * guiImageShader) {
+	HURT_QUAD->bind();
+
+	glDisable(GL_DEPTH_TEST);
+	glDisableVertexAttribArray(2);
+
+	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
+		Entity * entity = *iter;
+
+		if (entity->isActive()) {
+			GUI * gui = entity->getGUI();
+
+			if (gui != nullptr) {
+				gui->render(guiImageShader);
+			}
+		}
+	}
+
+	glEnable(GL_DEPTH_TEST);
+	glEnableVertexAttribArray(2);
 }
 
 void Scene::loadProjectionMatrix(Shader * entityShader) {
@@ -161,18 +197,26 @@ Scene::~Scene() {
 
 // Engine-only methods
 
-void Scene::updatePhysics() {
+void Scene::updateComponents() {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
 		Entity * entity = *iter;
-		Kinematics * kinematics = entity->getKinematics();
-		Collideable * collideable = entity->getCollideable();
 
-		if (kinematics != nullptr) {
-			kinematics->update();
-		}
+		if (entity->isActive()) {
+			Kinematics * kinematics = entity->getKinematics();
+			Collideable * collideable = entity->getCollideable();
+			GUI * gui = entity->getGUI();
 
-		if (collideable != nullptr) {
-			collideable->setColor(HURT_BSPHERE_DEFAULT);
+			if (kinematics != nullptr) {
+				kinematics->update();
+			}
+
+			if (collideable != nullptr) {
+				collideable->setColor(HURT_BSPHERE_DEFAULT);
+			}
+
+			if (gui != nullptr) {
+				gui->update();
+			}
 		}
 	}
 
@@ -241,12 +285,20 @@ void Scene::entityOnSceneClose() {
 
 void Scene::entityOnUpdate() {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
-		(*iter)->onUpdate();
+		Entity * entity = *iter;
+
+		if (entity->isActive()) {
+			entity->onUpdate();
+		}
 	}
 }
 
 void Scene::entityOnLateUpdate() {
 	for (list<Entity *>::iterator iter = entities->begin(); iter != entities->end(); ++iter) {
-		(*iter)->onLateUpdate();
+		Entity * entity = *iter;
+
+		if (entity->isActive()) {
+			entity->onLateUpdate();
+		}
 	}
 }
