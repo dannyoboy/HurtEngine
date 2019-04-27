@@ -17,3 +17,17 @@ A hobby project of Chris Hurt. This 3D C++ engine features a basic render engine
 * Square
 * 2<sup>n</sup> side length
 * All alpha values set to 0 or 1
+
+## VS17 Setup
+TODO
+
+## API
+
+### Components
+#### Collideable
+Collideable(Transform * transformIn, Vec3 * offsetIn, float radiusIn);
+Vec3 * collisionWith(Collideable * collideable);
+Vec3 * worldCenter();
+void setColor(Vec3 * colorIn);
+void setPicked(float pickedIn);
+float getRadius();
