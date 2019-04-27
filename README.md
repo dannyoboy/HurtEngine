@@ -143,3 +143,17 @@ inline Scene(string * nameIn, Camera * cameraIn);
 	void clear();  
 	string * getName();  
 	Camera * getCamera();
+
+### Input
+#### Buttons
+bool hurtButtonPressed(int button);  
+bool hurtButtonDown(int button);  
+bool hurtButtonReleased(int button);
+#### Cursor
+Vec2 * hurtGetCursorPos();  
+void hurtSetCursorPos(Vec2 * pos);  
+void hurtSetCursorVisible(bool visible);
+#### Keys
+bool hurtKeyPressed(int key);  
+bool hurtKeyDown(int key);  
+bool hurtKeyReleased(int key);
