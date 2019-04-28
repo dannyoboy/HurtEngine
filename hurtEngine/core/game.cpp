@@ -172,13 +172,19 @@ void Game::initConfig(Vec3 * clearColor) {
 
 void Game::gameLoop(GLFWwindow * window) {
 	while (!(glfwWindowShouldClose(window) || closed)) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		Time::instance()->markDelta();
-		hurt::updateInput(window);
-		debug->update();
-		updateCurrentScene();
-		renderCurrentScene();
-		glfwSwapBuffers(window);
+		frameTime += Time::instance()->getDelta();
+
+		if (frameTime >= TIME_SYNC) {
+			frameTime -= TIME_SYNC;
+
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			hurt::updateInput(window);
+			debug->update();
+			updateCurrentScene();
+			renderCurrentScene();
+			glfwSwapBuffers(window);
+		}
 	}
 }
 

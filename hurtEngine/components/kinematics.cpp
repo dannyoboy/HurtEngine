@@ -3,7 +3,7 @@
 Kinematics::Kinematics(Transform * transformIn, Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn) : transform(transformIn), vel(velIn), angVel(angVelIn), acc(accIn), angAcc(angAccIn) {}
 
 void Kinematics::update() {
-	float deltaTime = Time::instance()->getDelta();
+	float deltaTime = TIME_SYNC;
 	
 	Vec3 * deltaVel = acc->mul(deltaTime);
 	Vec3 * newVel = vel->add(deltaVel);

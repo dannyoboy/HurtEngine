@@ -4,6 +4,8 @@
 #include "hurtEngine/utils/time.h"
 #include "transform.h"
 
+constexpr float TIME_SYNC = 1.0f / 500;
+
 class Kinematics {
 public:
 	Kinematics(Transform * transformIn, Vec3 * velIn, Vec3 * angVelIn, Vec3 * accIn, Vec3 * angAccIn);

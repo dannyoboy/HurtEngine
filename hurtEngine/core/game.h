@@ -11,6 +11,7 @@
 #include "hurtEngine/utils/time.h"
 #include "hurtEngine/utils/debug.h"
 #include "hurtEngine/utils/meshes.h"
+#include "hurtEngine/components/kinematics.h"
 
 using namespace std;
 
@@ -42,6 +43,7 @@ private:
 	hurt::Debug * debug = nullptr;
 	Vec2 * windowSize = nullptr;
 	float aspectRatio = 0;
+	float frameTime = 0;
 
 	inline Game() {};
 	void initContext();
