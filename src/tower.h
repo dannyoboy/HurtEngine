@@ -19,6 +19,7 @@ public:
 	void lockRangeVisual();
 	float getRange();
 	~Tower();
+	void setTowerValues(float cooldownVal, int damageVal, int costVal);
 private:
 	float range;
 	Entity * rangeVisual;
@@ -27,4 +28,8 @@ private:
 	MousePicker * mouse;
 	float camFactor;
 	float towerY;
+	float currCoolDown;
+	float coolDown;
+	int damage;
+	int cost;
 };

@@ -5,7 +5,6 @@ static string RANGE_TAG("rangeVisual");
 static string TOWER_PLACER_TAG("towerPlacer");
 
 Entity * background;
-Enemy * test;
 
 void constructLevel(Scene * scene, float fov, float cam_distance) {
 	// HUD
@@ -64,10 +63,7 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 	background->attachMaterial(material);
 	scene->addEntity(background);
 
-	//create for particular level
-	Vec3 * enemyStartPos = new Vec3(-((float)wh / 2) + 1, 5, ((float)wh / 2) - 9);
-	test = new Enemy(scene, enemyStartPos);
-
+	//create particular level
 	Level1 * lvl = new Level1(scene, (float)wh);
 }
 
@@ -75,7 +71,6 @@ void freeLevelComponents() {
 	delete background->getTransform();
 	delete background->getMaterial();
 	delete background->getDirectionalLight();
-	test->death();
 }
 
 void endLevel(Scene * scene) {
