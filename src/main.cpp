@@ -30,6 +30,7 @@ int main() {
 	
 
 	// Delete components here
+	endLevel(scene);
 	freeLevelComponents();
 
 	return 0;

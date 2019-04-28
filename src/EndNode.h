@@ -2,11 +2,11 @@
 
 #include "hurtEngine/hurtEngine.h"
 
-class PathNode : public Entity {
+class EndNode : public Entity {
 public:
-	PathNode(Scene * scene, Vec3 * pos, Vec3 * velToSet);
+	EndNode(Scene * scene, Vec3 * pos);
 	void death();
 	void onUpdate() override;
 private:
-	Vec3 * velChange;
+	Scene * theScene;
 };
