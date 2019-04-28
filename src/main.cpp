@@ -26,6 +26,8 @@ int main() {
 	game->start();
 	
 	// Delete components here
+	endLevel(scene);
+	freeLevelComponents();
 
 	return 0;
 }

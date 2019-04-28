@@ -4,6 +4,9 @@ static string TOWER_INDICATOR_TAG("towerIndicator");
 static string RANGE_TAG("rangeVisual");
 static string TOWER_PLACER_TAG("towerPlacer");
 
+Entity * background;
+Enemy * test;
+
 void constructLevel(Scene * scene, float fov, float cam_distance) {
 	// HUD
 	float cam_factor = (float)(HUD_DISTANCE * tan(0.5 * hurtDegToRad(fov)));
@@ -48,4 +51,35 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 1, new Vec3(0, -1, 0));
 	light->attachDirectionalLight(directionalLight);
 	scene->addEntity(light);
+
+	// creates the background
+	string tag("background");
+	background = new Entity(&tag);
+	Mesh * mesh = HURT_PLANE;
+	int wh = int(2 * cam_distance * tan(hurtDegToRad((float)fov / 2)) + 1); //height/width given FOV
+	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3((float)wh, 1, (float)wh)); //change to depend on FOV 
+	Material * material = new Material(new Vec3(0.337f, 0.49f, 0.275f), 0.5f, 0.4f, 0, 32);
+	background->attachTransform(transform);
+	background->attachMesh(mesh);
+	background->attachMaterial(material);
+	scene->addEntity(background);
+
+	//create for particular level
+	Vec3 * enemyStartPos = new Vec3(-((float)wh / 2) + 1, 5, ((float)wh / 2) - 9);
+	test = new Enemy(scene, enemyStartPos);
+
+	Level1 * lvl = new Level1(scene, (float)wh);
+}
+
+void freeLevelComponents() {
+	delete background->getTransform();
+	delete background->getMaterial();
+	delete background->getDirectionalLight();
+	test->death();
+}
+
+void endLevel(Scene * scene) {
+	scene->removeEntities(&string("Enemy"));
+	scene->removeEntities(&string("PathNode"));
+	scene->removeEntities(&string("EndNode"));
 }
