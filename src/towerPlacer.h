@@ -4,6 +4,9 @@
 #include "hud.h"
 #include "ranges.h"
 #include "tower.h"
+#include "Towers/Turret.h"
+#include "Towers/Cannon.h"
+#include "Towers/Radio.h"
 
 class TowerPlacer : public Entity {
 public:

@@ -28,7 +28,7 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * pos = new Vec3(p->x, p->y, p->z);
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
-			tower = new Tower(TURRET_RANGE, rangeVisual, new Transform(pos, rot, scale), turretIndicator->getMaterial(), turretIndicator->getMesh(), camFactor, towerY, TURRET_RADIUS, TURRET_OFFSET);
+			tower = new Turret(TURRET_RANGE, rangeVisual, new Transform(pos, rot, scale), turretIndicator->getMaterial(), turretIndicator->getMesh(), camFactor, towerY);
 		}
 		else if (pickedIndicator == cannonIndicator) {
 			Vec3 * p = cannonIndicator->getTransform()->getPos();
@@ -37,7 +37,7 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * pos = new Vec3(p->x, p->y, p->z);
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
-			tower = new Tower(CANNON_RANGE, rangeVisual, new Transform(pos, rot, scale), cannonIndicator->getMaterial(), cannonIndicator->getMesh(), camFactor, towerY, CANNON_RADIUS, CANNON_OFFSET);
+			tower = new Cannon(CANNON_RANGE, rangeVisual, new Transform(pos, rot, scale), cannonIndicator->getMaterial(), cannonIndicator->getMesh(), camFactor, towerY);
 		}
 		else if (pickedIndicator == radioIndicator) {
 			Vec3 * p = radioIndicator->getTransform()->getPos();
@@ -46,7 +46,7 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * pos = new Vec3(p->x, p->y, p->z);
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
-			tower = new Tower(RADIO_RANGE, rangeVisual, new Transform(pos, rot, scale), radioIndicator->getMaterial(), radioIndicator->getMesh(), camFactor, towerY, RADIO_RADIUS, RADIO_OFFSET);
+			tower = new Radio(RADIO_RANGE, rangeVisual, new Transform(pos, rot, scale), radioIndicator->getMaterial(), radioIndicator->getMesh(), camFactor, towerY);
 		}
 		scene->addEntity(tower);
 
