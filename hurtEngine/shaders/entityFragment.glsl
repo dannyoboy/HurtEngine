@@ -55,7 +55,7 @@ void main() {
 	vec3 baseColor;
 	if(material.useDiffuseMap != 0) {
 		vec4 texColor = texture(material.diffuseMap, texCoords);
-		if(texColor.a == 0.0) {
+		if(texColor.a < 1.0) {
 			discard;
 		} else {
 			baseColor = texColor.rgb;

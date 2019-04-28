@@ -15,7 +15,7 @@ int main() {
 	game->setDebugToolsEnabled(true);
 
 	// Construct scenes here
-	Camera * camera = new Camera(new Vec3(0, CAM_DISTANCE, 0), new Vec3(0, -1, 0), new Vec3(0, 0, 1), FOV, WIDTH, HEIGHT, 0.001f, 1000);
+	Camera * camera = new Camera(new Vec3(0, CAM_DISTANCE, 0), new Vec3(0, -1, 0), new Vec3(0, 0, 1), FOV, WIDTH, HEIGHT, 0.01f, 1000);
 	string sceneName("main");
 	Scene * scene = new Scene(&sceneName, camera);
 

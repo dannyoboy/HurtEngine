@@ -17,21 +17,21 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 	Entity * turretIndicator = new Entity(&TOWER_INDICATOR_TAG);
 	turretIndicator->attachMesh(new Mesh(&string("res/turret.obj")));
 	turretIndicator->attachMaterial(new Material(new Vec3(1, 0, 0), 0.2f, 0.4f, 0.4f, 16));
-	turretIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(TOWER_SIZE, TOWER_SIZE, TOWER_SIZE)));
+	turretIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(TURRET_SIZE, TURRET_SIZE, TURRET_SIZE)));
 	scene->addEntity(turretIndicator);
 
 	// Cannon indicator
 	Entity * cannonIndicator = new Entity(&TOWER_INDICATOR_TAG);
 	cannonIndicator->attachMesh(new Mesh(&string("res/cannon.obj")));
-	cannonIndicator->attachMaterial(new Material(new Vec3(0, 1, 0), 0.2f, 0.4f, 0.4f, 16));
-	cannonIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(TOWER_SIZE, TOWER_SIZE, TOWER_SIZE)));
+	cannonIndicator->attachMaterial(new Material(&string("res/cannon.png"), 0.4f, 0.6f, 0.1f, 16));
+	cannonIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(CANNON_SIZE, CANNON_SIZE, CANNON_SIZE)));
 	scene->addEntity(cannonIndicator);
 
 	// Radio indicator
 	Entity * radioIndicator = new Entity(&TOWER_INDICATOR_TAG);
 	radioIndicator->attachMesh(new Mesh(&string("res/radio.obj")));
-	radioIndicator->attachMaterial(new Material(new Vec3(0, 0, 1), 0.2f, 0.4f, 0.4f, 16));
-	radioIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(TOWER_SIZE, TOWER_SIZE, TOWER_SIZE)));
+	radioIndicator->attachMaterial(new Material(&string("res/radio.png"), 0.4f, 0.7f, 0.9f, 8));
+	radioIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(RADIO_SIZE, RADIO_SIZE, RADIO_SIZE)));
 	scene->addEntity(radioIndicator);
 
 	// Range Visual

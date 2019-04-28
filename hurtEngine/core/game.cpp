@@ -139,10 +139,10 @@ void Game::initContext() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 }
 
 GLFWwindow * Game::createWindow(int width, int height, string * title) {
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	GLFWwindow* newWindow = glfwCreateWindow(width, height, title->c_str(), NULL, NULL);
 
 	if (newWindow == NULL) {

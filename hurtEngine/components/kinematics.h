@@ -4,7 +4,7 @@
 #include "hurtEngine/utils/time.h"
 #include "transform.h"
 
-constexpr float TIME_SYNC = 1.0f / 500;
+constexpr float TIME_SYNC = 1.0f / 300;
 
 class Kinematics {
 public:
