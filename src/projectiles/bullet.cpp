@@ -1,13 +1,18 @@
 #include "bullet.h"
 
-constexpr float BULLET_SPEED = 50;
+constexpr float BULLET_SPEED = 75;
 constexpr float BULLET_SIZE = 0.3f;
 constexpr float BULLET_BOUNDS = 1;
 
 static string TAG("bullet");
 
 Bullet::Bullet(Vec3 * pos, Vec3 * direction) : Entity(&TAG) {
-	Transform * transform = new Transform(pos, new Vec3(0, 0, 0), new Vec3(BULLET_SIZE, BULLET_SIZE, BULLET_SIZE)); // TODO: change rotation
+	Vec3 * rot = new Vec3(0, 0, 0);
+	if (direction->x != 0 || direction->z != 0) {
+		rot->y = (&Vec3(direction->x, 0, direction->z))->angleBetween(&Vec3(direction->z > 0 ? -1.0f : 1.0f, 0, 0)) + (direction->z > 0 ? 0 : 180);
+	}
+
+	Transform * transform = new Transform(pos, rot, new Vec3(BULLET_SIZE, BULLET_SIZE, BULLET_SIZE));
 	Vec3 * vel = direction->mul(BULLET_SPEED);
 	Kinematics * kinematics = new Kinematics(transform, vel, new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Collideable * collideable = new Collideable(transform, new Vec3(0, 0, 0), BULLET_BOUNDS);
@@ -29,8 +34,7 @@ void Bullet::onUpdate() {
 		Vec3 * collision = getCollideable()->collisionWith(enemy->getCollideable());
 
 		if (collision != nullptr) {
-			// TODO: remove health from enemy, don't remove from scene
-			mainScene->removeEntity(enemy);
+			enemy->takeDamage(1);
 			mainScene->removeEntity(this);
 			delete collision;
 			break;

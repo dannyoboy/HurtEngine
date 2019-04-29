@@ -9,7 +9,7 @@ Entity * background;
 void constructLevel(Scene * scene, float fov, float cam_distance) {
 	// Projectile assets
 	bulletMesh = new Mesh(&string("res/bullet.obj"));
-	bulletMaterial = new Material(&string("res/bullet.png"), 0.4f, 0.6f, 0.7f, 8);
+	bulletMaterial = new Material(&string("res/bullet.png"), 0.4f, 0.7f, 0.9f, 8);
 	cannonballMaterial = new Material(new Vec3(0, 0, 0), 0.2f, 0.5f, 0.7f, 8);
 
 	// HUD
@@ -35,7 +35,7 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 	Entity * radioIndicator = new Entity(&TOWER_INDICATOR_TAG);
 	radioIndicator->attachMesh(new Mesh(&string("res/radio.obj")));
 	radioIndicator->attachMaterial(new Material(&string("res/radio.png"), 0.4f, 0.7f, 0.9f, 8));
-	radioIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(RADIO_SIZE, RADIO_SIZE, RADIO_SIZE)));
+	radioIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, -45, 0), new Vec3(RADIO_SIZE, RADIO_SIZE, RADIO_SIZE)));
 	scene->addEntity(radioIndicator);
 
 	// Range Visual

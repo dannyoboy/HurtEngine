@@ -1,6 +1,6 @@
 #include "Turret.h"
 
-constexpr float BULLET_OFFSET = 2;
+constexpr float BULLET_HEIGHT = 2.25f;
 
 static string TAG("turret");
 
@@ -26,17 +26,21 @@ void Turret::onLateUpdate() {
 	}
 
 	if (furthestEnemy != nullptr && cooldown <= 0) {
-		Vec3 * diff = furthestEnemy->getTransform()->getPos()->sub(getTransform()->getPos());
+		Vec3 * thisPos = getTransform()->getPos();
+		Vec3 * pos = new Vec3(thisPos->x, thisPos->y + BULLET_HEIGHT, thisPos->z);
+		Vec3 * diff = furthestEnemy->getTransform()->getPos()->sub(pos);
 		Vec3 * dir = diff->normalized();
-		Vec3 * offset = dir->mul(BULLET_OFFSET);
-		Vec3 * pos = getTransform()->getPos()->add(offset);
 		Bullet * bullet = new Bullet(pos, dir);
+
 		mainScene->addEntity(bullet);
-		delete diff;
-		delete offset;
 		cooldown = TURRET_COOLDOWN;
 
-		// TODO: change turret rotation
+		if (diff->x != 0 || diff->z != 0) {
+			float rotY = (&Vec3(diff->x, 0, diff->z))->angleBetween(&Vec3(0, 0, diff->x < 0 ? -1.0f : 1.0f)) + (diff->x < 0 ? 0 : 180);
+			getTransform()->setRot(new Vec3(0, rotY, 0));
+		}
+
+		delete diff;
 	}
 
 	cooldown -= TIME_SYNC;
