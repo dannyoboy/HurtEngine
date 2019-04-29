@@ -10,6 +10,7 @@
 #include "health.h"
 #include "projectiles/projectileAssets.h"
 #include "spawner.h"
+#include "gameOver.h"
 
 constexpr int HUD_DISTANCE = 25;
 constexpr float TOWER_Y = 0.1f;
@@ -20,3 +21,4 @@ constexpr float RADIO_SIZE = 4;
 void constructLevel(Scene * scene, float fov, float cam_distance);
 void freeLevelComponents();
 void endLevel(Scene * scene);
+void constructGameOver(Scene * scene, float fov, float camDistance);

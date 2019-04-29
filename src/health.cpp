@@ -105,7 +105,7 @@ void Health::onLateUpdate() {
 
 	// Game over
 	if (healthMoney <= 0) {
-		// TODO: lose game
+		Game::instance()->setCurrentScene(&string("gameOver"));
 	}
 
 	// Update score

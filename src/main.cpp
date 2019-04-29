@@ -18,9 +18,14 @@ int main() {
 	Camera * camera = new Camera(new Vec3(0, CAM_DISTANCE, 0), new Vec3(0, -1, 0), new Vec3(0, 0, 1), FOV, WIDTH, HEIGHT, 0.01f, 1000);
 	string sceneName("main");
 	Scene * scene = new Scene(&sceneName, camera);
-
 	constructLevel(scene, FOV, CAM_DISTANCE);
 	game->addScene(scene);
+
+	Camera * gameOverCamera = new Camera(new Vec3(0, CAM_DISTANCE, 0), new Vec3(0, -1, 0), new Vec3(0, 0, 1), FOV, WIDTH, HEIGHT, 0.01f, 1000);
+	string gameOverSceneName("gameOver");
+	Scene * gameOverScene = new Scene(&gameOverSceneName, gameOverCamera);
+	constructGameOver(gameOverScene, FOV, CAM_DISTANCE);
+	game->addScene(gameOverScene);
 
 	// Start game here
 	game->start();

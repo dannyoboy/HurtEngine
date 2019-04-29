@@ -94,3 +94,16 @@ void endLevel(Scene * scene) {
 	scene->removeEntities(&string("PathNode"));
 	scene->removeEntities(&string("EndNode"));
 }
+
+void constructGameOver(Scene * scene, float fov, float camDistance) {
+	// Light
+	Entity * light = new Entity(&string("light"));
+	DirectionalLight * directionalLight = new DirectionalLight(new Vec3(1, 1, 1), 1, new Vec3(0, -1, 0));
+	light->attachDirectionalLight(directionalLight);
+	scene->addEntity(light);
+
+	// Game over
+	float camFactor = (float)(camDistance * tan(0.5 * hurtDegToRad(fov)));
+	GameOver * gameOver = new GameOver(scene, camFactor);
+	scene->addEntity(gameOver);
+}
