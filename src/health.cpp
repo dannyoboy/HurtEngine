@@ -1,10 +1,12 @@
 #include "health.h"
 
 int healthMoney = INIT_HEALTH;
+int score = 0;
 
 static string HEALTH_TAG("health");
 static string MONEY_LABEL_TAG("moneyLabel");
 static string DIGIT_TAG("digit");
+static string SCORE_DIGIT_TAG("scoreDigit");
 
 static Material *DIGIT_MATERIALS[10];
 
@@ -29,7 +31,19 @@ Health::Health(Scene * scene, float hud_width, float hud_height, float camFactor
 		digits[i]->setActive(false);
 		scene->addEntity(digits[i]);
 	}
-	
+
+	float baseScoreX = 1 - (SCORE_SIZE + SCORE_OFFSET) * NUM_SCORE_PLACES;
+	float scoreY = -1 + SCORE_SIZE / 2 + SCORE_OFFSET;
+	for (int i = 0; i < NUM_SCORE_PLACES; i++) {
+		float digitX = baseScoreX + (i * 0.5f) * SCORE_SIZE + i * SCORE_OFFSET;
+		Transform * digitTransform = new Transform(new Vec3(digitX * camFactor, hudY, scoreY * camFactor), new Vec3(0, 180, 180), new Vec3(SCORE_SIZE * camFactor, 1, SCORE_SIZE * camFactor));
+		scoreDisplay[i] = new Entity(&SCORE_DIGIT_TAG);
+		scoreDisplay[i]->attachTransform(digitTransform);
+		scoreDisplay[i]->attachMesh(HURT_PLANE);
+		scoreDisplay[i]->setActive(false);
+		scene->addEntity(scoreDisplay[i]);
+	}
+
 	for (int i = 0; i < 10; i++) {
 		string path = string("res/digits/") + to_string(i) + string(".png");
 		DIGIT_MATERIALS[i] = new Material(&path, 1, 0, 0, 1);
@@ -37,6 +51,7 @@ Health::Health(Scene * scene, float hud_width, float hud_height, float camFactor
 }
 
 void Health::onLateUpdate() {
+	// Health/money display
 	int digitCount = 0;
 	int value = healthMoney;
 	while (value > 0) {
@@ -62,8 +77,42 @@ void Health::onLateUpdate() {
 		}
 	}
 
+	// Score display
+	digitCount = 0;
+	value = score;
+	while (value > 0) {
+		value /= 10;
+		digitCount++;
+	}
+
+	place = (int)pow(10, digitCount - 1);
+	for (int i = 0; i < NUM_SCORE_PLACES; i++) {
+		if (place > 0) {
+			int digit = (score / place) % 10;
+			scoreDisplay[i]->attachMaterial(DIGIT_MATERIALS[digit]);
+			scoreDisplay[i]->setActive(true);
+			place /= 10;
+		}
+		else if (i == 0 && score <= 0) {
+			scoreDisplay[i]->attachMaterial(DIGIT_MATERIALS[0]);
+			scoreDisplay[i]->setActive(true);
+			score = 0;
+		}
+		else {
+			scoreDisplay[i]->setActive(false);
+		}
+	}
+
+	// Game over
 	if (healthMoney <= 0) {
 		// TODO: lose game
+	}
+
+	// Update score
+	currTick++;
+	if (currTick >= TICKS_PER_SECOND) {
+		currTick -= TICKS_PER_SECOND;
+		score++;
 	}
 }
 
