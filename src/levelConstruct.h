@@ -8,6 +8,8 @@
 #include "PathNode.h"
 #include "Levels/Level1.h"
 #include "health.h"
+#include "projectiles/projectileAssets.h"
+#include "spawner.h"
 
 constexpr int HUD_DISTANCE = 25;
 constexpr float TOWER_Y = 0.1f;

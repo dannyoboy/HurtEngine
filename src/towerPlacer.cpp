@@ -12,7 +12,7 @@ TowerPlacer::TowerPlacer(HUD * hudIn, Entity * turretIndicatorIn, Entity * canno
 
 void TowerPlacer::onLateUpdate() {
 	// Release selection
-	if (hurtKeyPressed(HURT_KEY_ESCAPE) && pickedIndicator != nullptr) {
+	if ((hurtKeyPressed(HURT_KEY_ESCAPE) || hurtButtonPressed(HURT_BUTTON_RIGHT)) && pickedIndicator != nullptr) {
 		pickedIndicator->setActive(false);
 		rangeVisual->setActive(false);
 		pickedIndicator = nullptr;

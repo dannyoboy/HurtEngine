@@ -14,12 +14,12 @@ extern bool selectionMade;
 
 class Tower : public Entity {
 public:
-	Tower(float rangeIn, Entity * rangeVisualIn, Transform * transformIn, Material * material, Mesh * mesh, float camFactorIn, float towerYIn, float towerRadius, Vec3 * towerOffset);
+	Tower(float rangeIn, Entity * rangeVisualIn, Transform * transformIn, Material * material, Mesh * mesh, float camFactorIn, float towerYIn, float towerRadius, Vec3 * towerOffset, string * tag);
 	void onUpdate() override;
 	void lockRangeVisual();
 	float getRange();
+	float getCamFactor();
 	~Tower();
-	void setTowerValues(float cooldownVal, int damageVal, int costVal);
 private:
 	float range;
 	Entity * rangeVisual;
@@ -27,11 +27,7 @@ private:
 	Collideable * collide;
 	float camFactor;
 	float towerY;
-	int damage;
-	int cost;
 protected:
 	MousePicker * mouse;
-	float currCoolDown;
-	float coolDown;
 	
 };

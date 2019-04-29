@@ -7,9 +7,6 @@ constexpr float ENEMY_SPEED = 12;
 constexpr float ENEMY_Y = 2;
 
 Level1::Level1(Scene * scene, float window) {
-	numEnemies = 1; //change to how many enemies are created
-	healthMoney = 1000; //change to whatever health/money they should start with
-
 	Vec3 * pos1 = new Vec3(-(window / 2) + 30, ENEMY_Y, (window / 2) - 9);
 	PathNode * pn1 = new PathNode(scene, pos1, new Vec3(0, 0, -ENEMY_SPEED));
 
@@ -39,24 +36,7 @@ Level1::Level1(Scene * scene, float window) {
 
 	Vec3 * pos10 = new Vec3(-(window / 2) + 6, ENEMY_Y, -(window / 2) + 8);
 	PathNode * pn10 = new PathNode(scene, pos10, new Vec3(ENEMY_SPEED, 0, 0));
-
+	
 	Vec3 * endPos = new Vec3((window / 2) - 2, ENEMY_Y, -(window / 2) + 10);
 	EndNode * end = new EndNode(scene, endPos);
-
-	Vec3 * enPos1 = new Vec3(-((float)window / 2) + 1, ENEMY_Y, ((float)window / 2) - 9);
-	Enemy * en1 = new Enemy(scene, enPos1, 100, 1, this);
-}
-
-void Level1::decrementEnemyCount() {
-	numEnemies--;
-	if (numEnemies == 0) {
-		//TODO: do something when all enemies have been eliminated
-	}
-}
-
-void Level1::addToHealthMoney(int val) {
-	healthMoney += val;
-	if (healthMoney <= 0) {
-		//TODO: do something if you lost
-	}
 }

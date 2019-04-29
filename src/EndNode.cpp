@@ -17,12 +17,11 @@ void EndNode::onUpdate() {
 	for (list<Entity *>::iterator iter = enemies->begin(); iter != enemies->end(); ++iter) {
 		Entity * enemy = *iter;
 		Collideable * collideable = enemy->getCollideable();
-		Vec3 * collision;
-		if ((collision = this->getCollideable()->collisionWith(collideable)) != nullptr) {
+		Vec3 * collision = this->getCollideable()->collisionWith(collideable);
+		if (collision != nullptr) {
 			theScene->removeEntity(enemy);
 			//TODO: do damage to health because enemy reached the end
+			delete collision;
 		}
-		delete collision;
 	}
-	delete enemies;
 }

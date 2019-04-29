@@ -13,25 +13,17 @@ PathNode::PathNode(Scene * scene, Vec3 * pos, Vec3 * velToSet) : Entity(&TAG) {
 	velChange = velToSet;
 }
 
-void PathNode::death() {
-	delete this->getTransform();
-	delete this->getCollideable();
-	delete this->getMaterial();
-}
-
 void PathNode::onUpdate() {
-	
 	list<Entity *> * enemies = gameScene->getEntities(&string("Enemy"));
 	for (list<Entity *>::iterator iter = enemies->begin(); iter != enemies->end(); ++iter) {
 		Entity * enemy = *iter;
 		Collideable * collideable = enemy->getCollideable();
-		Vec3 * collision;
-		if ((collision = this->getCollideable()->collisionWith(collideable)) != nullptr) {
+		Vec3 * collision = this->getCollideable()->collisionWith(collideable);
+		if (collision != nullptr) {
 			Vec3 * newPos = enemy->getTransform()->getPos()->sub(collision);
 			enemy->getTransform()->setPos(newPos); //push enemy back to get out of collision loop
-			enemy->getKinematics()->setVel(velChange);
+			enemy->getKinematics()->setVel(new Vec3(velChange->x, velChange->y, velChange->z));
+			delete collision;
 		}
-		delete collision;
 	}
-	delete enemies;
 }

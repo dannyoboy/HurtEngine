@@ -7,6 +7,11 @@ static string TOWER_PLACER_TAG("towerPlacer");
 Entity * background;
 
 void constructLevel(Scene * scene, float fov, float cam_distance) {
+	// Projectile assets
+	bulletMesh = new Mesh(&string("res/bullet.obj"));
+	bulletMaterial = new Material(&string("res/bullet.png"), 0.4f, 0.6f, 0.7f, 8);
+	cannonballMaterial = new Material(new Vec3(0, 0, 0), 0.2f, 0.5f, 0.7f, 8);
+
 	// HUD
 	float cam_factor = (float)(HUD_DISTANCE * tan(0.5 * hurtDegToRad(fov)));
 	HUD * hud = new HUD(new Vec3(0.3f, 0.3f, 0.3f), cam_factor, cam_distance - HUD_DISTANCE, &string("res/turretPic.png"), &string("res/radioPic.png"), &string("res/cannonPic.png"), scene);
@@ -69,9 +74,16 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 
 	//create particular level
 	Level1 * lvl = new Level1(scene, (float)wh);
+
+	// Enemy spawner
+	Spawner * spawner = new Spawner(scene, 2, (float)wh, lvl);
+	scene->addEntity(spawner);
 }
 
 void freeLevelComponents() {
+	delete bulletMesh;
+	delete bulletMaterial;
+	delete cannonballMaterial;
 	delete background->getTransform();
 	delete background->getMaterial();
 	delete background->getDirectionalLight();
