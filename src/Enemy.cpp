@@ -5,8 +5,8 @@ static string TAG("Enemy");
 constexpr float ENEMY_SPEED = 12;
 constexpr float SLOW_SPEED = 6;
 
-Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material, int rewardIn, int damageIn) : Entity(&TAG), reward(rewardIn), damage(damageIn) {
-	Transform * transform = new Transform(enemyStartPos, new Vec3(60, 0, 0), new Vec3(ENEMY_SIZE, ENEMY_SIZE, ENEMY_SIZE));
+Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material, int rewardIn, int damageIn, float scaleFactor) : Entity(&TAG), reward(rewardIn), damage(damageIn) {
+	Transform * transform = new Transform(enemyStartPos, new Vec3(60, 0, 0), new Vec3(ENEMY_SIZE * scaleFactor, ENEMY_SIZE * scaleFactor, ENEMY_SIZE * scaleFactor));
 	Kinematics * kinematics = new Kinematics(transform, new Vec3(ENEMY_SPEED, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Collideable * collideable = new Collideable(transform, new Vec3(0, 0, 0), ENEMY_SIZE/2);
 	this->attachTransform(transform);

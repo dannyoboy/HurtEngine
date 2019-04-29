@@ -7,7 +7,7 @@
 
 class Enemy : public Entity {
 public:
-	Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material, int rewardIn, int damageIn);
+	Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material, int rewardIn, int damageIn, float scaleFactor);
 	void death();
 	void takeDamage(int damage);
 	void onUpdate() override;
