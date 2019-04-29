@@ -5,7 +5,7 @@
 #include "src/Enemy.h"
 #include "src/projectiles/bullet.h"
 
-constexpr float TURRET_COOLDOWN = 0.25f;
+constexpr float TURRET_COOLDOWN = 0.75f;
 
 class Turret : public Tower {
 public:

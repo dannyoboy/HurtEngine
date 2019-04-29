@@ -28,6 +28,12 @@ Bullet::Bullet(Vec3 * pos, Vec3 * direction) : Entity(&TAG) {
 
 void Bullet::onUpdate() {
 	Scene * mainScene = Game::instance()->getScene(&string("main"));
+	Vec3 * pos = getTransform()->getPos();
+	if (pos->x < -1000 || pos->x > 1000 || pos->z < -1000 || pos->z > 1000) {
+		mainScene->removeEntity(this);
+		return;
+	}
+
 	list<Entity *> * enemies = mainScene->getEntities(&string("Enemy"));
 	for (list<Entity *>::iterator iter = enemies->begin(); iter != enemies->end(); ++iter) {
 		Enemy * enemy = (Enemy *)(*iter);

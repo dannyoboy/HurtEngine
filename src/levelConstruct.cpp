@@ -9,8 +9,8 @@ Entity * background;
 void constructLevel(Scene * scene, float fov, float cam_distance) {
 	// Projectile assets
 	bulletMesh = new Mesh(&string("res/bullet.obj"));
-	bulletMaterial = new Material(&string("res/bullet.png"), 0.4f, 0.7f, 0.9f, 8);
-	cannonballMaterial = new Material(new Vec3(0, 0, 0), 0.2f, 0.5f, 0.7f, 8);
+	bulletMaterial = new Material(&string("res/bullet.png"), 0.4f, 0.7f, 0.7f, 16);
+	cannonballMaterial = new Material(new Vec3(0, 0, 0), 0.2f, 0.5f, 0.5f, 4);
 
 	// HUD
 	float cam_factor = (float)(HUD_DISTANCE * tan(0.5 * hurtDegToRad(fov)));
