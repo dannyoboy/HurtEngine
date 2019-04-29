@@ -2,7 +2,7 @@
 #include "hurtEngine/hurtEngine.h"
 #include "levelConstruct.h"
 
-constexpr int WIDTH = 1400;
+constexpr int WIDTH = 800;
 constexpr int HEIGHT = WIDTH;
 
 constexpr float CAM_DISTANCE = 50;
