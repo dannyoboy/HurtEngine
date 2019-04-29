@@ -5,7 +5,7 @@ static string TAG("Enemy");
 constexpr float ENEMY_SPEED = 12;
 constexpr float SLOW_SPEED = 6;
 
-Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material) : Entity(&TAG) {
+Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Material * material, int rewardIn, int damageIn) : Entity(&TAG), reward(rewardIn), damage(damageIn) {
 	Transform * transform = new Transform(enemyStartPos, new Vec3(60, 0, 0), new Vec3(ENEMY_SIZE, ENEMY_SIZE, ENEMY_SIZE));
 	Kinematics * kinematics = new Kinematics(transform, new Vec3(ENEMY_SPEED, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(0, 0, 0));
 	Collideable * collideable = new Collideable(transform, new Vec3(0, 0, 0), ENEMY_SIZE/2);
@@ -21,6 +21,7 @@ Enemy::Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, Mesh * mesh, Ma
 
 void Enemy::death() {
 	theScene->removeEntity(this);
+	healthMoney += reward;
 }
 
 void Enemy::takeDamage(int damage) {
@@ -63,6 +64,10 @@ void Enemy::onUpdate() {
 
 float Enemy::getDistanceTraveled() {
 	return distanceTraveled;
+}
+
+int Enemy::getDamage() {
+	return damage;
 }
 
 Enemy::~Enemy() {

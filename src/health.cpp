@@ -52,13 +52,18 @@ void Health::onLateUpdate() {
 			digits[i]->setActive(true);
 			place /= 10;
 		}
-		else if(i == 0 && healthMoney == 0) {
+		else if(i == 0 && healthMoney <= 0) {
 			digits[i]->attachMaterial(DIGIT_MATERIALS[0]);
 			digits[i]->setActive(true);
+			healthMoney = 0;
 		}
 		else {
 			digits[i]->setActive(false);
 		}
+	}
+
+	if (healthMoney <= 0) {
+		// TODO: lose game
 	}
 }
 

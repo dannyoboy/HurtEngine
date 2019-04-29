@@ -21,7 +21,7 @@ void TowerPlacer::onLateUpdate() {
 	// Tower placement on click
 	if (hurtButtonPressed(HURT_BUTTON_LEFT) && pickedIndicator != nullptr) {
 		Tower * tower = nullptr;
-		if (pickedIndicator == turretIndicator) {
+		if (pickedIndicator == turretIndicator && healthMoney > TURRET_PRICE) {
 			Vec3 * p = turretIndicator->getTransform()->getPos();
 			Vec3 * r = turretIndicator->getTransform()->getRot();
 			Vec3 * s = turretIndicator->getTransform()->getScale();
@@ -29,8 +29,9 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
 			tower = new Turret(TURRET_RANGE, rangeVisual, new Transform(pos, rot, scale), turretIndicator->getMaterial(), turretIndicator->getMesh(), camFactor, towerY);
+			healthMoney -= TURRET_PRICE;
 		}
-		else if (pickedIndicator == cannonIndicator) {
+		else if (pickedIndicator == cannonIndicator && healthMoney > CANNON_PRICE) {
 			Vec3 * p = cannonIndicator->getTransform()->getPos();
 			Vec3 * r = cannonIndicator->getTransform()->getRot();
 			Vec3 * s = cannonIndicator->getTransform()->getScale();
@@ -38,8 +39,9 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
 			tower = new Cannon(CANNON_RANGE, rangeVisual, new Transform(pos, rot, scale), cannonIndicator->getMaterial(), cannonIndicator->getMesh(), camFactor, towerY);
+			healthMoney -= CANNON_PRICE;
 		}
-		else if (pickedIndicator == radioIndicator) {
+		else if (pickedIndicator == radioIndicator && healthMoney > RADIO_PRICE) {
 			Vec3 * p = radioIndicator->getTransform()->getPos();
 			Vec3 * r = radioIndicator->getTransform()->getRot();
 			Vec3 * s = radioIndicator->getTransform()->getScale();
@@ -47,8 +49,12 @@ void TowerPlacer::onLateUpdate() {
 			Vec3 * rot = new Vec3(r->x, r->y, r->z);
 			Vec3 * scale = new Vec3(s->x, s->y, s->z);
 			tower = new Radio(RADIO_RANGE, rangeVisual, new Transform(pos, rot, scale), radioIndicator->getMaterial(), radioIndicator->getMesh(), camFactor, towerY);
+			healthMoney -= RADIO_PRICE;
 		}
-		scene->addEntity(tower);
+
+		if (tower != nullptr) {
+			scene->addEntity(tower);
+		}
 
 		pickedIndicator->setActive(false);
 		rangeVisual->setActive(false);

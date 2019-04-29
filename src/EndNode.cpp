@@ -15,12 +15,12 @@ EndNode::EndNode(Scene * scene, Vec3 * pos) : Entity(&TAG) {
 void EndNode::onUpdate() {
 	list<Entity *> * enemies = theScene->getEntities(&string("Enemy"));
 	for (list<Entity *>::iterator iter = enemies->begin(); iter != enemies->end(); ++iter) {
-		Entity * enemy = *iter;
+		Enemy * enemy = (Enemy *)(*iter);
 		Collideable * collideable = enemy->getCollideable();
 		Vec3 * collision = this->getCollideable()->collisionWith(collideable);
 		if (collision != nullptr) {
 			theScene->removeEntity(enemy);
-			//TODO: do damage to health because enemy reached the end
+			healthMoney -= enemy->getDamage();
 			delete collision;
 		}
 	}

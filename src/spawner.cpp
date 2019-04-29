@@ -15,7 +15,7 @@ void Spawner::onUpdate() {
 
 	if (spawnTime <= 0) {
 		Vec3 * enPos = new Vec3(-((float)window / 2) + 1, enemyY, ((float)window / 2) - 9);
-		new Enemy(scene, enPos, 1, enemyMesh, enemyMaterial);
+		new Enemy(scene, enPos, 1, enemyMesh, enemyMaterial, 5, 20);
 		spawnTime = SPAWN_TIME;
 	}
 }

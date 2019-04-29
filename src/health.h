@@ -2,7 +2,7 @@
 
 #include "hurtEngine/hurtEngine.h"
 
-constexpr int INIT_HEALTH = 100;
+constexpr int INIT_HEALTH = 150;
 constexpr int NUM_PLACES = 6;
 
 constexpr float MONEY_LABEL_OFFSET = 0.04f;

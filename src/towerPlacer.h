@@ -7,6 +7,8 @@
 #include "Towers/Turret.h"
 #include "Towers/Cannon.h"
 #include "Towers/Radio.h"
+#include "health.h"
+#include "prices.h"
 
 class TowerPlacer : public Entity {
 public:
