@@ -1,8 +1,8 @@
 #include "spawner.h"
 
-#define ENEMY_1 new Enemy(scene, enPos, 1, enemyMesh, enemy1Material, 2, 25, 1)
-#define ENEMY_2 new Enemy(scene, enPos, 2, enemyMesh, enemy2Material, 5, 50, 1.1f)
-#define ENEMY_3 new Enemy(scene, enPos, 3, enemyMesh, enemy3Material, 10, 100, 1.2f)
+#define ENEMY_1 new Enemy(scene, enPos, 1, enemyMesh, enemy1Material, 1, 10, 1)
+#define ENEMY_2 new Enemy(scene, enPos, 2, enemyMesh, enemy2Material, 2, 25, 1.1f)
+#define ENEMY_3 new Enemy(scene, enPos, 3, enemyMesh, enemy3Material, 3, 50, 1.2f)
 
 static string TAG("spawner");
 static Mesh * enemyMesh = nullptr;

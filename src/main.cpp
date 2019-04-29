@@ -12,7 +12,7 @@ int main() {
 	// Init game here
 	Game * game = Game::instance();
 	game->init(WIDTH, HEIGHT, &string("Game of Drones"), &Vec3(0.57f, 0.77f, 71));
-	game->setDebugToolsEnabled(true);
+	//game->setDebugToolsEnabled(true);
 
 	// Construct scenes here
 	Camera * camera = new Camera(new Vec3(0, CAM_DISTANCE, 0), new Vec3(0, -1, 0), new Vec3(0, 0, 1), FOV, WIDTH, HEIGHT, 0.01f, 1000);

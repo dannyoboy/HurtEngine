@@ -3,7 +3,7 @@
 constexpr float CANNONBALL_SPEED = 50;
 constexpr float CANNONBALL_SIZE = 1.25f;
 constexpr float CANNONBALL_BOUNDS = 1;
-constexpr float SPLASH_RANGE = 5;
+constexpr float SPLASH_RANGE = 3;
 
 static string TAG("cannonball");
 

@@ -7,15 +7,15 @@
 constexpr float SPAWN_TIME = 0.5f;
 
 constexpr double ENEMY_1_SPAWN_TIME = 5;
-constexpr double ENEMY_1_INIT_SPAWN_RATE = 0.5;
+constexpr double ENEMY_1_INIT_SPAWN_RATE = 0.75f;
 constexpr double ENEMY_1_SPAWN_ACC = 0.00002;
 
 constexpr double ENEMY_2_SPAWN_TIME = 30;
-constexpr double ENEMY_2_INIT_SPAWN_RATE = 1;
+constexpr double ENEMY_2_INIT_SPAWN_RATE = 1.25f;
 constexpr double ENEMY_2_SPAWN_ACC = 0.00002;
 
 constexpr double ENEMY_3_SPAWN_TIME = 60;
-constexpr double ENEMY_3_INIT_SPAWN_RATE = 1.5;
+constexpr double ENEMY_3_INIT_SPAWN_RATE = 1.75f;
 constexpr double ENEMY_3_SPAWN_ACC = 0.00002;
 
 class Spawner : public Entity {
