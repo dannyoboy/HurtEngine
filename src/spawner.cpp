@@ -19,12 +19,42 @@ Spawner::Spawner(Scene * sceneIn, float enemyYIn, float windowIn, Level1 * level
 }
 
 void Spawner::onUpdate() {
-	spawnTime -= TIME_SYNC;
+	totalTime += TIME_SYNC;
 
-	if (spawnTime <= 0) {
-		Vec3 * enPos = new Vec3(-((float)window / 2) + 1, enemyY, ((float)window / 2) - 8.5f);
-		ENEMY_3;
-		spawnTime = SPAWN_TIME;
+	if (totalTime >= ENEMY_1_SPAWN_TIME) {
+		spawnTime1 += TIME_SYNC;
+
+		if (spawnTime1 >= spawnRate1) {
+			spawnTime1 = 0;
+			Vec3 * enPos = new Vec3(-((float)window / 2) + 1, enemyY, ((float)window / 2) - 8.5f);
+			ENEMY_1;
+		}
+
+		spawnRate1 -= ENEMY_1_SPAWN_ACC;
+	}
+
+	if (totalTime >= ENEMY_2_SPAWN_TIME) {
+		spawnTime2 += TIME_SYNC;
+
+		if (spawnTime2 >= spawnRate2) {
+			spawnTime2 = 0;
+			Vec3 * enPos = new Vec3(-((float)window / 2) + 1, enemyY, ((float)window / 2) - 8.5f);
+			ENEMY_2;
+		}
+
+		spawnRate2 -= ENEMY_2_SPAWN_ACC;
+	}
+
+	if (totalTime >= ENEMY_3_SPAWN_TIME) {
+		spawnTime3 += TIME_SYNC;
+
+		if (spawnTime3 >= spawnRate3) {
+			spawnTime3 = 0;
+			Vec3 * enPos = new Vec3(-((float)window / 2) + 1, enemyY, ((float)window / 2) - 8.5f);
+			ENEMY_3;
+		}
+
+		spawnRate3 -= ENEMY_3_SPAWN_ACC;
 	}
 }
 
