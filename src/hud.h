@@ -3,7 +3,7 @@
 #include "hurtEngine/hurtEngine.h"
 #include "selector.h"
 
-constexpr float MARGIN_SIZE = .02f;
+constexpr float MARGIN_SIZE = .015f;
 constexpr int NUM_SELECTORS = 3;
 
 class HUD : public Entity {
@@ -12,6 +12,8 @@ public:
 	bool getTurretSelected();
 	bool getRadioSelected();
 	bool getCannonSelected();
+	float getHUDWidth();
+	float getHUDHeight();
 	~HUD();
 
 private:
@@ -20,4 +22,6 @@ private:
 	Selector *cannon;
 	Material *material;
 	Transform *transform;
+	float hud_width;
+	float hud_height;
 };

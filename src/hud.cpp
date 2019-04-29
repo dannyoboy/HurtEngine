@@ -6,8 +6,8 @@ HUD::HUD(Vec3 *color, float cam_factor, float selector_y, string *turret_file, s
 	attachMesh(HURT_PLANE);
 	material = new Material(color, 1, 0, 0, 1);
 	attachMaterial(material);
-	float hud_width = SELECTOR_SIZE * NUM_SELECTORS + (NUM_SELECTORS + 1) * MARGIN_SIZE;
-	float hud_height = SELECTOR_SIZE + 2 * MARGIN_SIZE;
+	hud_width = SELECTOR_SIZE * NUM_SELECTORS + (NUM_SELECTORS + 1) * MARGIN_SIZE;
+	hud_height = SELECTOR_SIZE + 2 * MARGIN_SIZE;
 	Vec2 center(-1 + hud_width / 2, -1 + hud_height / 2);
 	transform = new Transform(new Vec3(center.x * cam_factor, selector_y - .001f, center.y * cam_factor), new Vec3(0, 0, 0), new Vec3(hud_width * cam_factor, 1, hud_height * cam_factor));
 	attachTransform(transform);
@@ -35,6 +35,14 @@ bool HUD::getRadioSelected() {
 
 bool HUD::getCannonSelected() {
 	return cannon->isSelected();
+}
+
+float HUD::getHUDWidth() {
+	return hud_width;
+}
+
+float HUD::getHUDHeight() {
+	return hud_height;
 }
 
 HUD::~HUD() {

@@ -9,13 +9,13 @@ Entity * background;
 void constructLevel(Scene * scene, float fov, float cam_distance) {
 	// HUD
 	float cam_factor = (float)(HUD_DISTANCE * tan(0.5 * hurtDegToRad(fov)));
-	HUD * hud = new HUD(new Vec3(1, 1, 0), cam_factor, cam_distance - HUD_DISTANCE, &string("res/turretPic.png"), &string("res/radioPic.png"), &string("res/cannonPic.png"), scene);
+	HUD * hud = new HUD(new Vec3(0.3f, 0.3f, 0.3f), cam_factor, cam_distance - HUD_DISTANCE, &string("res/turretPic.png"), &string("res/radioPic.png"), &string("res/cannonPic.png"), scene);
 	scene->addEntity(hud);
 
 	// Turret indicator
 	Entity * turretIndicator = new Entity(&TOWER_INDICATOR_TAG);
 	turretIndicator->attachMesh(new Mesh(&string("res/turret.obj")));
-	turretIndicator->attachMaterial(new Material(new Vec3(1, 0, 0), 0.2f, 0.4f, 0.4f, 16));
+	turretIndicator->attachMaterial(new Material(&string("res/turret.png"), 0.3f, 0.5f, 0, 1));
 	turretIndicator->attachTransform(new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3(TURRET_SIZE, TURRET_SIZE, TURRET_SIZE)));
 	scene->addEntity(turretIndicator);
 
@@ -51,17 +51,21 @@ void constructLevel(Scene * scene, float fov, float cam_distance) {
 	light->attachDirectionalLight(directionalLight);
 	scene->addEntity(light);
 
-	// creates the background
+	// Creates the background
 	string tag("background");
 	background = new Entity(&tag);
 	Mesh * mesh = HURT_PLANE;
 	int wh = int(2 * cam_distance * tan(hurtDegToRad((float)fov / 2)) + 1); //height/width given FOV
-	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 0, 0), new Vec3((float)wh, 1, (float)wh)); //change to depend on FOV 
-	Material * material = new Material(new Vec3(0.337f, 0.49f, 0.275f), 0.5f, 0.4f, 0, 32);
+	Transform * transform = new Transform(new Vec3(0, 0, 0), new Vec3(0, 180, 180), new Vec3((float)wh, -1, (float)wh)); //change to depend on FOV
+	Material * material = new Material(&string("res/backdrop.png"), 1, 0, 0, 1);
 	background->attachTransform(transform);
 	background->attachMesh(mesh);
 	background->attachMaterial(material);
 	scene->addEntity(background);
+
+	// Create health display
+	Health * health = new Health(scene, hud->getHUDWidth(), hud->getHUDHeight(), cam_factor, cam_distance - HUD_DISTANCE);
+	scene->addEntity(health);
 
 	//create particular level
 	Level1 * lvl = new Level1(scene, (float)wh);

@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "PathNode.h"
 #include "Levels/Level1.h"
+#include "health.h"
 
 constexpr int HUD_DISTANCE = 25;
 constexpr float TOWER_Y = 0.1f;
