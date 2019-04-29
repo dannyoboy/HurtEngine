@@ -11,7 +11,7 @@ constexpr float FOV = 60;
 int main() {
 	// Init game here
 	Game * game = Game::instance();
-	game->init(WIDTH, HEIGHT, &string("Dank game"), &Vec3(0.57f, 0.77f, 71));
+	game->init(WIDTH, HEIGHT, &string("Game of Drones"), &Vec3(0.57f, 0.77f, 71));
 	game->setDebugToolsEnabled(true);
 
 	// Construct scenes here
