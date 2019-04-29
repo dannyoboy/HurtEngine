@@ -25,11 +25,13 @@ private:
 	Entity * rangeVisual;
 	Transform * transform;
 	Collideable * collide;
-	MousePicker * mouse;
 	float camFactor;
 	float towerY;
-	float currCoolDown;
-	float coolDown;
 	int damage;
 	int cost;
+protected:
+	MousePicker * mouse;
+	float currCoolDown;
+	float coolDown;
+	
 };
