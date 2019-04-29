@@ -8,6 +8,7 @@ public:
 	Enemy(Scene * scene, Vec3 * enemyStartPos, int healthAmt, int meshNum, Level1 * level);
 	void death();
 	void takeDamage(int damage);
+	void onUpdate() override;
 private:
 	int health;
 	Scene * theScene;
