@@ -1,6 +1,6 @@
 #include "Turret.h"
 
-static constexpr float TURRET_COOLDOWN = 0.1;
+static constexpr float TURRET_COOLDOWN = 0.1f;
 static constexpr int TURRET_DAMAGE = 1;
 static constexpr int TURRET_COST = 0;
 
