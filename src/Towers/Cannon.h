@@ -5,7 +5,7 @@
 #include "src/Enemy.h"
 #include "src/projectiles/cannonball.h"
 
-constexpr float CANNON_COOLDOWN = 2;
+constexpr float CANNON_COOLDOWN = 1.85f;
 
 class Cannon : public Tower {
 public:

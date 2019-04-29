@@ -9,6 +9,9 @@ constexpr float CAM_DISTANCE = 50;
 constexpr float FOV = 60;
 
 int main() {
+	// Hide console window
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+
 	// Init game here
 	Game * game = Game::instance();
 	game->init(WIDTH, HEIGHT, &string("Game of Drones"), &Vec3(0.57f, 0.77f, 71));
